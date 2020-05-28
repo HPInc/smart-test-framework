@@ -1,0 +1,2 @@
+# smart-test-framework
+Smart Test Framework is multi-purpose test framework composed by four independent libraries. You’ll be able to create automated tests for Web pages (via desktop and mobile web browsers), Web services (REST APis), Desktop applications (on Windows, Mac and Linux) and Mobile applications (native and hybrid). It's flexible enough to support most of projects and to provide professional quality to automated test needs. 
