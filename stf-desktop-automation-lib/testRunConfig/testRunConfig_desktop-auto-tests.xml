@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="STF_DESKTOP-AUTOMATION_TEST_SUITE">
+
+    <!--*************************************[TEST CASES AREA]*************************************-->
+    <!--Global parameter-->
+    <parameter name="optionalGlobalParameterExample" value="valueGotFromGlobalParam"/>
+
+    <test name="Desktop-Automation-Helpers_Test-Set">
+        <classes>
+            <class name="system.test.DesktopAutomation"/>
+        </classes>
+    </test>
+</suite>
