@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="STF_HTTP-CLIENT_TEST_SUITE">
+
+    <!--*************************************[TEST CASES AREA]*************************************-->
+    <!--Global parameter-->
+    <parameter name="optionalGlobalParameterExample" value="valueGotFromGlobalParam"/>
+
+    <test name="WebServices-Rest_Test-Set">
+        <classes>
+            <class name="system.test.rest.DeserializeResponseTests"/>
+            <class name="system.test.rest.HeadersTests"/>
+            <class name="system.test.rest.HttpLoggerTests"/>
+            <class name="system.test.rest.HttpStatusCodeVerifierTests"/>
+            <class name="system.test.rest.LegacyRequestsTests"/>
+            <class name="system.test.rest.HttpDetailedRequestTests"/>
+        </classes>
+    </test>
+</suite>

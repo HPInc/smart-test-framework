@@ -13,28 +13,24 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import system.base.MainTestBase;
 
-
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 
 public class DesktopAutomation extends MainTestBase {
 
-    DesktopAutomationDataDrivenHelper dataDrivenHelper;
-    String folderWithMasterImages;
-    String navigatorFile;
-    String dataDrivenFile;
-    Pattern xButton;
-    String stf_win_app_demo;
-    Double similarity;
-    DesktopAutomationHelper desktopAutomationHelper;
+    private DesktopAutomationDataDrivenHelper dataDrivenHelper;
+    private String folderWithMasterImages;
+    private String navigatorFile;
+    private String dataDrivenFile;
+    private Pattern xButton;
+    private String stf_win_app_demo;
+    private Double similarity;
+    private DesktopAutomationHelper desktopAutomationHelper;
 
     @BeforeClass
     public void beforeClass() throws Exception {
         testLog.logIt("Running before class steps");
-        stf_win_app_demo = getAbsoluteFilePathFromResources("bin/SmartTestFrameworkDemo.exe");
+        stf_win_app_demo = discoverAbsoluteFilePath("bin/SmartTestFrameworkDemo.exe");
         similarity = 0.92;
         Screen screen = new Screen();
 
@@ -52,7 +48,7 @@ public class DesktopAutomation extends MainTestBase {
                 true,
                 true);
 
-        folderWithMasterImages = getAbsoluteFilePathFromResources("imgrDatadriven/desktop-apps/winformSTFdemo/1.0");
+        folderWithMasterImages = discoverAbsoluteFilePath("imgrDatadriven/desktop-apps/winformSTFdemo/1.0");
 
         navigatorFile = folderWithMasterImages + "/nav_winformSTFdemo_v1-0_1920x1080_Win-10_ALL-BTNS-AND-FUNCTIONS.json";
         dataDrivenFile = folderWithMasterImages + "/dd_winformSTFdemo_v1-0_SETS_AND_ASSERTS.json";
@@ -177,9 +173,7 @@ public class DesktopAutomation extends MainTestBase {
                 "assert_validValues_kickoffDemo");
     }
 
-    private String getAbsoluteFilePathFromResources(String filename) throws URISyntaxException {
-        URL res = getClass().getClassLoader().getResource(filename);
-        File file = Paths.get(res.toURI()).toFile();
-        return file.getAbsolutePath();
+    private String discoverAbsoluteFilePath(String filename) {
+        return new File(String.format("src/test/resources/%s", filename)).getAbsolutePath();
     }
 }
