@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <note>
+        <body>Don't forget that STF means Smart Test Framework</body>
+        <from>STF</from>
+        <heading>Urgent!</heading>
+        <to>QA User</to>
+    </note>
+</root>
