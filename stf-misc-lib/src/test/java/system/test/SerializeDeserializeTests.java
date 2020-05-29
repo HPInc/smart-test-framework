@@ -12,9 +12,6 @@ import system.base.MainTestBase;
 import system.pojo.NoteDemoClass;
 
 import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 
 
 public class SerializeDeserializeTests extends MainTestBase {
@@ -26,7 +23,7 @@ public class SerializeDeserializeTests extends MainTestBase {
     @Link(name = "This could be a Link to your project Issue Tracker", url = "https://github.com/HPInc/smart-test-framework")
     public void deserializeJsonContent() throws Exception {
 
-        String content = InputOutputHelper.readContentFromFile(getAbsoluteFilePathFromResources("content.json"));
+        String content = InputOutputHelper.readContentFromFile(discoverAbsoluteFilePath("content.json"));
         NoteDemoClass noteDemoClass = DeserializeHelper.deserializeStringToObject(NoteDemoClass.class, SerializationType.JSON, content);
 
         assertAllPropertiesValuesFromNoteObject(noteDemoClass);
@@ -38,7 +35,7 @@ public class SerializeDeserializeTests extends MainTestBase {
     @Description("Deserialize a xml file and check all its properties values")
     @Link(name = "This could be a Link to your project Issue Tracker", url = "https://github.com/HPInc/smart-test-framework")
     public void deserializeXmlContent() throws Exception {
-        String content = InputOutputHelper.readContentFromFile(getAbsoluteFilePathFromResources("content.xml"));
+        String content = InputOutputHelper.readContentFromFile(discoverAbsoluteFilePath("content.xml"));
         NoteDemoClass noteDemoClass = DeserializeHelper.deserializeStringToObject(NoteDemoClass.class, SerializationType.XML, content);
 
         assertAllPropertiesValuesFromNoteObject(noteDemoClass);
@@ -50,7 +47,7 @@ public class SerializeDeserializeTests extends MainTestBase {
     @Description("Deserialize a yaml file and check all its properties values")
     @Link(name = "This could be a Link to your project Issue Tracker", url = "https://github.com/HPInc/smart-test-framework")
     public void deserializeYamlContent() throws Exception {
-        String content = InputOutputHelper.readContentFromFile(getAbsoluteFilePathFromResources("content.yml"));
+        String content = InputOutputHelper.readContentFromFile(discoverAbsoluteFilePath("content.yml"));
         NoteDemoClass noteDemoClass = DeserializeHelper.deserializeStringToObject(NoteDemoClass.class, SerializationType.YAML, content);
 
         assertAllPropertiesValuesFromNoteObject(noteDemoClass);
@@ -111,10 +108,7 @@ public class SerializeDeserializeTests extends MainTestBase {
         Assert.assertEquals(currentValue.note.body, expectedValue.note.body);
     }
 
-    private String getAbsoluteFilePathFromResources(String filename) throws URISyntaxException {
-        URL res = getClass().getClassLoader().getResource(filename);
-        File file = Paths.get(res.toURI()).toFile();
-        return file.getAbsolutePath();
+    private String discoverAbsoluteFilePath(String filename) {
+        return new File(String.format("src/test/resources/%s", filename)).getAbsolutePath();
     }
-
 }
