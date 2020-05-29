@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="STF_MISC_TEST_SUITE">
+<suite name="STF_DESKTOP-AUTOMATION_TEST_SUITE">
 
     <!--*************************************[TEST CASES AREA]*************************************-->
     <!--Global parameter-->
     <parameter name="optionalGlobalParameterExample" value="valueGotFromGlobalParam"/>
 
-    <test name="General-Helpers_Test-Set">
+    <test name="Desktop-Automation-Helpers_Test-Set">
         <classes>
-            <class name="system.test.CalendarTests"/>
-            <class name="system.test.SerializeDeserializeTests"/>
-            <class name="system.test.InputOutputTests"/>
-            <class name="system.test.RegexTests"/>
+            <class name="system.test.DesktopAutomation"/>
         </classes>
     </test>
 </suite>

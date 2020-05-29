@@ -1,0 +1,474 @@
+{
+  "SmartDataDriven": [
+    {
+      "instructionSet": "set_validValues1_NoEvaluate",
+      "statements": [
+        {
+          "statement": {
+            "_comment": "This set does not care about the current value. It will use the given navigator as base to click on this offsetCoordinate below.",
+            "agent": "sikuli",
+            "purpose": "set",
+            "selector": "tbr_value2",
+            "areaId": "mainScreen",
+            "action": "setField",
+            "method": "byPointClick"
+          }
+        }
+      ]
+    },
+    {
+      "instructionSet": "set_validValues_kickoffDemo",
+      "statements": [
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "set",
+            "selector": "txtBox_2",
+            "areaId": "mainScreen",
+            "action": "setField",
+            "method": "byPaste",
+            "contentType": "string",
+            "content": [
+              "this is a test"
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "set",
+            "selector": "cbx_1",
+            "areaId": "mainScreen",
+            "action": "setField",
+            "method": "byPointClick"
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "set",
+            "selector": "rbt_2",
+            "areaId": "mainScreen",
+            "action": "setField",
+            "method": "byPointClick"
+          }
+        }
+      ]
+    },
+    {
+      "instructionSet": "assert_validValues_kickoffDemo",
+      "statements": [
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "textBox2Result",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "checkBox1",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "radioButton2",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        }
+      ]
+    },
+    {
+      "instructionSet": "assert_values_to_make_test_fail",
+      "statements": [
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "textBox2Result",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "checkBox1",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "NotExist",
+            "contentType": "masterFile"
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "radioButton2",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        }
+      ]
+    },
+    {
+      "instructionSet": "assert_validValues1_NoEvaluate",
+      "statements": [
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "textBox1",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "checkBox1",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "checkBox2",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "dropdownLst_item2",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "radioButton2",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "textBox2",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "trackBar_value2",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        }
+      ]
+    },
+    {
+      "instructionSet": "set_validValues1_Evaluate",
+      "statements": [
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "set",
+            "selector": "txtBox_1",
+            "areaId": "mainScreen",
+            "action": "setField",
+            "method": "byPaste",
+            "contentType": "string",
+            "content": [
+              "value1 read from datadriven validValues1Advanced"
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "set",
+            "selector": "checkBox_checked",
+            "areaId": "dataDrivenCommon",
+            "action": "setField",
+            "method": "byEvaluatePointClick",
+            "contentType": "boolean",
+            "rectangleTopLeftX": 13,
+            "rectangleTopLeftY": 71,
+            "rectangleBottomRightX": 35,
+            "rectangleBottomRightY": 93,
+            "xCoordinate": 24,
+            "yCoordinate": 80,
+            "content": [
+              true
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "set",
+            "selector": "checkBox_checked",
+            "areaId": "dataDrivenCommon",
+            "action": "setField",
+            "method": "byEvaluatePointClick",
+            "contentType": "boolean",
+            "rectangleTopLeftX": 12,
+            "rectangleTopLeftY": 95,
+            "rectangleBottomRightX": 35,
+            "rectangleBottomRightY": 116,
+            "xCoordinate": 24,
+            "yCoordinate": 104,
+            "content": [
+              false
+            ]
+          }
+        },
+        {
+          "statement": {
+            "_comment": "this one will select the 2nd option, by pressing 'arrow down' twice then 'enter', Recommended just for non dynamic items list.",
+            "agent": "sikuli",
+            "purpose": "set",
+            "selector": "dropdownLst",
+            "areaId": "mainScreen",
+            "action": "setField",
+            "method": "byKeystrokeSequence",
+            "content": [
+              "b",
+              "r",
+              "a",
+              "\n"
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "set",
+            "selector": "radioButton_checked",
+            "areaId": "dataDrivenCommon",
+            "action": "setField",
+            "method": "byEvaluatePointClick",
+            "contentType": "boolean",
+            "rectangleTopLeftX": 195,
+            "rectangleTopLeftY": 164,
+            "rectangleBottomRightX": 270,
+            "rectangleBottomRightY": 223,
+            "xCoordinate": 228,
+            "yCoordinate": 196,
+            "content": [
+              true
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "set",
+            "selector": "txtBox_2",
+            "areaId": "mainScreen",
+            "action": "setField",
+            "method": "byPaste",
+            "contentType": "string",
+            "content": [
+              "value2 read from datadriven validValues1Advanced"
+            ]
+          }
+        },
+        {
+          "statement": {
+            "_comment": "This set does not care about the current value. It will use the given navigator as base to click on this offsetCoordinate below.",
+            "agent": "sikuli",
+            "purpose": "set",
+            "selector": "trackBar1",
+            "areaId": "mainScreen",
+            "action": "setField",
+            "method": "byPointClick",
+            "contentType": "offsetCoordinate",
+            "xCoordinate": 102,
+            "yCoordinate": 331,
+            "content": []
+          }
+        }
+      ]
+    },
+    {
+      "instructionSet": "assert_validValues1_Evaluate",
+      "statements": [
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "txtBox_1_OCR_result",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byOCR",
+            "operator": "Contains",
+            "contentType": "string",
+            "content": [
+              "value1"
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "checkBox_checked",
+            "areaId": "dataDrivenCommon",
+            "operator": "EqualTo",
+            "action": "assertField",
+            "method": "byImageFindInRegion",
+            "contentType": "boolean",
+            "rectangleTopLeftX": 13,
+            "rectangleTopLeftY": 71,
+            "rectangleBottomRightX": 35,
+            "rectangleBottomRightY": 93,
+            "content": [
+              true
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "checkBox_checked",
+            "areaId": "dataDrivenCommon",
+            "action": "assertField",
+            "method": "byImageFindInRegion",
+            "operator": "EqualTo",
+            "contentType": "boolean",
+            "rectangleTopLeftX": 12,
+            "rectangleTopLeftY": 95,
+            "rectangleBottomRightX": 35,
+            "rectangleBottomRightY": 116,
+            "content": [
+              false
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "ddl_OCR_result",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byOCR",
+            "operator": "Contains",
+            "contentType": "string",
+            "content": [
+              "Bra"
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "radioButton_checked",
+            "areaId": "dataDrivenCommon",
+            "action": "assertField",
+            "method": "byImageFindInRegion",
+            "operator": "EqualTo",
+            "contentType": "boolean",
+            "rectangleTopLeftX": 195,
+            "rectangleTopLeftY": 164,
+            "rectangleBottomRightX": 270,
+            "rectangleBottomRightY": 223,
+            "content": [
+              true
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "txtBox_2_OCR_result",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byOCR",
+            "operator": "Contains",
+            "contentType": "string",
+            "content": [
+              "value2"
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "sikuli",
+            "purpose": "assert",
+            "selector": "trackBar_value2",
+            "areaId": "dataDrivenSpecific",
+            "action": "assertField",
+            "method": "byImageFind",
+            "operator": "Exists",
+            "contentType": "masterFile"
+          }
+        }
+      ]
+    }
+  ]
+}
