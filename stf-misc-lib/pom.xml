@@ -100,6 +100,7 @@
                 <version>2.18.1</version>
                 <configuration>
                     <suiteXmlFiles>
+                        <suiteXmlFile>testRunConfig/testRunConfig_misc-tests.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
