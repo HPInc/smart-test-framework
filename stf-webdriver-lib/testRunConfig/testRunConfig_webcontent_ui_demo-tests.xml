@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="STF_WEBDRIVER_TEST-SUITE">
+
+    <!--*************************************[TEST CASES AREA]*************************************-->
+    <parameter name="param_SeleniumGridHost" value="192.168.0.31"/>
+    <parameter name="param_SeleniumGridPort" value="4444"/>
+    <parameter name="param_BaseGridUrl" value="http://%s:%s/wd/hub"/>
+    <parameter name="param_IsSelenoid" value="true"/>
+    <parameter name="param_BrowserName" value="chrome"/>
+    <parameter name="param_BrowserVersion" value="80.0"/>
+
+    <parameter name="param_WiremockExternalIP" value="192.168.0.29"/>
+    <parameter name="param_WiremockPort" value="7654"/>
+    <parameter name="param_WiremockUiEndpoint" value="/web/ui"/>
+
+    <test name="WebContent-Ui_Test-Set">
+        <classes>
+            <class name="system.test.ui.WebUiTests"/>
+        </classes>
+    </test>
+</suite>
