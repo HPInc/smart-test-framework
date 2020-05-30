@@ -1,0 +1,149 @@
+{
+  "SmartDataDriven": [
+    {
+      "instructionSet": "set_validValues1",
+      "statements": [
+        {
+          "statement": {
+            "agent": "selenium",
+            "purpose": "set",
+            "selector": "input[name='tbx1']",
+            "locator": "byCss",
+            "action": "setField",
+            "contentType": "string",
+            "content": [
+              "1 hello this is a test from STF"
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "selenium",
+            "purpose": "set",
+            "selector": "input[name='tbx2']",
+            "locator": "byCss",
+            "action": "setField",
+            "contentType": "string",
+            "content": [
+              "some input from stf"
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "selenium",
+            "purpose": "set",
+            "selector": "radio-1",
+            "locator": "byId",
+            "action": "setField",
+            "contentType": "boolean",
+            "content": [
+              true
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "selenium",
+            "purpose": "set",
+            "selector": "#option-0",
+            "locator": "byCss",
+            "action": "setField",
+            "contentType": "boolean",
+            "content": [
+              true
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "selenium",
+            "purpose": "set",
+            "selector": "#dropdown",
+            "locator": "byCss",
+            "action": "setField",
+            "contentType": "string",
+            "content": [
+              "Super option 4"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "instructionSet": "assert_validValues1",
+      "statements": [
+        {
+          "statement": {
+            "agent": "selenium",
+            "purpose": "assert",
+            "selector": "input[name='tbx1']",
+            "locator": "byCss",
+            "operator": "EqualTo",
+            "action": "assertField",
+            "contentType": "string",
+            "content": [
+              "1 hello this is a test from STF"
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "selenium",
+            "purpose": "assert",
+            "selector": "input[name='tbx2']",
+            "locator": "byCss",
+            "operator": "EqualTo",
+            "action": "assertField",
+            "contentType": "string",
+            "content": [
+              "some input from stf"
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "selenium",
+            "purpose": "assert",
+            "selector": "radio-1",
+            "locator": "byId",
+            "operator": "EqualTo",
+            "action": "assertField",
+            "contentType": "boolean",
+            "content": [
+              true
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "selenium",
+            "purpose": "assert",
+            "selector": "#option-0",
+            "locator": "byCss",
+            "operator": "EqualTo",
+            "action": "assertField",
+            "contentType": "boolean",
+            "content": [
+              true
+            ]
+          }
+        },
+        {
+          "statement": {
+            "agent": "selenium",
+            "purpose": "assert",
+            "selector": "#dropdown",
+            "locator": "byCss",
+            "operator": "EqualTo",
+            "action": "assertField",
+            "contentType": "string",
+            "content": [
+              "Super option 4"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
