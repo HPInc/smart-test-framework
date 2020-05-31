@@ -6,9 +6,8 @@
 # *~
 */target/*
 */.idea/*
+/.idea/*
 */allure-results/*
-STF/src/main/java/allure-results/*.json
 *.iml
 */test-output/*
-SmartTestFramework/*
 *.db
