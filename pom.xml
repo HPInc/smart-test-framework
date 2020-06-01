@@ -17,9 +17,9 @@
     </properties>
 
     <modules>
-        <module>stf-desktop-automation-lib</module>
-        <module>stf-http-client-lib</module>
         <module>stf-misc-lib</module>
+        <module>stf-http-client-lib</module>
+        <module>stf-desktop-automation-lib</module>
         <module>stf-webdriver-lib</module>
     </modules>
 
