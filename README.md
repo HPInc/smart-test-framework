@@ -1,4 +1,4 @@
-# Smart-Test-Framework
+# Smart-Test-Framework ![STF Icon](readme-img/STF.PNG)
  
 ### What is that?
 Smart Test Framework is multi-purpose test framework composed by four independent libraries. You’ll be able to create automated tests for Web pages (via desktop and mobile web browsers), Web services (REST APis), Desktop applications (on Windows, Mac and Linux) and Mobile applications (native and hybrid). It's flexible enough to support most of projects and to provide professional quality to automated test needs.
@@ -62,7 +62,7 @@ The abstraction layers of STF are optional, so you can stick with all supported 
 - TestNG
 - Allure
 
-### Selenium
+### Selenium  ![Selenium](readme-img/selenium.PNG)
 
 I've chosen Selenium to make WebUi tests flexible. A test that you've created to run in desktop browsers will work on mobile browsers too. It also works great with STF data-driven feature.
 
@@ -70,7 +70,7 @@ Some notes from its official site:
 
 `"Selenium automates browsers. That's it! What you do with that power is entirely up to you. Primarily, it is for automating web applications for testing purposes, but is certainly not limited to just that. Boring web-based administration tasks can (and should!) be automated as well."`
 
-### Appium
+### Appium  ![Appium](readme-img/appium.PNG)
 
 I've chosen Appium to make Mobile Application tests flexible. It's compatible with most STF Selenium helpers. It also supports STF data-driven feature for mobile testing.
 
@@ -81,7 +81,7 @@ Some notes from its official site:
 Check [http://appium.io/](http://appium.io/)
 
 
-### SikuliX
+### SikuliX  ![SkiliX](readme-img/sikulix.PNG)
 
 I've chosen SikuliX because it's a powerful framework that allows you to test anything visible in the screen. It can reach visual components that even where Selenium and Appium cannot. It supports STF image data-driven allowing you to easily create reliable tests for desktop apps using a minimum of master images! This is one of the key features of STF.
 
@@ -91,7 +91,7 @@ Some notes from its official site:
 
 Check [http://appium.io/](http://appium.io/)
 
-### Apache Http Client
+### Apache Http Client  ![Apache](readme-img/apache.PNG)
 
 This is a solid, flexible and reliable HTTP Client. Using STF abstraction layer for it will allow you to speed up the development of automated tests for you rest APIs easier than you can image!
 
@@ -104,7 +104,7 @@ Some notes from its official site:
 Check [https://hc.apache.org/httpcomponents-client-ga/](https://hc.apache.org/httpcomponents-client-ga/)
  
  
- ### testNG
+ ### testNG  ![testNG](readme-img/testNG.PNG)
  
  testNG is like Junit, but with steroids. Jokes aside, testNG is by far one of the most complete and powerful test execution frameworks I've ever saw during my QA career - I can tell you this for sure. This is the nervous system from STF, allowing to run test sets on any order, dependency, single or multi-thread. Then connecting all this with a report test results framework. This framework is pure gold!
  
@@ -129,7 +129,7 @@ Check [https://hc.apache.org/httpcomponents-client-ga/](https://hc.apache.org/ht
  Check [https://testng.org/doc/](https://testng.org/doc/)
 
 
-### Allure
+### Allure  ![Allure](readme-img/allure.PNG)
 
 Even testNG framework has its own test execution reports, it's too simple for professional usage in my opinion. Especially when it comes to check historical results, trends etc. So, therefore STF makes usage of Allure. This is by far one of the most complete and powerful test results reports available. Even it does support multiple execution frameworks, just a few can make use of most important features of Allure and testNG is one of them. Using Allure with testNG is a win-win.
 
