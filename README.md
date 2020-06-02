@@ -729,13 +729,62 @@ These are the possible values to these properties:
 ## How to setup Smart Test Framework
 
 If you just want to start creating automated tests for your project right away, be sure to attend all these requirements first:
-
+###Requirements
 - Java8 installed
 - Git installed and configured
 - Any Java IDE ([IntelliJ Idea community](https://www.jetbrains.com/idea/download/#section=windows) *(free-version)* works great with STF)
 - If you don't use IntelliJ, you'll need Maven binaries and all its mandatory environment variables configured
 - If you're planning to create automated tests for desktop applications, then make sure you have SikuliX configure complete as described [here](https://raiman.github.io/SikuliX1/downloads.html).
+- [Maven](https://maven.apache.org/download.cgi?Preferred=ftp://ftp.osuosl.org/pub/apache/) configured.
 
+###Installing STF libs in local maven repository (.m2)
+  Until smart-test-framework (stf) libs are not available in any Maven Central Repositories, **you must clone the source repository** and install its libs.
+  *Please keep calm*, you can achieve this running just three command lines:
+ ```shell
+clone <stf repo>
+cd <your stf cloned repo>
+mvn clean install -DskipTests
+```
+As result you should see some output like this one:
+![stfArch](readme-img/installingLibsViaMvn.PNG)
+*In order to not skip tests when installing the STF source code, you'll need to configure a selenium Grid server by your own and run it in Windows 10 due to a native windows form demo app used by Desktop Automation tests.*
+
+- **This way you'll have direct access to source code, feel free to improve and add new functionality.**
+
+###Adding the STF libs in your framework:
+#### If Maven based:
+- Edit POM.xml and add these dependencies.
+```xml
+ <dependencies>
+        <dependency>
+            <groupId>hp.inc.jsg.qa.stf</groupId>
+            <artifactId>stf-misc</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>hp.inc.jsg.qa.stf</groupId>
+            <artifactId>stf-web-driver</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>hp.inc.jsg.qa.stf</groupId>
+            <artifactId>stf-http-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>hp.inc.jsg.qa.stf</groupId>
+            <artifactId>stf-desktop-automation</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+```
+
+ You don't need to use all four, but pay attention to this:
+ - `stf-web-driver`, `stf-http-client` and `stf-desktop-automation` **depends on** `stf-misc`
+ - `stf-web-driver` also **depends on** `stf-http-client` 
+
+#### If NOT Maven based:
+- Just pick the compiled STF libs (.jar) from `.m2` or `target` (folder were stf-source repo was compiled), then add it directly in your repository as external source lib.
 ***
 
 ### Contact
