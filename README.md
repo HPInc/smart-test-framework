@@ -746,10 +746,9 @@ cd <your stf cloned repo>
 mvn clean install -DskipTests
 ```
 As result you should see some output like this one:
-
 ![stfArch](readme-img/installingLibsViaMvn.PNG)
 
-*In order to not skip tests when installing the STF source code, you'll need to configure a selenium Grid server by your own and run it in Windows 10 due to a native windows form demo app used by Desktop Automation tests.*
+- *In order to not skip tests when installing the STF source code, you'll need to configure a selenium Grid server by your own and run it in Windows 10 due to a native windows form demo app used by Desktop Automation tests.*
 
 - **This way you'll have direct access to source code, feel free to improve and add new functionality.**
 
