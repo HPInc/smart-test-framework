@@ -21,6 +21,6 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn clean compile -DskippTests --file pom.xml
+      run: mvn clean install -DskippTests --file pom.xml
     - name: Run Http-Client tests
       run: mvn test --file stf-http-client-lib/pom.xml
