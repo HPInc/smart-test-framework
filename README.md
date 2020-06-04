@@ -70,6 +70,8 @@ Some notes from its official site:
 
 `"Selenium automates browsers. That's it! What you do with that power is entirely up to you. Primarily, it is for automating web applications for testing purposes, but is certainly not limited to just that. Boring web-based administration tasks can (and should!) be automated as well."`
 
+Check [https://www.selenium.dev/](https://www.selenium.dev/)
+
 ### Appium
 
 I've chosen Appium to make Mobile Application tests flexible. It's compatible with most STF Selenium helpers. It also supports STF data-driven feature for mobile testing.
@@ -89,7 +91,7 @@ Some notes from its official site:
 
 `"SikuliX automates anything you see on the screen of your desktop computer running Windows, Mac or some Linux/Unix. It uses image recognition powered by OpenCV to identify and control GUI components. This is handy in cases when there is no easy access to a GUI's internals or the source code of the application or web page you want to act on."`
 
-Check [http://appium.io/](http://appium.io/)
+Check [http://sikulix.com/](http://sikulix.com/)
 
 ### Apache Http Client
 
@@ -746,7 +748,7 @@ cd <your stf cloned repo>
 mvn clean install -DskipTests
 ```
 As result you should see some output like this one:
-![stfArch](readme-img/installingLibsViaMvn.PNG)
+![stfArch](readme-img/installingLibsViaMvn.png)
 
 - *In order to not skip tests when installing the STF source code, you'll need to configure a selenium Grid server by your own and run it in Windows 10 due to a native windows form demo app used by Desktop Automation tests.*
 
