@@ -42,6 +42,12 @@
             <artifactId>allure-testng</artifactId>
             <version>2.12.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>[24.1.1,)</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
