@@ -1,8 +1,8 @@
 package system.test.rest;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import hp.inc.jsg.qa.stf.dataclasses.web.http.HttpDetailedResponse;
-import hp.inc.jsg.qa.stf.enums.http.HttpRequestMethod;
+import com.github.hpinc.jeangiacomin.stf.dataclasses.web.http.HttpDetailedResponse;
+import com.github.hpinc.jeangiacomin.stf.enums.http.HttpRequestMethod;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;

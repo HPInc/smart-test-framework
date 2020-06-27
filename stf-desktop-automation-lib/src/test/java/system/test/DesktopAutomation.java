@@ -1,8 +1,8 @@
 package system.test;
 
-import hp.inc.jsg.qa.stf.framework.datadriven.DesktopAutomationDataDrivenHelper;
-import hp.inc.jsg.qa.stf.framework.desktop.DesktopAutomationHelper;
-import hp.inc.jsg.qa.stf.framework.io.InputOutputHelper;
+import com.github.hpinc.jeangiacomin.stf.framework.datadriven.DesktopAutomationDataDrivenHelper;
+import com.github.hpinc.jeangiacomin.stf.framework.desktop.DesktopAutomationHelper;
+import com.github.hpinc.jeangiacomin.stf.framework.io.InputOutputHelper;
 import io.qameta.allure.*;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
