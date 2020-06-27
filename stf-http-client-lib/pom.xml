@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>hp.inc.jsg.qa.stf</groupId>
+        <groupId>com.github.hpinc.jeangiacomin.stf</groupId>
         <artifactId>smart-test-framework</artifactId>
-        <version>1.1</version>
+        <version>1.2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -20,7 +20,7 @@
     <dependencies>
         <!--Smart Test Framework lib-->
         <dependency>
-            <groupId>hp.inc.jsg.qa.stf</groupId>
+            <groupId>com.github.hpinc.jeangiacomin.stf</groupId>
             <artifactId>stf-misc</artifactId>
             <version>${stf.misc.release}</version>
         </dependency>
