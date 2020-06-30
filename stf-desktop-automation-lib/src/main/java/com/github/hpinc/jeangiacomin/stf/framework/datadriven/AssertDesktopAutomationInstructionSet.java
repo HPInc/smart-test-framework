@@ -121,7 +121,7 @@ public class AssertDesktopAutomationInstructionSet {
             if (!this.desktopAutomationHelper.getTakeScreenshotIfOCRNotFound()) {
                 customMessage = String.format(customMessage, ".");
             } else {
-                customMessage = String.format(customMessage, ". The image to that corresponds to the given region was saved at: " + this.desktopAutomationHelper.saveScreenshotFromRegion(region));
+//                customMessage = String.format(customMessage, ". The image to that corresponds to the given region was saved at: " + this.desktopAutomationHelper.saveScreenshotFromRegion(region));
             }
         }
         switch (operator) {

@@ -1,15 +1,15 @@
 package com.github.hpinc.jeangiacomin.stf.framework.desktop;
 
-import com.github.hpinc.jeangiacomin.stf.enums.image.Action;
-import com.google.common.base.Stopwatch;
 import com.github.hpinc.jeangiacomin.stf.dataclasses.web.datadriven.DataDrivenNavigator;
 import com.github.hpinc.jeangiacomin.stf.dataclasses.web.datadriven.Elements;
 import com.github.hpinc.jeangiacomin.stf.dataclasses.web.datadriven.MasterImageDetails;
+import com.github.hpinc.jeangiacomin.stf.enums.image.Action;
 import com.github.hpinc.jeangiacomin.stf.enums.serialization.SerializationType;
 import com.github.hpinc.jeangiacomin.stf.framework.io.InputOutputHelper;
 import com.github.hpinc.jeangiacomin.stf.framework.logger.TestLog;
 import com.github.hpinc.jeangiacomin.stf.framework.serialization.DeserializeHelper;
 import com.github.hpinc.jeangiacomin.stf.framework.wait.WaitHelper;
+import com.google.common.base.Stopwatch;
 import org.sikuli.basics.Settings;
 import org.sikuli.script.*;
 
@@ -332,7 +332,7 @@ public class DesktopAutomationHelper {
         }
 
         if (screenCaptureIfMissing && !wasFound) {
-            this.testLog.logIt(String.format("The expected image [%1$s] was not found, instead found [%2$s]", pattern.getFilename(), isForRegion ? saveScreenshotFromRegion(region) : saveDesktopScreenshot()));
+//            this.testLog.logIt(String.format("The expected image [%1$s] was not found, instead found [%2$s]", pattern.getFilename(), isForRegion ? saveScreenshotFromRegion(region) : saveDesktopScreenshot()));
         }
         return wasFound;
     }
@@ -684,7 +684,7 @@ public class DesktopAutomationHelper {
      * @throws IOException
      */
     public String saveDesktopScreenshot() throws IOException {
-        return saveDesktopScreenshot(this.folderPathToSaveScreenshots, "");
+        return saveDesktopScreenshot(this.folderPathToSaveScreenshots, com.github.hpinc.jeangiacomin.stf.framework.misc.RandomValuesHelper.generateAlphabetic(10));
     }
 
     /***
@@ -696,7 +696,7 @@ public class DesktopAutomationHelper {
      */
     public String saveDesktopScreenshot(String path, String filename) throws IOException {
         InputOutputHelper.createDirectory(this.folderPathToSaveScreenshots);
-        return this.screen.saveScreenCapture(path, filename);
+        return this.screen.capture().save(path, filename);
     }
 
     /***
@@ -705,8 +705,8 @@ public class DesktopAutomationHelper {
      * @return
      * @throws IOException
      */
-    public String saveScreenshotFromRegion(Region region) throws IOException {
-        return saveScreenshotFromRegion(region, this.folderPathToSaveScreenshots, "");
+    public void saveScreenshotFromRegion(Region region) throws IOException {
+        saveScreenshotFromRegion(region, this.folderPathToSaveScreenshots, "");
     }
 
     /***
@@ -717,9 +717,9 @@ public class DesktopAutomationHelper {
      * @return
      * @throws IOException
      */
-    public String saveScreenshotFromRegion(Region region, String path, String filename) throws IOException {
+    public void saveScreenshotFromRegion(Region region, String path, String filename) throws IOException {
         InputOutputHelper.createDirectory(path);
-        return region.saveScreenCapture(path, filename);
+        region.getImage().save(path, filename);
     }
 
     /***
@@ -841,7 +841,7 @@ public class DesktopAutomationHelper {
                         return region.find(pattern1);
                     } catch (Exception e) {
                         if (this.takeRegionScreenshotIfPatternNotFound) {
-                            this.testLog.logIt(String.format("The pattern [%1$s] inside the given region was not found! Instead this was found inside the given region:[%2$s].", pattern1.getFilename(), saveScreenshotFromRegion(region)));
+//                            this.testLog.logIt(String.format("The pattern [%1$s] inside the given region was not found! Instead this was found inside the given region:[%2$s].", pattern1.getFilename(), saveScreenshotFromRegion(region)));
                         }
                         throw new Exception(e);
                     }
