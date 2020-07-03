@@ -5,7 +5,7 @@ import system.base.MainTestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static com.github.hpinc.jeangiacomin.stf.framework.misc.CalendarHelper.convertTimestampToDate;
+import static com.github.jeansantos38.stf.framework.misc.CalendarHelper.convertTimestampToDate;
 
 public class CalendarTests extends MainTestBase {
 

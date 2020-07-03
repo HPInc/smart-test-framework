@@ -2,7 +2,7 @@ package system.test.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.hpinc.jeangiacomin.stf.framework.serialization.SerializeHelper;
+import com.github.jeansantos38.stf.framework.serialization.SerializeHelper;
 
 public class CommonPayloadBody {
 

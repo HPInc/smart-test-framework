@@ -1,7 +1,7 @@
 package system.test;
 
-import com.github.hpinc.jeangiacomin.stf.framework.io.InputOutputHelper;
-import com.github.hpinc.jeangiacomin.stf.framework.misc.RandomValuesHelper;
+import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
+import com.github.jeansantos38.stf.framework.misc.RandomValuesHelper;
 import io.qameta.allure.*;
 import system.base.MainTestBase;
 import org.testng.Assert;

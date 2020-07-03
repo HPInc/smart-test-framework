@@ -1,6 +1,6 @@
 package system.test;
 
-import com.github.hpinc.jeangiacomin.stf.framework.regex.RegexHelper;
+import com.github.jeansantos38.stf.framework.regex.RegexHelper;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;

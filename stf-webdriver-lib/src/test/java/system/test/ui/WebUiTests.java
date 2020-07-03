@@ -1,8 +1,8 @@
 package system.test.ui;
 
-import com.github.hpinc.jeangiacomin.stf.enums.webdriver.SelectorType;
-import com.github.hpinc.jeangiacomin.stf.framework.datadriven.WebDriverDataDrivenHelper;
-import com.github.hpinc.jeangiacomin.stf.framework.webdriver.WebDriverSeleniumHelper;
+import com.github.jeansantos38.stf.enums.webdriver.SelectorType;
+import com.github.jeansantos38.stf.framework.datadriven.WebDriverDataDrivenHelper;
+import com.github.jeansantos38.stf.framework.webdriver.WebDriverSeleniumHelper;
 import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.testng.Assert;

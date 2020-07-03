@@ -1,10 +1,10 @@
 package system.test;
 
-import com.github.hpinc.jeangiacomin.stf.enums.wait.ThreadWait;
-import com.github.hpinc.jeangiacomin.stf.framework.datadriven.DesktopAutomationDataDrivenHelper;
-import com.github.hpinc.jeangiacomin.stf.framework.desktop.DesktopAutomationHelper;
-import com.github.hpinc.jeangiacomin.stf.framework.io.InputOutputHelper;
-import com.github.hpinc.jeangiacomin.stf.framework.wait.WaitHelper;
+import com.github.jeansantos38.stf.enums.wait.ThreadWait;
+import com.github.jeansantos38.stf.framework.datadriven.DesktopAutomationDataDrivenHelper;
+import com.github.jeansantos38.stf.framework.desktop.DesktopAutomationHelper;
+import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
+import com.github.jeansantos38.stf.framework.wait.WaitHelper;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 import org.sikuli.vnc.VNCScreen;
@@ -64,14 +64,21 @@ public class DesktopAutomation2 extends MainTestBase {
 
         new WaitHelper().wait(ThreadWait.WAIT_3_SEC);
         //screen.getImage().save("daksjhdalksjdha1", screenshotsDestination);
-        screen.getImage().save("alopra11", screenshotsDestination);
+
+
+        Pattern zica = new Pattern("C:\\Users\\giacomin\\Documents\\SikuliX.sikuli\\1593487849458.png");
+        zica.similar(0.75);
+        screen.click(zica);
 
 
         //screen.getClient().setDesktopSize(1920, 1080);
         //screen.getClient().setsetDesktopSize(1920, 1080);
 
-        new WaitHelper().wait(ThreadWait.WAIT_3_SEC);
-        screen.getImage().save("alopra22", screenshotsDestination);
+        new WaitHelper().wait(ThreadWait.WAIT_10_SEC);
+        screen.getClient().refreshFramebuffer();
+        screen.getImage().save("alopra22.png", screenshotsDestination);
+
+        screen.stop();
 
 //        desktopAutomationHelper = new DesktopAutomationHelper(
 //                testLog,
