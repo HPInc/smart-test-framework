@@ -1,4 +1,4 @@
-![stfLogo](readme-img/STFLOGO.png)
+![stfLogo](readme-img/stf_logo.png)
 # Smart-Test-Framework
  
 ### What is that?
