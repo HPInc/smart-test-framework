@@ -1,10 +1,10 @@
 package system.test;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.github.hpinc.jeangiacomin.stf.enums.serialization.SerializationType;
-import com.github.hpinc.jeangiacomin.stf.framework.io.InputOutputHelper;
-import com.github.hpinc.jeangiacomin.stf.framework.serialization.DeserializeHelper;
-import com.github.hpinc.jeangiacomin.stf.framework.serialization.SerializeHelper;
+import com.github.jeansantos38.stf.enums.serialization.SerializationType;
+import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
+import com.github.jeansantos38.stf.framework.serialization.DeserializeHelper;
+import com.github.jeansantos38.stf.framework.serialization.SerializeHelper;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;

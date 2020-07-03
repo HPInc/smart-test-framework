@@ -1,7 +1,7 @@
 package system.test.base;
 
 
-import com.github.hpinc.jeangiacomin.stf.framework.logger.TestLog;
+import com.github.jeansantos38.stf.framework.logger.TestLog;
 import org.testng.annotations.*;
 
 public class MainTestBase {

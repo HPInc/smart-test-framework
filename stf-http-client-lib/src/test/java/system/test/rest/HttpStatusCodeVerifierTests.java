@@ -1,10 +1,10 @@
 package system.test.rest;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.hpinc.jeangiacomin.stf.dataclasses.web.http.HttpDetailedRequest;
-import com.github.hpinc.jeangiacomin.stf.dataclasses.web.http.HttpDetailedResponse;
-import com.github.hpinc.jeangiacomin.stf.enums.http.HttpRequestMethod;
-import com.github.hpinc.jeangiacomin.stf.framework.httpclient.StatusCodeVerifier;
+import com.github.jeansantos38.stf.dataclasses.web.http.HttpDetailedRequest;
+import com.github.jeansantos38.stf.dataclasses.web.http.HttpDetailedResponse;
+import com.github.jeansantos38.stf.enums.http.HttpRequestMethod;
+import com.github.jeansantos38.stf.framework.httpclient.StatusCodeVerifier;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;

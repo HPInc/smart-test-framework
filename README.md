@@ -1,3 +1,4 @@
+![stfLogo](readme-img/stf_logo.png)
 # Smart-Test-Framework
  
 ### What is that?
@@ -184,7 +185,7 @@ Detailed instructions on how to use STF APIs.
 
 ### HttpClient
 #### First steps:
-This helper `HttpClient.java` can be found in this namespace: `com.github.hpinc.jeangiacomin.stf.framework.httpclient`
+This helper `HttpClient.java` can be found in this namespace: `com.github.jeansantos38.stf.framework.httpclient`
 
 This is how to instantiate it:
 ```java
@@ -244,7 +245,7 @@ The advantage of using this one is the possibility of using `HttpDetailedRequest
 
 ### WebDriverSeleniumHelper & WebDriverAppiumHelper
 #### First steps:
-The helpers `WebDriverSeleniumHelper.java` and `WebDriverAppiumHelper.java` can be found in this namespace: `com.github.hpinc.jeangiacomin.stf.framework.webdriver`
+The helpers `WebDriverSeleniumHelper.java` and `WebDriverAppiumHelper.java` can be found in this namespace: `com.github.jeansantos38.stf.framework.webdriver`
 
 This is how to instantiate **WebDriverSeleniumHelper**:
 ```java
@@ -302,7 +303,7 @@ public void initialize() throws Exception {
 
 ### DesktopAutomationHelper
 #### First steps:
-This helper `DesktopAutomationHelper.java` can be found in this namespace: `com.github.hpinc.jeangiacomin.stf.framework.desktop`
+This helper `DesktopAutomationHelper.java` can be found in this namespace: `com.github.jeansantos38.stf.framework.desktop`
 
 This is how to instantiate **DesktopAutomationHelper**:
 ```java
@@ -411,7 +412,7 @@ This is a so important feature of STF, that it deserves an entire section.
 To be used for settings or asserting values for Selenium and Appium.
 
 #### First steps:
-This helper `WebDriverDataDrivenHelper.java` can be found in this namespace: `com.github.hpinc.jeangiacomin.stf.framework.datadriven`. It works for both *WebDriverAppiumHelper* and *WebDriverSeleniumHelper*
+This helper `WebDriverDataDrivenHelper.java` can be found in this namespace: `com.github.jeansantos38.stf.framework.datadriven`. It works for both *WebDriverAppiumHelper* and *WebDriverSeleniumHelper*
 
 This is how to instantiate and use it:
 ```java
@@ -558,7 +559,7 @@ These are the possible values to these properties:
 To be used for settings or asserting values for SikuliX.
 
 #### First steps:
-This helper `DesktopAutomationDataDrivenHelper.java` can be found in this namespace: `com.github.hpinc.jeangiacomin.stf.framework.datadriven`. It works for both *WebDriverAppiumHelper* and *WebDriverSeleniumHelper*
+This helper `DesktopAutomationDataDrivenHelper.java` can be found in this namespace: `com.github.jeansantos38.stf.framework.datadriven`. It works for both *WebDriverAppiumHelper* and *WebDriverSeleniumHelper*
 
 This is how to instantiate and use it:
 ```java
@@ -760,22 +761,22 @@ As result you should see some output like this one:
 ```xml
  <dependencies>
         <dependency>
-            <groupId>com.github.hpinc.jeangiacomin.stf</groupId>
+            <groupId>com.github.jeansantos38.stf</groupId>
             <artifactId>stf-misc</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.github.hpinc.jeangiacomin.stf</groupId>
+            <groupId>com.github.jeansantos38.stf</groupId>
             <artifactId>stf-web-driver</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.github.hpinc.jeangiacomin.stf</groupId>
+            <groupId>com.github.jeansantos38.stf</groupId>
             <artifactId>stf-http-client</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.github.hpinc.jeangiacomin.stf</groupId>
+            <groupId>com.github.jeansantos38.stf</groupId>
             <artifactId>stf-desktop-automation</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

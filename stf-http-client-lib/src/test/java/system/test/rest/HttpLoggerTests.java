@@ -1,11 +1,11 @@
 package system.test.rest;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.hpinc.jeangiacomin.stf.dataclasses.web.http.HttpDetailedHeader;
-import com.github.hpinc.jeangiacomin.stf.dataclasses.web.http.HttpDetailedHeaders;
-import com.github.hpinc.jeangiacomin.stf.dataclasses.web.http.HttpDetailedRequest;
-import com.github.hpinc.jeangiacomin.stf.enums.http.HttpRequestLogLevel;
-import com.github.hpinc.jeangiacomin.stf.enums.http.HttpRequestMethod;
+import com.github.jeansantos38.stf.dataclasses.web.http.HttpDetailedHeader;
+import com.github.jeansantos38.stf.dataclasses.web.http.HttpDetailedHeaders;
+import com.github.jeansantos38.stf.dataclasses.web.http.HttpDetailedRequest;
+import com.github.jeansantos38.stf.enums.http.HttpRequestLogLevel;
+import com.github.jeansantos38.stf.enums.http.HttpRequestMethod;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import system.test.base.HttpClientTestBase;

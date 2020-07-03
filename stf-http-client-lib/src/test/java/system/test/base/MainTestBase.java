@@ -1,8 +1,8 @@
 package system.test.base;
 
 
-import com.github.hpinc.jeangiacomin.stf.framework.logger.TestLog;
-import com.github.hpinc.jeangiacomin.stf.framework.wait.WaitHelper;
+import com.github.jeansantos38.stf.framework.logger.TestLog;
+import com.github.jeansantos38.stf.framework.wait.WaitHelper;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
