@@ -7,6 +7,7 @@ import com.github.jeansantos38.stf.enums.image.Action;
 import com.github.jeansantos38.stf.enums.serialization.SerializationType;
 import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
 import com.github.jeansantos38.stf.framework.logger.TestLog;
+import com.github.jeansantos38.stf.framework.misc.CalendarHelper;
 import com.github.jeansantos38.stf.framework.misc.RandomValuesHelper;
 import com.github.jeansantos38.stf.framework.serialization.DeserializeHelper;
 import com.github.jeansantos38.stf.framework.wait.WaitHelper;
@@ -333,7 +334,7 @@ public class DesktopAutomationHelper {
         }
 
         if (screenCaptureIfMissing && !wasFound) {
-//            this.testLog.logIt(String.format("The expected image [%1$s] was not found, instead found [%2$s]", pattern.getFilename(), isForRegion ? saveScreenshotFromRegion(region) : saveDesktopScreenshot()));
+            this.testLog.logIt(String.format("The expected image [%1$s] was not found, instead found [%2$s]", pattern.getFilename(), isForRegion ? saveScreenshotFromRegion(region) : saveDesktopScreenshot()));
         }
         return wasFound;
     }
@@ -685,7 +686,8 @@ public class DesktopAutomationHelper {
      * @throws IOException
      */
     public String saveDesktopScreenshot() throws IOException {
-        return saveDesktopScreenshot(this.folderPathToSaveScreenshots, RandomValuesHelper.generateAlphabetic(10));
+        return saveDesktopScreenshot(this.folderPathToSaveScreenshots,
+                String.format("%s_%s", RandomValuesHelper.generateAlphabetic(10), CalendarHelper.getCurrentTimeAndDate()));
     }
 
     /***
@@ -707,7 +709,8 @@ public class DesktopAutomationHelper {
      * @throws IOException
      */
     public String saveScreenshotFromRegion(Region region) throws IOException {
-        return saveScreenshotFromRegion(region, this.folderPathToSaveScreenshots, "");
+        return saveScreenshotFromRegion(region, this.folderPathToSaveScreenshots,
+                String.format("%s_%s", RandomValuesHelper.generateAlphabetic(10), CalendarHelper.getCurrentTimeAndDate()));
     }
 
     /***
@@ -720,7 +723,7 @@ public class DesktopAutomationHelper {
      */
     public String saveScreenshotFromRegion(Region region, String path, String filename) throws IOException {
         InputOutputHelper.createDirectory(path);
-        region.getImage().save(path, filename);
+        region.getImage().save(filename + ".png", path);
         return String.format("%s/%s", path, filename);
     }
 
