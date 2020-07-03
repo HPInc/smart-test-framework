@@ -1,5 +1,6 @@
 package com.github.jeansantos38.stf.framework.misc;
 
+import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,9 +54,9 @@ public class CalendarHelper {
         return new GregorianCalendar(year, month, day, hour, minutes, seconds).getTime().getTime();
     }
 
-    //region To Be Deprecate
-
-
-    //endregion
-
+    public static String getCurrentTimeAndDate() {
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
+        return dateFormat.format(date);
+    }
 }
