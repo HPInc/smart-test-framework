@@ -166,7 +166,7 @@ Last but not least. I've seen teams multiple times teams **replacing their QA fr
 **Using STF, a java solution, you won't have these type of drawbacks.**
 
 ### High level components structure
-![stfArch](readme-img/STF_Architecture.png)
+![stfArch](readme-img/stf_architecture.png)
 
  ## STF Core Helpers
 These are the main helpers (wrappers) that STF does provide to make easier creating tests. 
@@ -740,9 +740,65 @@ If you just want to start creating automated tests for your project right away, 
 - If you're planning to create automated tests for desktop applications, then make sure you have SikuliX configure complete as described [here](https://raiman.github.io/SikuliX1/downloads.html).
 - [Maven](https://maven.apache.org/download.cgi?Preferred=ftp://ftp.osuosl.org/pub/apache/) configured.
 
-###Installing STF libs in local maven repository (.m2)
-  Until smart-test-framework (stf) libs are not available in any Maven Central Repositories, **you must clone the source repository** and install its libs.
-  *Please keep calm*, you can achieve this running just three command lines:
+#### Option 1: Import STF libraries directly into your maven project
+- Open your pom.xml
+- Add this repository:
+```xml
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+```
+#### Now you can add all STF libs at once by adding:
+```xml
+	<dependency>
+	    <groupId>com.github.HPInc.smart-test-framework</groupId>
+	    <artifactId>smart-test-framework</artifactId>
+	    <version>v1.3</version>
+	</dependency>
+```
+#### Or you can add only the dependencies you need:
+- For desktop automation:
+```xml
+	<dependency>
+	    <groupId>com.github.HPInc.smart-test-framework</groupId>
+	    <artifactId>stf-desktop-automation</artifactId>
+	    <version>v1.3</version>
+	</dependency>
+```
+- For Rest API testing:
+```xml
+	<dependency>
+	    <groupId>com.github.HPInc.smart-test-framework</groupId>
+	    <artifactId>stf-http-client</artifactId>
+	    <version>v1.3</version>
+	</dependency>
+```
+- For Web Ui, Mobile and Desktop (Electron) testing:
+```xml
+	<dependency>
+	    <groupId>com.github.HPInc.smart-test-framework</groupId>
+	    <artifactId>stf-web-driver</artifactId>
+	    <version>v1.3</version>
+	</dependency>
+```
+- For Data-driven testing and general test helpers:
+```xml
+    <dependency>
+	    <groupId>com.github.HPInc.smart-test-framework</groupId>
+	    <artifactId>stf-misc</artifactId>
+	    <version>v1.3</version>
+	</dependency>
+```
+###You don't need to use all four, but pay attention to this:
+ - `stf-web-driver`, `stf-http-client` and `stf-desktop-automation` **depends on** `stf-misc`
+ - `stf-web-driver` also **depends on** `stf-http-client`
+
+
+#### Option 2: Download STF sources and install libs in local maven repository (.m2)
+- Just clone STF repository, then:
  ```shell
 clone <stf repo>
 cd <your stf cloned repo>
@@ -754,42 +810,7 @@ As result you should see some output like this one:
 - *In order to not skip tests when installing the STF source code, you'll need to configure a selenium Grid server by your own and run it in Windows 10 due to a native windows form demo app used by Desktop Automation tests.*
 
 - **This way you'll have direct access to source code, feel free to improve and add new functionality.**
-
-###Adding the STF libs in your framework:
-#### If Maven based:
-- Edit POM.xml and add these dependencies.
-```xml
- <dependencies>
-        <dependency>
-            <groupId>com.github.jeansantos38.stf</groupId>
-            <artifactId>stf-misc</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.jeansantos38.stf</groupId>
-            <artifactId>stf-web-driver</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.jeansantos38.stf</groupId>
-            <artifactId>stf-http-client</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.jeansantos38.stf</groupId>
-            <artifactId>stf-desktop-automation</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-```
-
- You don't need to use all four, but pay attention to this:
- - `stf-web-driver`, `stf-http-client` and `stf-desktop-automation` **depends on** `stf-misc`
- - `stf-web-driver` also **depends on** `stf-http-client` 
-
-#### If NOT Maven based:
-- Just pick the compiled STF libs (.jar) from `.m2` or `target` (folder were stf-source repo was compiled), then add it directly in your repository as external source lib.
 ***
 
 ### Contact
-Jean Giacomin > jeansantos38@hp.com 
+Jean Giacomin > jeansantos38@gmail.com
