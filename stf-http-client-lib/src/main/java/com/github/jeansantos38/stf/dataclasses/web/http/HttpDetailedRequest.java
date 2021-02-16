@@ -21,14 +21,19 @@ public class HttpDetailedRequest {
     public HttpRequestLogLevel logLevel;
 
     public HttpDetailedRequest() {
-        this.logLevel = HttpRequestLogLevel.LOG_EVERYTHING_FROM_REQUEST_AND_RESPONSE;
+        this(null, null, null, null, null, HttpRequestLogLevel.LOG_EVERYTHING_FROM_REQUEST_AND_RESPONSE);
     }
 
     public HttpDetailedRequest(HttpRequestMethod method, String url, Object headers, byte[] payloadToBeSent, StatusCodeVerifier statusVerifier) {
+        this(method, url, headers, payloadToBeSent, statusVerifier, HttpRequestLogLevel.LOG_EVERYTHING_FROM_REQUEST_AND_RESPONSE);
+    }
+
+    public HttpDetailedRequest(HttpRequestMethod method, String url, Object headers, byte[] payloadToBeSent, StatusCodeVerifier statusVerifier, HttpRequestLogLevel logLevel) {
         this.method = method;
         this.url = url;
         this.headers = headers;
         this.payloadToBeSent = payloadToBeSent;
         this.statusCodeVerifier = statusVerifier;
+        this.logLevel = logLevel;
     }
 }
