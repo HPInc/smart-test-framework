@@ -40,12 +40,16 @@ public class HttpDetailedHeaders {
     /**
      * Helper to check if a detailed header does exist in a list of headers.
      *
-     * @param httpDetailedHeaders
-     * @param httpDetailedHeader
+     * @param httpDetailedHeaders The headers from Http response
+     * @param httpDetailedHeader  The header you're looking for. If you don't provide an expected header value, it will check only if the header key exists.
      * @return
      */
     public static boolean containsHeader(HttpDetailedHeaders httpDetailedHeaders, HttpDetailedHeader httpDetailedHeader) {
-        return httpDetailedHeaders.headerList.stream().filter(x -> x.headerKey.equals(httpDetailedHeader.headerKey) && x.headerValue.equals(httpDetailedHeader.headerValue)).findAny().orElse(null) != null;
+        if (httpDetailedHeader.headerValue != null && !httpDetailedHeader.headerValue.isEmpty()) {
+            return httpDetailedHeaders.headerList.stream().filter(x -> x.headerKey.equals(httpDetailedHeader.headerKey) && x.headerValue.equals(httpDetailedHeader.headerValue)).findAny().orElse(null) != null;
+        } else {
+            return httpDetailedHeaders.headerList.stream().filter(x -> x.headerKey.equals(httpDetailedHeader.headerKey)).findAny().orElse(null) != null;
+        }
     }
 
     /**

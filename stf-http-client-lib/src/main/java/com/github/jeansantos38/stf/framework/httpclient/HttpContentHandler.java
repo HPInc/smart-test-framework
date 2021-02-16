@@ -99,8 +99,11 @@ public class HttpContentHandler {
                     counter++;
                 }
                 return allHeaders;
+            } else if (headers.getClass().equals(HttpDetailedHeader.class)) {
+                HttpDetailedHeader httpDetailedHeader = (HttpDetailedHeader) headers;
+                return String.format("%s:%s", httpDetailedHeader.headerKey, httpDetailedHeader.headerValue);
             } else {
-                throw new Exception("The only supported headers objects are Hashmasp<String,String> and HttpDetailedHeaders! Please verify what you're sending!");
+                throw new Exception("The only supported headers objects are Hashmap<String,String> and HttpDetailedHeaders! Please verify what you're sending!");
             }
         }
         return allHeaders;

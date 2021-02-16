@@ -2,6 +2,9 @@ package com.github.jeansantos38.stf.framework.httpclient;
 
 import com.github.jeansantos38.stf.enums.http.StatusCodeVerifierStrategy;
 import com.github.jeansantos38.stf.framework.regex.RegexHelper;
+import org.testng.Assert;
+
+import java.util.Arrays;
 
 
 /************************************************************
@@ -39,10 +42,14 @@ public class StatusCodeVerifier {
     }
 
     public void verifyStatusCode(int httpStatusCode) throws Exception {
+        verifyStatusCode(httpStatusCode, false);
+    }
+
+    public void verifyStatusCode(int httpStatusCode, Boolean useAssertions) throws Exception {
         switch (this.statusCodeVerifierStrategy) {
             case EXPECTED_STATUS_CODE:
                 if (this.expectedStatusCode != httpStatusCode) {
-                    throw new Exception(String.format("The status code %s didn't match: %s", httpStatusCode, this.expectedStatusCode));
+                    statusCodeCheckFailed(String.format("The status code %s didn't match: %s", httpStatusCode, this.expectedStatusCode), useAssertions);
                 }
                 break;
             case LIST_OF_POSSIBLE_STATUS_CODES:
@@ -54,16 +61,16 @@ public class StatusCodeVerifier {
                     }
                 }
                 if (!hasMatch) {
-                    throw new Exception(String.format("The status code %s didn't match: %s", httpStatusCode, this.expectedStatusCodes));
+                    statusCodeCheckFailed(String.format("The status code %s didn't match any: %s", httpStatusCode, Arrays.toString(this.expectedStatusCodes)), useAssertions);
                 }
                 break;
             case REGEX_FOR_POSSIBLE_STATUS_CODES:
                 if (!RegexHelper.isMatch(this.expectedStatusCodeRegex, Integer.toString(httpStatusCode))) {
-                    throw new Exception(String.format("The status code %s didn't match the provided regex: %s", httpStatusCode, this.expectedStatusCodeRegex));
+                    statusCodeCheckFailed(String.format("The status code %s didn't match the provided regex: %s", httpStatusCode, this.expectedStatusCodeRegex), useAssertions);
                 }
                 break;
             default:
-                throw new Exception(String.format("The status code strategy is not supported!", this.statusCodeVerifierStrategy.toString()));
+                throw new Exception(String.format("The status code strategy [%s] is not supported!", this.statusCodeVerifierStrategy.toString()));
         }
     }
 
@@ -77,6 +84,14 @@ public class StatusCodeVerifier {
             if (!RegexHelper.isMatch("[1-5][0-9][0-9]", statusTemp)) {
                 throw new Exception(String.format("The status code %s does not match the possible HTTP status code spec!!!", statusTemp));
             }
+        }
+    }
+
+    private void statusCodeCheckFailed(String msg, boolean useAssertions) throws Exception {
+        if (useAssertions) {
+            Assert.fail(msg);
+        } else {
+            throw new Exception(msg);
         }
     }
 }
