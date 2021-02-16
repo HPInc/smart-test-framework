@@ -133,6 +133,16 @@ public class HttpClient {
         return performHttpRequest(HttpDetailedResponse.class, method, url, null, null, null);
     }
 
+    public HttpDetailedResponse performHttpRequest(HttpRequestMethod method, String url, byte[] payload) throws Exception {
+        HttpDetailedRequest httpDetailedRequest = new HttpDetailedRequest(method, url, null, payload, null, this.httpRequestLogLevel);
+        return performHttpRequest(httpDetailedRequest);
+    }
+
+    public HttpDetailedResponse performHttpRequest(HttpRequestMethod method, String url, Object headers, byte[] payload) throws Exception {
+        HttpDetailedRequest httpDetailedRequest = new HttpDetailedRequest(method, url, headers, payload, null, this.httpRequestLogLevel);
+        return performHttpRequest(httpDetailedRequest);
+    }
+
     /***
      * Helper to perform HTTP Client requests.
      * @param tClass: The response type you need, HttpResponse or HTTPClientResponse.
@@ -727,8 +737,11 @@ public class HttpClient {
                 for (HttpDetailedHeader httpDetailedHeader : httpDetailedHeaders.headerList) {
                     httpRequest.setHeader(httpDetailedHeader.headerKey, httpDetailedHeader.headerValue);
                 }
+            } else if (headers.getClass().equals(HttpDetailedHeader.class)) {
+                HttpDetailedHeader httpDetailedHeader = (HttpDetailedHeader) headers;
+                httpRequest.setHeader(httpDetailedHeader.headerKey, httpDetailedHeader.headerValue);
             } else {
-                throw new Exception("The only supported headers objects are Hashmasp<String,String> and HttpDetailedHeaders! Please verify what you're sending!");
+                throw new Exception("The only supported headers objects are Hashmasp<String,String> and HttpDetailedHeader(s)! Please verify what you're sending!");
             }
         }
 
