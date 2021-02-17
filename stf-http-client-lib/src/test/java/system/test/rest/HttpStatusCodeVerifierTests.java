@@ -219,7 +219,7 @@ public class HttpStatusCodeVerifierTests extends HttpClientTestBase {
                 .assertExpectedStatusCode(200)
                 .assertResponseBodyContainsText("Hello STF user!")
                 .assertResponseContainsHeader("Content-Type", "text/plain")
-                .assertResponseElapsedTimeInMs(9);
+                .assertResponseElapsedTimeInMs(30);
     }
 
     private void configureStubForPutWithBody(WireMockServer wireMockServer, byte[] requestBody, byte[] responseBody, String endpoint, int statusCode) {
