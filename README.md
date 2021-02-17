@@ -1,6 +1,8 @@
 ![stfLogo](readme-img/stf_logo.png)
 # Smart-Test-Framework
  
+In a hurry? So you can see how to setup it [here](https://github.com/HPInc/smart-test-framework#how-to-setup-smart-test-framework).
+
 ### What is that?
 Smart Test Framework is multi-purpose test framework composed by four independent libraries. You’ll be able to create automated tests for Web pages (via desktop and mobile web browsers), Web services (REST APis), Desktop applications (on Windows, Mac and Linux) and Mobile applications (native and hybrid). It's flexible enough to support most of projects and to provide professional quality to automated test needs.
  
@@ -730,8 +732,8 @@ These are the possible values to these properties:
 ***
 
 ## How to setup Smart Test Framework
-
 If you just want to start creating automated tests for your project right away, be sure to attend all these requirements first:
+
 ###Requirements
 - Java8 installed
 - Git installed and configured
@@ -740,7 +742,12 @@ If you just want to start creating automated tests for your project right away, 
 - If you're planning to create automated tests for desktop applications, then make sure you have SikuliX configure complete as described [here](https://raiman.github.io/SikuliX1/downloads.html).
 - [Maven](https://maven.apache.org/download.cgi?Preferred=ftp://ftp.osuosl.org/pub/apache/) configured.
 
-#### Option 1: Import STF libraries directly into your maven project
+#### Option 1: Clone a demo\kick-off QA project and start using STF in '10 minutes or so' :-)
+- This is a project that contains several examples of rest, web ui, desktop and mobile tests.
+- You can just use it as model\base project to your new project with a lot of examples of STF API usage.
+- The repo for the STF Kick-Off QA project is available [here](https://github.com/jeansantos38/stf-kick-off).
+
+#### Option 2: Import STF libraries directly into your maven project
 - Open your pom.xml
 - Add this repository:
 ```xml
@@ -751,15 +758,7 @@ If you just want to start creating automated tests for your project right away, 
 		</repository>
 	</repositories>
 ```
-#### Now you can add all STF libs at once by adding:
-```xml
-	<dependency>
-	    <groupId>com.github.HPInc.smart-test-framework</groupId>
-	    <artifactId>smart-test-framework</artifactId>
-	    <version>v1.3</version>
-	</dependency>
-```
-#### Or you can add only the dependencies you need:
+#### Now you can add all STF libs or just the ones you need:
 - For desktop automation:
 ```xml
 	<dependency>
@@ -792,12 +791,12 @@ If you just want to start creating automated tests for your project right away, 
 	    <version>v1.3</version>
 	</dependency>
 ```
-###You don't need to use all four, but pay attention to this:
+### You don't need to use all four, **but pay attention** to this:
  - `stf-web-driver`, `stf-http-client` and `stf-desktop-automation` **depends on** `stf-misc`
  - `stf-web-driver` also **depends on** `stf-http-client`
 
 
-#### Option 2: Download STF sources and install libs in local maven repository (.m2)
+#### Option 3: Download STF sources, build and install it in local maven repository (.m2)
 - Just clone STF repository, then:
  ```shell
 clone <stf repo>
