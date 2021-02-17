@@ -14,19 +14,6 @@ import net.minidev.json.JSONArray;
 public class JsonParserHelper {
 
     /**
-     * Deserialize a JSON object into respective POJO class - using JSON Path API.
-     * @param tClass
-     * @param jsonPathExpression
-     * @param jsonDocument
-     * @param options
-     * @param <T>
-     * @return
-     */
-    public static <T> T deserializeJsonPath(Class<T> tClass, String jsonPathExpression, String jsonDocument, Option... options) {
-        return JsonPath.using(setConfig(options)).parse(jsonDocument).read(jsonPathExpression, tClass);
-    }
-
-    /**
      * Use regular cast to get the values.
      * @param jsonPathExpression
      * @param jsonDocument

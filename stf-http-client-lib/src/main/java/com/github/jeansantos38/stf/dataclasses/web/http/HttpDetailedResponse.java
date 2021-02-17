@@ -27,13 +27,26 @@ import java.util.concurrent.TimeUnit;
 
 public class HttpDetailedResponse {
 
-    private static final String LOG_EVERYTHING_FROM_REQUEST_AND_RESPONSE = "\n***** REQUEST DETAILS ****\n    [#URL] %s\n    [#METHOD] %s\n    [#REQUEST_HEADERS] %s\n    [#REQUEST_BODY_SIZE_BYTES] %s\n    [#REQUEST_BODY] %s\n \n***** RESPONSE DETAILS ****\n    [#HTTP_STATUS_CODE] %s\n    [#RESPONSE_HEADERS] %s\n    [#ELAPSED TIME] %s ms\n    [#LOCAL_TIMESTAMP] %s\n    [#LOCAL_DATETIME] %s\n    [#THREAD_ID] %s\n    [#RESPONSE_BODY_SIZE_BYTES] %s\n    [#RESPONSE_BODY] %s\n";
+    private static final String LOG_EVERYTHING_FROM_REQUEST_AND_RESPONSE = "\n***** REQUEST DETAILS ****\n    " +
+            "[#URL] %s\n    [#METHOD] %s\n    [#REQUEST_HEADERS] %s\n    [#REQUEST_BODY_SIZE_BYTES] %s\n    " +
+            "[#REQUEST_BODY] %s\n \n***** RESPONSE DETAILS ****\n    [#HTTP_STATUS_CODE] %s\n    " +
+            "[#RESPONSE_HEADERS] %s\n    [#RESPONSE_BODY_SIZE_BYTES] %s\n    [#ELAPSED TIME] %s ms\n    " +
+            "[#LOCAL_TIMESTAMP] %s\n    [#LOCAL_DATETIME] %s\n    [#THREAD_ID] %s\n    [#RESPONSE_BODY] %s\n";
 
-    private static final String LOG_BASIC_INFO_ONLY_FROM_REQUEST_AND_RESPONSE = "\n***** REQUEST DETAILS ****\n    [#URL] %s\n    [#METHOD] %s\n    \n***** RESPONSE DETAILS ****\n    [#HTTP_STATUS_CODE] %s\n    [#ELAPSED TIME] %s ms\n    [#LOCAL_TIMESTAMP] %s\n    [#LOCAL_DATETIME] %s\n    [#THREAD_ID] %s\n";
+    private static final String LOG_BASIC_INFO_ONLY_FROM_REQUEST_AND_RESPONSE = "\n***** REQUEST DETAILS ****\n    " +
+            "[#URL] %s\n    [#METHOD] %s\n    \n***** RESPONSE DETAILS ****\n    [#HTTP_STATUS_CODE] %s\n    " +
+            "[#ELAPSED TIME] %s ms\n    [#LOCAL_TIMESTAMP] %s\n    [#LOCAL_DATETIME] %s\n    [#THREAD_ID] %s\n";
 
-    private static final String LOG_EVERYTHING_FROM_REQUEST_AND_RESPONSE_BUT_HEADERS = "\n***** REQUEST DETAILS ****\n    [#URL] %s\n    [#METHOD] %s\n    [#REQUEST_BODY_SIZE_BYTES] %s\n    [#REQUEST_BODY] %s\n \n***** ## RESPONSE DETAILS ****\n    [#HTTP_STATUS_CODE] %s\n    [#RESPONSE_BODY_SIZE_BYTES] %s\n    [#ELAPSED TIME] %s ms\n    [#LOCAL_TIMESTAMP] %s\n    [#LOCAL_DATETIME] %s\n    [#THREAD_ID] %s\n    [#RESPONSE_BODY] %s\n";
+    private static final String LOG_EVERYTHING_FROM_REQUEST_AND_RESPONSE_BUT_HEADERS = "\n***** REQUEST DETAILS ****\n    " +
+            "[#URL] %s\n    [#METHOD] %s\n    [#REQUEST_BODY_SIZE_BYTES] %s\n    " +
+            "[#REQUEST_BODY] %s\n \n***** ## RESPONSE DETAILS ****\n    [#HTTP_STATUS_CODE] %s\n    " +
+            "[#RESPONSE_BODY_SIZE_BYTES] %s\n    [#ELAPSED TIME] %s ms\n    [#LOCAL_TIMESTAMP] %s\n    " +
+            "[#LOCAL_DATETIME] %s\n    [#THREAD_ID] %s\n    [#RESPONSE_BODY] %s\n";
 
-    private static final String LOG_EVERYTHING_FROM_REQUEST_AND_RESPONSE_BUT_PAYLOAD = "\n***** REQUEST DETAILS ****\n    [#URL] %s\n    [#METHOD] %s\n    [#REQUEST_HEADERS] %s\n  \n***** ## RESPONSE DETAILS ****\n    [#HTTP_STATUS_CODE] %s\n    [#RESPONSE_HEADERS] %s\n    [#ELAPSED TIME] %s ms\n    [#LOCAL_TIMESTAMP] %s\n    [#LOCAL_DATETIME] %s\n    [#THREAD_ID] %s\n";
+    private static final String LOG_EVERYTHING_FROM_REQUEST_AND_RESPONSE_BUT_PAYLOAD = "\n***** REQUEST DETAILS ****\n    " +
+            "[#URL] %s\n    [#METHOD] %s\n    [#REQUEST_HEADERS] %s\n  \n***** ## RESPONSE DETAILS ****\n    " +
+            "[#HTTP_STATUS_CODE] %s\n    [#RESPONSE_HEADERS] %s\n    [#RESPONSE_BODY_SIZE_BYTES] %s\n    " +
+            "[#ELAPSED TIME] %s ms\n    [#LOCAL_TIMESTAMP] %s\n    [#LOCAL_DATETIME] %s\n    [#THREAD_ID] %s\n";
 
 
     public HttpResponse httpResponse;
@@ -158,6 +171,7 @@ public class HttpDetailedResponse {
                 requestHeadersRaw,
                 Integer.toString(this.statusCode),
                 responseHeadersRaw,
+                this.responsePayloadSizeBytes,
                 this.elapsedTime.elapsed(TimeUnit.MILLISECONDS),
                 this.localTimestamp,
                 this.localDateTime,
@@ -213,10 +227,6 @@ public class HttpDetailedResponse {
 
     public JSONArray readJsonPathFromResponse(String jsonPathExpression) {
         return JsonParserHelper.tryReadJsonPath(jsonPathExpression, this.responseBody);
-    }
-
-    public <T> T deserializeJsonPathFromResponse(Class<T> tClass, String jsonPathExpression) {
-        return JsonParserHelper.deserializeJsonPath(tClass, jsonPathExpression, this.responseBody);
     }
 
     public <T> T deserializeResponseBodyToObject(Class<T> tClass, SerializationType serializationType) throws Exception {
