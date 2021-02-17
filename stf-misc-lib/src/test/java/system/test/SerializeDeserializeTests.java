@@ -105,19 +105,6 @@ public class SerializeDeserializeTests extends MainTestBase {
     @Story("The serialize helper should work for yaml files")
     @Description("Serialize a yaml object and check all its properties values")
     @Link(name = "This could be a Link to your project Issue Tracker", url = "https://github.com/HPInc/smart-test-framework")
-    public void parseJsonDeserializeTest() throws Exception {
-        String content = InputOutputHelper.readContentFromFile(discoverAbsoluteFilePath("booksStore.json"));
-        Book book = JsonParserHelper.deserializeJsonPath(Book.class, "$.store.book[3]", content);
-        Assert.assertEquals(book.author, "J. R. R. Tolkien");
-        Assert.assertEquals(book.title, "The Lord of the Rings");
-        Assert.assertEquals(book.isbn, "0-395-19395-8");
-    }
-
-    @Test
-    @Severity(SeverityLevel.BLOCKER)
-    @Story("The serialize helper should work for yaml files")
-    @Description("Serialize a yaml object and check all its properties values")
-    @Link(name = "This could be a Link to your project Issue Tracker", url = "https://github.com/HPInc/smart-test-framework")
     public void parseJsonReadDotNotationTest() throws Exception {
         String content = InputOutputHelper.readContentFromFile(discoverAbsoluteFilePath("booksStore.json"));
         String isbn = (String) JsonParserHelper.readJsonPath("$.store.book[3].isbn", content);
@@ -147,12 +134,12 @@ public class SerializeDeserializeTests extends MainTestBase {
         Assert.assertEquals(author2.get(0), "J. R. R. Tolkien");
 
         // TODO complete this test - WIP
-        List<String> author3 = (List<String>) JsonParserHelper.readJsonPath("$['store']['book'][3]", content, Option.ALWAYS_RETURN_LIST);
-        JSONArray author4 = JsonParserHelper.tryReadJsonPath("$['store']['book'][3]['author']", content);
-        JSONArray book = JsonParserHelper.tryReadJsonPath("$['store']['book'][3]", content);
-        String books = JsonParserHelper.tryParseJsonPathToString("$['store']['book']", content);
-        String booksx = JsonParserHelper.tryParseJsonPathToString("$['store']['book'][3]", content);
-        String booksx2 = JsonParserHelper.tryParseJsonPathToString("$['store']['book'][3]['author']", content);
+        List<String> book3Object = (List<String>) JsonParserHelper.readJsonPath("$['store']['book'][3]", content, Option.ALWAYS_RETURN_LIST);
+        JSONArray authorObjectString = JsonParserHelper.tryReadJsonPath("$['store']['book'][3]['author']", content);
+        JSONArray book3rdObject = JsonParserHelper.tryReadJsonPath("$['store']['book'][3]", content);
+        String listOfAllBooksObjects = JsonParserHelper.tryParseJsonPathToString("$['store']['book']", content);
+        String bookObjectContent = JsonParserHelper.tryParseJsonPathToString("$['store']['book'][3]", content);
+        String authorName = JsonParserHelper.tryParseJsonPathToString("$['store']['book'][3]['author']", content);
 
         Assert.assertEquals(author2.get(0), "J. R. R. Tolkien");
 
