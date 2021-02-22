@@ -1,6 +1,8 @@
 package com.github.jeansantos38.stf.framework.network;
 
+import com.github.jeansantos38.stf.framework.logger.TestLog;
 import com.github.jeansantos38.stf.framework.regex.RegexHelper;
+import org.testng.annotations.Test;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -33,6 +35,11 @@ public class NetworkHelper {
      */
     private static String retrieveLocalIpAddress(IpVersion ipVersion, String networkInterface) throws SocketException {
         NetworkInterface ni = NetworkInterface.getByName(networkInterface);
+        if (ni == null) {
+            new TestLog().logIt(String.format("It seems the selected network interface %s does not exist." +
+                    "\nTry any other from this list:\n %s", networkInterface, listAllNetworkInterfacesAvailable()));
+            return "";
+        }
         Enumeration<InetAddress> inetAddresses = ni.getInetAddresses();
         String myIP = "";
         while (inetAddresses.hasMoreElements()) {
