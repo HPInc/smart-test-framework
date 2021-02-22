@@ -12,6 +12,7 @@
             <class name="system.test.SerializeDeserializeTests"/>
             <class name="system.test.InputOutputTests"/>
             <class name="system.test.RegexTests"/>
+            <class name="system.test.NetworkInterfaceTests"/>
         </classes>
     </test>
 </suite>
