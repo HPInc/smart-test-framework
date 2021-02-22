@@ -20,6 +20,7 @@ public class NetworkInterfaceTests extends MainTestBase {
         Assert.assertTrue(NetworkHelper.isValidIpv6(ipV6example));
         Assert.assertFalse(NetworkHelper.listAllNetworkInterfacesAvailable().isEmpty());
 
+        testLog.logIt(NetworkHelper.listAllNetworkInterfacesAvailable());
         testLog.logIt(NetworkHelper.retrieveLocalIPv4Address(networkInterface));
         testLog.logIt(NetworkHelper.retrieveLocalIPv6Address(networkInterface));
     }
