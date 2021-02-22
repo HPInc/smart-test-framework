@@ -1,5 +1,6 @@
 package system.test;
 
+import com.github.jeansantos38.stf.framework.regex.RegexHelper;
 import io.qameta.allure.*;
 import system.base.MainTestBase;
 import org.testng.Assert;
@@ -13,10 +14,12 @@ public class CalendarTests extends MainTestBase {
     @Severity(SeverityLevel.MINOR)
     @Story("A QA should be capable of easily handling date formats using STF")
     @Description("Converting a timestamp in human readable date format")
-    @Link(name = "This could be a Link to your project Issue Tracker", url = "https://github.com/HPInc/smart-test-framework")
     public void convertTimestampToDateTest() {
-        String extractedDate = convertTimestampToDate(Long.valueOf("1564800583569"));
-        Assert.assertEquals(extractedDate, "08/02/2019 23:49:43");
+        String extractedDate = convertTimestampToDate(Long.parseLong("1613569411419"));
+        String pattern = "([0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2})";
+        Assert.assertTrue(RegexHelper.isMatch(pattern, extractedDate), String.format(
+                "Expecting a date in this format: [MM/dd/yyyy HH:mm:ss], but got %s", extractedDate));
+
     }
 
     @Test
@@ -25,7 +28,9 @@ public class CalendarTests extends MainTestBase {
     @Description("Converting a timestamp in specific time format")
     @Link(name = "This could be a Link to your project Issue Tracker", url = "https://github.com/HPInc/smart-test-framework")
     public void convertTimestampUsingPattern() {
-        String extractedDate = convertTimestampToDate(Long.valueOf("1564800583569"), "yyyy/dd/MM' 'HH:mm:ss");
-        Assert.assertEquals(extractedDate, "2019/02/08 23:49:43");
+        String extractedDate = convertTimestampToDate(Long.parseLong("1613569411419"), "yyyy/dd/MM' 'HH:mm:ss");
+        String pattern = "([0-9]{4}/[0-9]{2}/[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2})";
+        Assert.assertTrue(RegexHelper.isMatch(pattern, extractedDate), String.format(
+                "Expecting a date in this format: [yyyy/dd/MM HH:mm:ss], but got %s", extractedDate));
     }
 }
