@@ -24,3 +24,5 @@ jobs:
       run: mvn clean install -DskipTests --file pom.xml
     - name: Run Http-Client tests
       run: mvn test --file stf-http-client-lib/pom.xml
+    - name: Run General Helpers tests
+      run: mvn test --file stf-misc-lib/pom.xml
