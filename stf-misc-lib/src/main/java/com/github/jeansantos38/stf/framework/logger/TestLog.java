@@ -1,6 +1,9 @@
 package com.github.jeansantos38.stf.framework.logger;
 
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /************************************************************
@@ -12,6 +15,7 @@ import java.util.logging.Logger;
 public class TestLog {
 
     private static final String LOGGER_STRING_NAME = "TestLog";
+
     private Logger testLog;
     private boolean enableLog;
 
@@ -19,8 +23,7 @@ public class TestLog {
      * Constructor
      */
     public TestLog() {
-        this.testLog = Logger.getLogger(LOGGER_STRING_NAME);
-        this.enableLog = true;
+        this(true);
     }
 
     /***
@@ -28,8 +31,14 @@ public class TestLog {
      * @param enableLogs: Enable logs or not.
      */
     public TestLog(boolean enableLogs) {
-        this.testLog = Logger.getLogger(LOGGER_STRING_NAME);
         this.enableLog = enableLogs;
+        this.testLog = Logger.getLogger(LOGGER_STRING_NAME);
+        Handler handlerObj = new ConsoleHandler();
+        handlerObj.setLevel(Level.ALL);
+        testLog.addHandler(handlerObj);
+        testLog.setLevel(Level.ALL);
+        testLog.setUseParentHandlers(false);
+        this.enableLog = true;
     }
 
     /***
@@ -61,7 +70,7 @@ public class TestLog {
      */
     public void logIt(String content, boolean addLineBreakAtEnd) {
         if (enableLog) {
-            this.testLog.info(addLineBreakAtEnd ? content + "\n" : content);
+            this.testLog.log(Level.INFO, addLineBreakAtEnd ? content + "\n" : content);
         }
     }
 
