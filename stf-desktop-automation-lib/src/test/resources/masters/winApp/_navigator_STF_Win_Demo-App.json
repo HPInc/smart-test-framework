@@ -1,0 +1,433 @@
+{
+  "MasterImageDetails": [
+    {
+      "areaId": "desktop",
+      "readOnlyNote_osSource": "win10",
+      "readOnlyNote_originalRes": "1920x1080",
+      "elements": [
+        {
+          "element": {
+            "selector": "stfIcon",
+            "ctrlType": "icon",
+            "interactionType": "direct",
+            "similarity": 0.9,
+            "masterLoc": "stfShortcutIcon.png",
+            "shortcuts": []
+          }
+        }
+      ]
+    },
+    {
+      "areaId": "mainScreen",
+      "readOnlyNote_osSource": "win10",
+      "readOnlyNote_originalRes": "1920x1080",
+      "readOnlyNote_originalVer": "1.0",
+      "elements": [
+        {
+          "element": {
+            "selector": "innerIco",
+            "ctrlType": "image",
+            "interactionType": "picture_region",
+            "similarity": 0.8,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "x_close_btn",
+            "ctrlType": "button",
+            "interactionType": "indirect",
+            "xCoordinate": 375,
+            "yCoordinate": -50,
+            "similarity": 0.8,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "textBox1Region",
+            "ctrlType": "textbox",
+            "interactionType": "indirect",
+            "rectangleTopLeftX": 6,
+            "rectangleTopLeftY": 32,
+            "rectangleBottomRightX": 316,
+            "rectangleBottomRightY": 76,
+            "similarity": 0.8,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "txtBox_1",
+            "ctrlType": "textBox",
+            "interactionType": "indirect",
+            "xCoordinate": 25,
+            "yCoordinate": 58,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "cbx_1",
+            "ctrlType": "checkBox",
+            "interactionType": "indirect",
+            "xCoordinate": 22,
+            "yCoordinate": 80,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "cbx_2",
+            "ctrlType": "checkBox",
+            "interactionType": "indirect",
+            "xCoordinate": 22,
+            "yCoordinate": 105,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "dropdownLst",
+            "ctrlType": "dropDownList",
+            "interactionType": "indirect",
+            "xCoordinate": 299,
+            "yCoordinate": 144,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "dropdownLst_item1",
+            "ctrlType": "dropDownList",
+            "interactionType": "indirect",
+            "xCoordinate": 29,
+            "yCoordinate": 160,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "dropdownLst_item3",
+            "ctrlType": "dropDownList",
+            "interactionType": "direct",
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "dropdownLst_item5",
+            "ctrlType": "dropDownList",
+            "interactionType": "indirect",
+            "xCoordinate": 29,
+            "yCoordinate": 160,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "rbt_1",
+            "ctrlType": "radioButton",
+            "interactionType": "indirect",
+            "xCoordinate": 30,
+            "yCoordinate": 196,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "rbt_2",
+            "ctrlType": "radioButton",
+            "interactionType": "indirect",
+            "xCoordinate": 136,
+            "yCoordinate": 196,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "rbt_3",
+            "ctrlType": "radioButton",
+            "interactionType": "indirect",
+            "xCoordinate": 230,
+            "yCoordinate": 196,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "txtBox_2",
+            "ctrlType": "textBox",
+            "interactionType": "indirect",
+            "xCoordinate": 25,
+            "yCoordinate": 240,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "trackBar1",
+            "ctrlType": "trackBar",
+            "interactionType": "indirect",
+            "similarity": 0.75,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "tbr_value1",
+            "ctrlType": "trackBar",
+            "interactionType": "indirect",
+            "xCoordinate": 28,
+            "yCoordinate": 333,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "tbr_value2",
+            "ctrlType": "trackBar",
+            "interactionType": "indirect",
+            "xCoordinate": 102,
+            "yCoordinate": 331,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "tbr_value3",
+            "ctrlType": "trackBar",
+            "interactionType": "indirect",
+            "xCoordinate": 177,
+            "yCoordinate": 333,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "tbr_value4",
+            "ctrlType": "trackBar",
+            "interactionType": "indirect",
+            "xCoordinate": 250,
+            "yCoordinate": 333,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "tbr_value5",
+            "ctrlType": "trackBar",
+            "interactionType": "indirect",
+            "xCoordinate": 325,
+            "yCoordinate": 333,
+            "similarity": 0.7,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        }
+      ]
+    },
+    {
+      "areaId": "dataDrivenCommon",
+      "readOnlyNote_osSource": "win10",
+      "readOnlyNote_originalRes": "1920x1080",
+      "readOnlyNote_originalVer": "1.0",
+      "elements": [
+        {
+          "element": {
+            "selector": "checkBox_checked",
+            "ctrlType": "checkBox",
+            "interactionType": "direct",
+            "similarity": 0.8,
+            "masterLoc": "mst_winformSTFdemo_v1-0_1920x1080_Win-10_cbx_true.png",
+            "refMasterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "radioButton_checked",
+            "ctrlType": "radioButton",
+            "interactionType": "direct",
+            "similarity": 0.8,
+            "masterLoc": "mst_winformSTFdemo_v1-0_1920x1080_Win-10_rbt_true.png",
+            "refMasterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        }
+      ]
+    },
+    {
+      "areaId": "dataDrivenSpecific",
+      "readOnlyNote_osSource": "win10",
+      "readOnlyNote_originalRes": "1920x1080",
+      "readOnlyNote_originalVer": "1.0",
+      "elements": [
+        {
+          "element": {
+            "selector": "txtBox_1_OCR_result",
+            "ctrlType": "pictureRegion",
+            "similarity": 0.75,
+            "xCoordinate": 0,
+            "yCoordinate": 0,
+            "rectangleTopLeftX": 8,
+            "rectangleTopLeftY": 39,
+            "rectangleBottomRightX": 315,
+            "rectangleBottomRightY": 75,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "txtBox_2_OCR_result",
+            "ctrlType": "pictureRegion",
+            "similarity": 0.75,
+            "xCoordinate": 0,
+            "yCoordinate": 0,
+            "rectangleTopLeftX": 8,
+            "rectangleTopLeftY": 222,
+            "rectangleBottomRightX": 315,
+            "rectangleBottomRightY": 265,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "ddl_OCR_result",
+            "ctrlType": "pictureRegion",
+            "similarity": 0.75,
+            "xCoordinate": 0,
+            "yCoordinate": 0,
+            "rectangleTopLeftX": 8,
+            "rectangleTopLeftY": 121,
+            "rectangleBottomRightX": 315,
+            "rectangleBottomRightY": 163,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "tbr_OCR_result",
+            "ctrlType": "pictureRegion",
+            "similarity": 0.75,
+            "xCoordinate": 0,
+            "yCoordinate": 0,
+            "rectangleTopLeftX": 199,
+            "rectangleTopLeftY": 268,
+            "rectangleBottomRightX": 296,
+            "rectangleBottomRightY": 333,
+            "masterLoc": "stf_ico.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "textBox1",
+            "ctrlType": "picture_region",
+            "interactionType": "direct",
+            "similarity": 0.98,
+            "masterLoc": "mst_winformSTFdemo_v1-0_1920x1080_Win-10_dd_assert_txb1.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "checkBox1",
+            "ctrlType": "picture_region",
+            "interactionType": "direct",
+            "similarity": 0.75,
+            "masterLoc": "mst_winformSTFdemo_v1-0_1920x1080_Win-10_dd_assert_cbx1.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "checkBox2",
+            "ctrlType": "picture_region",
+            "interactionType": "direct",
+            "similarity": 0.7,
+            "masterLoc": "mst_winformSTFdemo_v1-0_1920x1080_Win-10_dd_assert_cbx2.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "dropdownLst_item2",
+            "ctrlType": "picture_region",
+            "interactionType": "direct",
+            "similarity": 0.7,
+            "masterLoc": "mst_winformSTFdemo_v1-0_1920x1080_Win-10_dd_assert_ddl_item2.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "radioButton2",
+            "ctrlType": "picture_region",
+            "interactionType": "direct",
+            "similarity": 0.7,
+            "masterLoc": "mst_winformSTFdemo_v1-0_1920x1080_Win-10_dd_assert_rbt2.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "textBox2",
+            "ctrlType": "picture_region",
+            "interactionType": "direct",
+            "similarity": 0.98,
+            "masterLoc": "mst_winformSTFdemo_v1-0_1920x1080_Win-10_dd_assert_txb2.png",
+            "shortcuts": []
+          }
+        },
+        {
+          "element": {
+            "selector": "trackBar_value2",
+            "ctrlType": "picture_region",
+            "interactionType": "direct",
+            "similarity": 0.7,
+            "masterLoc": "mst_winformSTFdemo_v1-0_1920x1080_Win-10_dd_assert_tbr_value2.png",
+            "shortcuts": []
+          }
+        }
+      ]
+    }
+  ]
+}
