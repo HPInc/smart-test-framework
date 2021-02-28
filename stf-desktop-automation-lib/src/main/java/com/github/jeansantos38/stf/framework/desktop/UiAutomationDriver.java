@@ -31,6 +31,7 @@ public class UiAutomationDriver {
     private WaitHelper waitHelper;
     private int msDelayBetweenClicks;
     private int msDelayBetweenActions;
+    private UiVisualFeedback uiVisualFeedback;
 
 
     public UiAutomationDriver(
@@ -39,10 +40,20 @@ public class UiAutomationDriver {
             WaitHelper waitHelper,
             String folderPathToSaveScreenshots,
             boolean takeScreenshotWhenFail) throws Exception {
-        this(screen, testLog, waitHelper, folderPathToSaveScreenshots, takeScreenshotWhenFail, 0, 0);
+        this(screen, testLog, waitHelper, folderPathToSaveScreenshots, takeScreenshotWhenFail, 100, 100);
     }
 
-    private UiAutomationDriver(
+    public UiAutomationDriver(
+            Object screen,
+            TestLog testLog,
+            WaitHelper waitHelper,
+            String folderPathToSaveScreenshots,
+            boolean takeScreenshotWhenFail,
+            UiVisualFeedback uiVisualFeedback) throws Exception {
+        this(screen, testLog, waitHelper, folderPathToSaveScreenshots, takeScreenshotWhenFail, 100, 100, uiVisualFeedback);
+    }
+
+    public UiAutomationDriver(
             Object screen,
             TestLog testLog,
             WaitHelper waitHelper,
@@ -50,6 +61,18 @@ public class UiAutomationDriver {
             boolean takeScreenshotWhenFail,
             int msDelayBetweenClicks,
             int msDelayBetweenActions) throws Exception {
+        this(screen, testLog, waitHelper, folderPathToSaveScreenshots, takeScreenshotWhenFail, msDelayBetweenClicks, msDelayBetweenActions, null);
+    }
+
+    public UiAutomationDriver(
+            Object screen,
+            TestLog testLog,
+            WaitHelper waitHelper,
+            String folderPathToSaveScreenshots,
+            boolean takeScreenshotWhenFail,
+            int msDelayBetweenClicks,
+            int msDelayBetweenActions,
+            UiVisualFeedback uiVisualFeedback) throws Exception {
 
         this.screen = screen;
         this.testLog = testLog;
@@ -58,6 +81,7 @@ public class UiAutomationDriver {
         this.waitHelper = waitHelper;
         this.msDelayBetweenActions = msDelayBetweenActions == 0 ? MS_DELAY_BETWEEN_ACTIONS : msDelayBetweenActions;
         this.msDelayBetweenClicks = msDelayBetweenClicks == 0 ? MS_DELAY_BETWEEN_CLICKS : msDelayBetweenClicks;
+        this.uiVisualFeedback = uiVisualFeedback;
         checkScreen(screen);
     }
 
@@ -77,6 +101,13 @@ public class UiAutomationDriver {
         return factory(this.screen, imagePath, xCoordinate, yCoordinate, SURE_MATCH_MIN_SCORE);
     }
 
+    public UiElement buildRelativePatternFromNavigator(String navFilePath, String areaId, String selector,UiElement masterUiElement) throws Exception {
+        UiElement uiElement = retrievePatternFromNavigatorString(navFilePath, areaId, selector, true);
+        masterUiElement.initializeMatch();
+
+        uiElement.setMatch(masterUiElement.getMatch());
+        return uiElement;
+    }
 
     public UiElement buildPattern(String imagePath, int xCoordinate, int yCoordinate, Double similarity) {
         return factory(this.screen, imagePath, xCoordinate, yCoordinate, similarity);
@@ -100,19 +131,9 @@ public class UiAutomationDriver {
 
     private UiElement retrievePatternFromNavigatorString(String navigatorFileFullPath, String areaId, String
             selector, boolean retrieveMasterLocOnly) throws Exception {
-        String navigatorContent = InputOutputHelper.readContentFromFile(navigatorFileFullPath);
-        DataDrivenNavigator dataDrivenNavigator = DeserializeHelper.deserializeStringToObject(DataDrivenNavigator.class, SerializationType.JSON, navigatorContent);
-        MasterImageDetails masterImageDetails = Arrays.stream(dataDrivenNavigator.MasterImageDetails).filter(x -> x.areaId.equals(areaId)).findAny().orElse(null);
-        if (masterImageDetails == null)
-            throw new Exception(String.format("The master image details for area '%1$s' was not retrieved from navigator, pls review the given parameters.", areaId));
-
-        Elements elements = Arrays.stream(masterImageDetails.elements).filter(x -> x.element.selector.equals(selector)).findFirst().orElse(null);
-        if (elements == null || elements.element == null)
-            throw new Exception(String.format("The element for selector '%1$s' was not retrieved from navigator, pls review the given parameters.", selector));
-
+       Elements elements = UiAutomationUtils.retrievePatternFromNavigatorString(navigatorFileFullPath,areaId,selector,retrieveMasterLocOnly);
         File navigator = new File(navigatorFileFullPath);
         String masterAbsolutePath = navigator.getAbsolutePath().replace(navigator.getName(), (retrieveMasterLocOnly ? elements.element.masterLoc : elements.element.refMasterLoc));
-        this.testLog.logIt(String.format("Searching for the image '%1$s' related to the selector '%2$s'.", retrieveMasterLocOnly ? elements.element.masterLoc : elements.element.refMasterLoc, selector));
         return factory(this.screen,
                 masterAbsolutePath,
                 elements.element.xCoordinate,
@@ -123,6 +144,35 @@ public class UiAutomationDriver {
                 elements.element.rectangleBottomRightY,
                 (double) elements.element.similarity);
     }
+
+
+
+
+//private UiElement retrievePatternFromNavigatorString(String navigatorFileFullPath, String areaId, String
+//            selector, boolean retrieveMasterLocOnly) throws Exception {
+//        String navigatorContent = InputOutputHelper.readContentFromFile(navigatorFileFullPath);
+//        DataDrivenNavigator dataDrivenNavigator = DeserializeHelper.deserializeStringToObject(DataDrivenNavigator.class, SerializationType.JSON, navigatorContent);
+//        MasterImageDetails masterImageDetails = Arrays.stream(dataDrivenNavigator.MasterImageDetails).filter(x -> x.areaId.equals(areaId)).findAny().orElse(null);
+//        if (masterImageDetails == null)
+//            throw new Exception(String.format("The master image details for area '%1$s' was not retrieved from navigator, pls review the given parameters.", areaId));
+//
+//        Elements elements = Arrays.stream(masterImageDetails.elements).filter(x -> x.element.selector.equals(selector)).findFirst().orElse(null);
+//        if (elements == null || elements.element == null)
+//            throw new Exception(String.format("The element for selector '%1$s' was not retrieved from navigator, pls review the given parameters.", selector));
+//
+//        File navigator = new File(navigatorFileFullPath);
+//        String masterAbsolutePath = navigator.getAbsolutePath().replace(navigator.getName(), (retrieveMasterLocOnly ? elements.element.masterLoc : elements.element.refMasterLoc));
+//        this.testLog.logIt(String.format("Searching for the image '%1$s' related to the selector '%2$s'.", retrieveMasterLocOnly ? elements.element.masterLoc : elements.element.refMasterLoc, selector));
+//        return factory(this.screen,
+//                masterAbsolutePath,
+//                elements.element.xCoordinate,
+//                elements.element.yCoordinate,
+//                elements.element.rectangleTopLeftX,
+//                elements.element.rectangleTopLeftY,
+//                elements.element.rectangleBottomRightX,
+//                elements.element.rectangleBottomRightY,
+//                (double) elements.element.similarity);
+//    }
 
 
     private UiElement factory(Object screen,
@@ -139,6 +189,7 @@ public class UiAutomationDriver {
                 this.msDelayBetweenActions,
                 this.takeScreenshotWhenFail,
                 this.folderPathToSaveScreenshots,
+                this.uiVisualFeedback,
                 this.waitHelper,
                 this.testLog);
     }
@@ -166,6 +217,7 @@ public class UiAutomationDriver {
                 this.msDelayBetweenActions,
                 this.takeScreenshotWhenFail,
                 this.folderPathToSaveScreenshots,
+                this.uiVisualFeedback,
                 this.waitHelper,
                 this.testLog);
     }

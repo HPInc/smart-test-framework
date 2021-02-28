@@ -5,12 +5,8 @@ import com.github.jeansantos38.stf.framework.misc.CalendarHelper;
 import com.github.jeansantos38.stf.framework.misc.RandomValuesHelper;
 import com.google.common.base.Stopwatch;
 import org.sikuli.basics.Settings;
-import org.sikuli.script.FindFailed;
-import org.sikuli.script.Match;
-import org.sikuli.script.Pattern;
-import org.sikuli.script.Region;
+import org.sikuli.script.*;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -27,8 +23,8 @@ public class UiAutomationHelper {
     private final String FIND_LOG = "[#action: %1$s],[#on: %2$s],[#similatiry: %3$s]";
     private final String DRAG_AND_DROP_LOG = "[#action: %1$s],[#Source: %2$s],[#Destination: %3$s]";
 
-    protected void click(UiElement uiElement) throws FindFailed, InterruptedException {
-        Pattern pattern = createPattern(uiElement);
+    protected void click(UiElement uiElement) throws Exception {
+        Match pattern = find(uiElement);
         if (!uiElement.isVncScreen()) {
             uiElement.getScreen().click(pattern);
         } else {
@@ -45,8 +41,8 @@ public class UiAutomationHelper {
         UiAutomationUtils.type(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(), content);
     }
 
-    protected void moveCursorOver(UiElement uiElement) throws FindFailed {
-        Pattern pattern = createPattern(uiElement);
+    protected void moveCursorOver(UiElement uiElement) throws Exception {
+        Match pattern = find(uiElement);
         if (!uiElement.isVncScreen()) {
             uiElement.getScreen().hover(pattern);
         } else {
@@ -58,9 +54,9 @@ public class UiAutomationHelper {
         region.doubleClick(createPattern(uiElement));
     }
 
-    protected void doubleClick(UiElement uiElement) throws FindFailed, InterruptedException {
-//        uiElement.getTestLog().logIt(String.format(SINGLE_DOUBLE_CLICK_LOG, action.toString(), mainImagePath, mainImageOffset, mainImageSimilarity));
-        Pattern pattern = createPattern(uiElement);
+    protected void doubleClick(UiElement uiElement) throws Exception {
+        Match pattern = find(uiElement);
+
         if (!uiElement.isVncScreen()) {
             uiElement.getScreen().doubleClick(pattern);
         } else {
@@ -129,16 +125,37 @@ public class UiAutomationHelper {
         return region.text();
     }
 
+
     protected Match find(UiElement uiElement) throws Exception {
         Pattern pattern = createPattern(uiElement);
         try {
-            return !uiElement.isVncScreen() ? uiElement.getScreen().find(pattern) : uiElement.getVncScreen().find(pattern);
+            if (uiElement.getMatch() == null) {
+                uiElement.setMatch(!uiElement.isVncScreen() ? uiElement.getScreen().find(pattern) : uiElement.getVncScreen().find(pattern));
+                uiElement.getTestLog().logIt("======> Precisei ...");
+            }else{
+                uiElement.getTestLog().logIt("======> Nao precisei");
+            }
+            highlighter(uiElement,uiElement.getMatch());
+            return uiElement.getMatch();
         } catch (Exception e) {
             if (uiElement.takeScreenshotWhenFail()) {
                 uiElement.getTestLog().logIt(String.format("The pattern was not found! ###The expected master is:[%1$s] ### It was not found at: [%2$s]",
                         pattern.getFilename(), UiAutomationUtils.saveDesktopScreenshot(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(), uiElement.getFolderPathToSaveScreenshots())));
             }
             throw new Exception(e);
+        }
+    }
+
+    private void highlighter(UiElement uiElement, Match match) {
+        UiVisualFeedback visualFeedback = uiElement.getUiVisualFeedback();
+        if (visualFeedback != null && visualFeedback.enableHighlight) {
+            match.highlight(visualFeedback.masterHighlightTimeSec, visualFeedback.masterHighlightColor);
+            if (uiElement.getXcoordinate() != 0 || uiElement.getYcoordinate() != 0) {
+                new Region(match.getCenter().x + uiElement.getXcoordinate(),
+                        match.getCenter().y + uiElement.getYcoordinate(), visualFeedback.relHighlightW, visualFeedback.relHighlightH)
+                        .highlight(visualFeedback.relAreaHighlightTimeSec, visualFeedback.relAreaHighlightColor);
+            }
+
         }
     }
 
@@ -160,8 +177,7 @@ public class UiAutomationHelper {
                 if (isForRegion) {
                     match = region.find(pattern);
                 } else {
-                    match = !uiElement.isVncScreen() ? uiElement.getScreen().find(pattern) :
-                            uiElement.getVncScreen().find(pattern);
+                    match = find(uiElement);
                 }
                 break;
             } catch (Exception e) {
@@ -214,7 +230,22 @@ public class UiAutomationHelper {
         Pattern pattern = new Pattern(uiElement.getImagePath());
         if (uiElement.getSimilarity() != null)
             pattern.similar(uiElement.getSimilarity());
-        pattern.targetOffset(uiElement.getxCoordinate(), uiElement.getyCoordinate());
+        pattern.targetOffset(uiElement.getXcoordinate(), uiElement.getYcoordinate());
         return pattern;
+    }
+
+    protected void actionClick(UiElement uiElement, boolean isLeftClick, int howManyClicks) throws FindFailed, InterruptedException {
+        for (int i = 0; i < howManyClicks; i++) {
+            if (!uiElement.isVncScreen()) {
+                uiElement.getScreen().mouseDown(isLeftClick ? Button.LEFT : Button.RIGHT);
+                uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenActions());
+                uiElement.getScreen().mouseUp(isLeftClick ? Button.LEFT : Button.RIGHT);
+            } else {
+                uiElement.getVncScreen().mouseDown(isLeftClick ? Button.LEFT : Button.RIGHT);
+                uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenActions());
+                uiElement.getVncScreen().mouseUp(isLeftClick ? Button.LEFT : Button.RIGHT);
+            }
+            uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenClicks());
+        }
     }
 }

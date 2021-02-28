@@ -3,6 +3,7 @@ package com.github.jeansantos38.stf.framework.desktop;
 import com.github.jeansantos38.stf.framework.logger.TestLog;
 import com.github.jeansantos38.stf.framework.wait.WaitHelper;
 import org.sikuli.script.FindFailed;
+import org.sikuli.script.Match;
 import org.sikuli.script.Screen;
 import org.sikuli.vnc.VNCScreen;
 import org.testng.Assert;
@@ -27,18 +28,36 @@ public class UiElement extends UiAutomationHelper {
     private int msDelayBetweenActions;
     private final String NOT_VISIBLE_ASSERT_MSG = "The Ui element was not found! See logs for more details!";
     private final String STILL_VISIBLE_ASSERT_MSG = "The Ui element is still visible! See logs for more details!";
+
+    private UiVisualFeedback uiVisualFeedback;
     private WaitHelper waitHelper;
     private TestLog testLog;
+
+
+    public Match getMatch() {
+        return match;
+    }
+
+    public void setMatch(Match match) {
+        this.match = match;
+    }
+
+    private Match match;
+
 
     public String getImagePath() {
         return imagePath;
     }
 
-    public int getxCoordinate() {
+    public UiVisualFeedback getUiVisualFeedback() {
+        return uiVisualFeedback;
+    }
+
+    public int getXcoordinate() {
         return xCoordinate;
     }
 
-    public int getyCoordinate() {
+    public int getYcoordinate() {
         return yCoordinate;
     }
 
@@ -118,9 +137,10 @@ public class UiElement extends UiAutomationHelper {
                      int msDelayBetweenActions,
                      boolean takeScreenshotWhenFail,
                      String folderPathToSaveScreenshots,
+                     UiVisualFeedback uiVisualFeedback,
                      WaitHelper waitHelper,
                      TestLog testLog) {
-        this(screen, imagePath, xCoordinate, yCoordinate, -0, -0, -0, -0, similarity, msDelayBetweenClicks, msDelayBetweenActions, takeScreenshotWhenFail, folderPathToSaveScreenshots, waitHelper, testLog);
+        this(screen, imagePath, xCoordinate, yCoordinate, -0, -0, -0, -0, similarity, msDelayBetweenClicks, msDelayBetweenActions, takeScreenshotWhenFail, folderPathToSaveScreenshots, uiVisualFeedback, waitHelper, testLog);
     }
 
     public UiElement(Object screen,
@@ -136,6 +156,7 @@ public class UiElement extends UiAutomationHelper {
                      int msDelayBetweenActions,
                      boolean takeScreenshotWhenFail,
                      String folderPathToSaveScreenshots,
+                     UiVisualFeedback uiVisualFeedback,
                      WaitHelper waitHelper,
                      TestLog testLog) {
 
@@ -153,18 +174,20 @@ public class UiElement extends UiAutomationHelper {
         this.takeScreenshotWhenFail = takeScreenshotWhenFail;
         this.folderPathToSaveScreenshots = folderPathToSaveScreenshots;
         this.waitHelper = waitHelper;
+        this.uiVisualFeedback = uiVisualFeedback;
         this.testLog = testLog;
     }
 
-    public void moveCursorOver() throws FindFailed {
+
+    public void moveCursorOver() throws Exception {
         moveCursorOver(this);
     }
 
-    public void click() throws FindFailed, InterruptedException {
+    public void click() throws Exception {
         click(this);
     }
 
-    public void doubleClick() throws FindFailed, InterruptedException {
+    public void doubleClick() throws Exception {
         doubleClick(this);
     }
 
@@ -177,7 +200,7 @@ public class UiElement extends UiAutomationHelper {
     }
 
     public String getTextViaOCR() throws Exception {
-       return extractTextViaOCR(this);
+        return extractTextViaOCR(this);
     }
 
     public boolean containsString(String content) {
@@ -192,9 +215,20 @@ public class UiElement extends UiAutomationHelper {
         Assert.assertTrue(exists(this), NOT_VISIBLE_ASSERT_MSG);
     }
 
+    public void multipleLeftClicks(int howMany) throws InterruptedException, FindFailed {
+        actionClick(this, true, howMany);
+    }
+
+    public void multipleRightClicks(int howMany) throws InterruptedException, FindFailed {
+        actionClick(this, false, howMany);
+    }
 
     public void assertNotVisible(int waitMs) throws Exception {
         Assert.assertFalse(exists(this, waitMs, true), STILL_VISIBLE_ASSERT_MSG);
+    }
+
+    public void initializeMatch() throws Exception {
+        find(this);
     }
 
     public void assertNotVisible() throws Exception {
