@@ -14,7 +14,7 @@ import system.base.UiAutomationTestBase;
 
 import java.io.IOException;
 
-public class UiAutomation extends UiAutomationTestBase {
+public class UiAutomationBasic extends UiAutomationTestBase {
 
     UiAutomationDriver uiAutomationDriver;
     String radioBtn2ImgUnchecked;
