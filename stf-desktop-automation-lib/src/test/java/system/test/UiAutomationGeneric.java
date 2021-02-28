@@ -3,6 +3,8 @@ package system.test;
 import com.github.jeansantos38.stf.enums.wait.ThreadWait;
 import com.github.jeansantos38.stf.framework.desktop.UiAutomationDriver;
 import com.github.jeansantos38.stf.framework.desktop.UiAutomationUtils;
+import com.github.jeansantos38.stf.framework.desktop.UiElement;
+import com.github.jeansantos38.stf.framework.desktop.UiVisualFeedback;
 import org.sikuli.script.Screen;
 import org.sikuli.vnc.VNCScreen;
 import org.testng.annotations.*;
@@ -46,13 +48,16 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
         vmName = _vmName;
         vmSnapshotName = _vmSnapshotName;
 
+        UiVisualFeedback uiVisualFeedback = new UiVisualFeedback("green", "red", 0.2, 0.2);
+        uiVisualFeedback.setEnableHighlight(true);
+
         if (!_isVncScreen) {
-            uiAutomationDriver = new UiAutomationDriver(new Screen(), testLog, waitHelper, System.getProperty("user.home") + "/STF_Screenshots", true);
+            uiAutomationDriver = new UiAutomationDriver(new Screen(), testLog, waitHelper, System.getProperty("user.home") + "/STF_Screenshots", true, 50, 50, uiVisualFeedback);
             startWinDemoApp();
         } else {
             manageVm("Starting test VM!", startVmScript, _vmManagerBinPath, _vmName, _vmSnapshotName);
             VNCScreen screen = UiAutomationUtils.connectToVncScreen(_vncServerIpAddress, _vncServerPort, _vncServerPassword, _connectionTimeoutSec, _operationTimeoutMs, 3);
-            uiAutomationDriver = new UiAutomationDriver(screen, testLog, waitHelper, System.getProperty("user.home") + "/STF_Screenshots", true);
+            uiAutomationDriver = new UiAutomationDriver(screen, testLog, waitHelper, System.getProperty("user.home") + "/STF_Screenshots", true, uiVisualFeedback);
             uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "desktop", "stfIcon").doubleClick();
         }
     }
@@ -69,12 +74,48 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
     @Test
     public void radioButtonTest() throws Exception {
         waitHelper.wait(ThreadWait.WAIT_1_SEC);
+        testLog.logIt("abc123xx");
         uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "innerIco").assertVisible(3000);
         uiAutomationDriver.type("UHUM SEI");
         String something = uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "textBox1Region").getTextViaOCR();
-        uiAutomationDriver.takeScreenshot();
+        testLog.logIt("abc123");
+        testLog.logIt(String.format("You've typed: \n %s", something));
+        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "cbx_2").click();
+        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "rbt_2").click();
+        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "dropdownLst").click();
         waitHelper.wait(ThreadWait.WAIT_1_SEC);
+        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "dropdownLst_item1").click();
+        testLog.logIt("fimasassa");
+        waitHelper.wait(ThreadWait.WAIT_1_SEC);
+
         uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "x_close_btn").click();
+        testLog.logIt("fim");
 
     }
+
+//    @Test
+//    public void radioButtonTest2() throws Exception {
+//        waitHelper.wait(ThreadWait.WAIT_1_SEC);
+//        testLog.logIt("abc123xx");
+//        UiElement uiElement = uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "innerIco");
+//        uiElement.assertNotVisible(3000);
+//
+//
+//
+//        uiAutomationDriver.type("UHUM SEI");
+//        String something = uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "textBox1Region").getTextViaOCR();
+//        testLog.logIt("abc123");
+//        testLog.logIt(String.format("You've typed: \n %s", something));
+//        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "cbx_2").click();
+//        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "rbt_2").click();
+//        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "dropdownLst").click();
+//        waitHelper.wait(ThreadWait.WAIT_1_SEC);
+//        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "dropdownLst_item1").click();
+//        testLog.logIt("fimasassa");
+//        waitHelper.wait(ThreadWait.WAIT_1_SEC);
+//
+//        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "x_close_btn").click();
+//        testLog.logIt("fim");
+//
+  //  }
 }

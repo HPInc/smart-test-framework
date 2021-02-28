@@ -121,28 +121,6 @@
         },
         {
           "element": {
-            "selector": "dropdownLst_item3",
-            "ctrlType": "dropDownList",
-            "interactionType": "direct",
-            "similarity": 0.7,
-            "masterLoc": "stf_ico.png",
-            "shortcuts": []
-          }
-        },
-        {
-          "element": {
-            "selector": "dropdownLst_item5",
-            "ctrlType": "dropDownList",
-            "interactionType": "indirect",
-            "xCoordinate": 29,
-            "yCoordinate": 160,
-            "similarity": 0.7,
-            "masterLoc": "stf_ico.png",
-            "shortcuts": []
-          }
-        },
-        {
-          "element": {
             "selector": "rbt_1",
             "ctrlType": "radioButton",
             "interactionType": "indirect",
