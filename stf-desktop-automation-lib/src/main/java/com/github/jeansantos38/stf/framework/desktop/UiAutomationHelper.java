@@ -4,11 +4,13 @@ import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
 import com.github.jeansantos38.stf.framework.misc.CalendarHelper;
 import com.github.jeansantos38.stf.framework.misc.RandomValuesHelper;
 import com.google.common.base.Stopwatch;
+import org.sikuli.basics.Settings;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Match;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Region;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -25,13 +27,46 @@ public class UiAutomationHelper {
     private final String FIND_LOG = "[#action: %1$s],[#on: %2$s],[#similatiry: %3$s]";
     private final String DRAG_AND_DROP_LOG = "[#action: %1$s],[#Source: %2$s],[#Destination: %3$s]";
 
-    protected void click(UiElement uiElement) throws FindFailed {
-        if (!uiElement.isVncScreen) {
-            Pattern pattern = createPattern(uiElement);
-            uiElement.screen.click(pattern);
+    protected void click(UiElement uiElement) throws FindFailed, InterruptedException {
+        Pattern pattern = createPattern(uiElement);
+        if (!uiElement.isVncScreen()) {
+            uiElement.getScreen().click(pattern);
         } else {
-            uiElement.vncScreen.click(createPattern(uiElement));
+            uiElement.getVncScreen().click(pattern);
         }
+        uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenClicks());
+    }
+
+    protected void paste(UiElement uiElement, String content) {
+        UiAutomationUtils.paste(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(), content);
+    }
+
+    protected void type(UiElement uiElement, String content) {
+        UiAutomationUtils.type(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(), content);
+    }
+
+    protected void moveCursorOver(UiElement uiElement) throws FindFailed {
+        Pattern pattern = createPattern(uiElement);
+        if (!uiElement.isVncScreen()) {
+            uiElement.getScreen().hover(pattern);
+        } else {
+            uiElement.getVncScreen().hover(pattern);
+        }
+    }
+
+    protected void doubleClickRegion(UiElement uiElement, Region region) throws FindFailed {
+        region.doubleClick(createPattern(uiElement));
+    }
+
+    protected void doubleClick(UiElement uiElement) throws FindFailed, InterruptedException {
+//        uiElement.getTestLog().logIt(String.format(SINGLE_DOUBLE_CLICK_LOG, action.toString(), mainImagePath, mainImageOffset, mainImageSimilarity));
+        Pattern pattern = createPattern(uiElement);
+        if (!uiElement.isVncScreen()) {
+            uiElement.getScreen().doubleClick(pattern);
+        } else {
+            uiElement.getVncScreen().doubleClick(pattern);
+        }
+        uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenClicks());
     }
 
     public boolean exists(UiElement uiElement) throws Exception {
@@ -40,46 +75,17 @@ public class UiAutomationHelper {
 
     /***
      * Helper that checks if an image does exist.
-     * @param timeoutSec: How long will keep trying before given up from this operation.
+     * @param timeoutMs: How long will keep trying before given up from this operation.
      * @return
      */
-    public boolean exists(UiElement uiElement, int timeoutSec) throws IOException, FindFailed {
-        return superExists(false, null, uiElement, uiElement.takeScreenshotIfNotFound, timeoutSec);
+    protected boolean exists(UiElement uiElement, int timeoutMs, boolean screenCaptureIfFound) throws IOException, FindFailed {
+        return superExists(false, null, uiElement, screenCaptureIfFound, timeoutMs);
     }
 
-
-    /***
-     * Helper that checks if an image does exist.
-     * @param timeoutSec: How long will keep trying before given up from this operation.
-     * @return
-     */
-    public boolean patternExistsInRegion(Region region, UiElement uiElement, boolean screenCaptureIfMissing, double timeoutSec) throws IOException, FindFailed {
-        return superExists(true, region, uiElement, screenCaptureIfMissing, timeoutSec);
+    protected boolean exists(UiElement uiElement, int timeoutMs) throws IOException, FindFailed {
+        return superExists(false, null, uiElement, false, timeoutMs);
     }
 
-
-    /***
-     * Helper that takes a screenshot from the entire desktop.
-     * @return
-     * @throws IOException
-     */
-    public String saveDesktopScreenshot(UiElement uiElement) throws IOException {
-        String path = RandomValuesHelper.generateAlphabetic(10);
-        String filename = CalendarHelper.getCurrentTimeAndDate();
-        return saveDesktopScreenshot(uiElement, filename);
-    }
-
-    /***
-     * Helper that takes a screenshot from the entire desktop.
-     * @param filename: The screenshot filename.
-     * @return
-     * @throws IOException
-     */
-    protected String saveDesktopScreenshot(UiElement uiElement, String filename) throws IOException {
-        String path = InputOutputHelper.createDirectory(uiElement.folderPathToSaveScreenshots);
-        return !uiElement.isVncScreen ? uiElement.screen.capture().save(path, filename) :
-                uiElement.vncScreen.capture().save(path, filename);
-    }
 
     /***
      * Helper that takes a screenshot from a given region.
@@ -88,7 +94,7 @@ public class UiAutomationHelper {
      * @throws IOException
      */
     protected String saveScreenshotFromRegion(UiElement uiElement, Region region) throws IOException {
-        return saveScreenshotFromRegion(region, uiElement.folderPathToSaveScreenshots,
+        return saveScreenshotFromRegion(region, uiElement.getFolderPathToSaveScreenshots(),
                 String.format("%s_%s", RandomValuesHelper.generateAlphabetic(10), CalendarHelper.getCurrentTimeAndDate()));
     }
 
@@ -106,11 +112,41 @@ public class UiAutomationHelper {
         return String.format("%s/%s", path, filename);
     }
 
-    private boolean superExists(boolean isForRegion, Region region, UiElement uiElement, boolean screenCaptureIfMissing, double timeoutSec) throws IOException {
+
+    protected Region createRegionFromReferencePattern(UiElement uiElement) throws Exception {
+        Match patternMatch = find(uiElement);
+        int recH = uiElement.getRecBottomRightY() - uiElement.getRecTopLeftY();
+        int recW = uiElement.getRecBottomRightX() - uiElement.getRecTopLeftX();
+        int finalX = patternMatch.x + ((patternMatch.w / 2) + uiElement.getRecTopLeftX());
+        int finalY = patternMatch.y + ((patternMatch.h / 2) + uiElement.getRecTopLeftY());
+        return new Region(finalX, finalY, recW, recH);
+    }
+
+    public String extractTextViaOCR(UiElement uiElement) throws Exception {
+        Settings.OcrTextRead = true;
+        Settings.OcrTextSearch = true;
+        Region region = createRegionFromReferencePattern(uiElement);
+        return region.text();
+    }
+
+    protected Match find(UiElement uiElement) throws Exception {
+        Pattern pattern = createPattern(uiElement);
+        try {
+            return !uiElement.isVncScreen() ? uiElement.getScreen().find(pattern) : uiElement.getVncScreen().find(pattern);
+        } catch (Exception e) {
+            if (uiElement.takeScreenshotWhenFail()) {
+                uiElement.getTestLog().logIt(String.format("The pattern was not found! ###The expected master is:[%1$s] ### It was not found at: [%2$s]",
+                        pattern.getFilename(), UiAutomationUtils.saveDesktopScreenshot(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(), uiElement.getFolderPathToSaveScreenshots())));
+            }
+            throw new Exception(e);
+        }
+    }
+
+    private boolean superExists(boolean isForRegion, Region region, UiElement uiElement, boolean screenCaptureIfFound, double timeoutSec) throws IOException {
         Pattern pattern = createPattern(uiElement);
         Match match = null;
         Stopwatch stopwatch = Stopwatch.createStarted();
-        while (stopwatch.elapsed(TimeUnit.SECONDS) <= timeoutSec) {
+        while (stopwatch.elapsed(TimeUnit.MILLISECONDS) <= timeoutSec) {
             try {
                 /*
                 If you're thinking "Why the heck we're using find here instead exists?!"
@@ -124,12 +160,12 @@ public class UiAutomationHelper {
                 if (isForRegion) {
                     match = region.find(pattern);
                 } else {
-                    match = !uiElement.isVncScreen ? uiElement.screen.find(pattern) :
-                            uiElement.vncScreen.find(pattern);
+                    match = !uiElement.isVncScreen() ? uiElement.getScreen().find(pattern) :
+                            uiElement.getVncScreen().find(pattern);
                 }
                 break;
             } catch (Exception e) {
-                uiElement.testLog.logIt(e.getMessage());
+                uiElement.getTestLog().logIt(e.getMessage());
             }
         }
         boolean wasFound = false;
@@ -144,11 +180,22 @@ public class UiAutomationHelper {
             wasFound = evaluateScore(uiElement, current);
         }
 
-        if (screenCaptureIfMissing && !wasFound) {
-            uiElement.testLog.logIt(
+        if (uiElement.takeScreenshotWhenFail() && !wasFound) {
+            uiElement.getTestLog().logIt(
                     String.format("The expected image [%s] was not found, instead found [%s]",
                             pattern.getFilename(),
-                            isForRegion ? saveScreenshotFromRegion(uiElement, region) : saveDesktopScreenshot(uiElement)));
+                            isForRegion ? saveScreenshotFromRegion(uiElement, region) :
+                                    UiAutomationUtils.saveDesktopScreenshot(
+                                            uiElement.isVncScreen() ? uiElement.getVncScreen() : uiElement.getScreen(),
+                                            uiElement.getFolderPathToSaveScreenshots())));
+        } else if (screenCaptureIfFound && wasFound) {
+            uiElement.getTestLog().logIt(
+                    String.format("The expected image [%s] was found, see it on captured screenshot [%s]",
+                            pattern.getFilename(),
+                            isForRegion ? saveScreenshotFromRegion(uiElement, region) :
+                                    UiAutomationUtils.saveDesktopScreenshot(
+                                            uiElement.isVncScreen() ? uiElement.getVncScreen() : uiElement.getScreen(),
+                                            uiElement.getFolderPathToSaveScreenshots())));
         }
         return wasFound;
     }
@@ -159,15 +206,15 @@ public class UiAutomationHelper {
      * @return
      */
     private boolean evaluateScore(UiElement uiElement, double currentScore) {
-        uiElement.testLog.logIt(String.format("###Image Recognition match evaluation:[#Found pattern score:%1$s][#Minimum acceptance score:%2$s]", String.valueOf(currentScore), String.valueOf(uiElement.similarity)));
-        return (currentScore >= uiElement.similarity);
+        uiElement.getTestLog().logIt(String.format("###Image Recognition match evaluation:[#Found pattern score:%1$s][#Minimum acceptance score:%2$s]", String.valueOf(currentScore), String.valueOf(uiElement.getSimilarity())));
+        return (currentScore >= uiElement.getSimilarity());
     }
 
     private Pattern createPattern(UiElement uiElement) {
-        Pattern pattern = new Pattern(uiElement.imagePath);
-        if (uiElement.similarity != null)
-            pattern.similar(uiElement.similarity);
-        pattern.targetOffset(uiElement.xCoordinate, uiElement.yCoordinate);
+        Pattern pattern = new Pattern(uiElement.getImagePath());
+        if (uiElement.getSimilarity() != null)
+            pattern.similar(uiElement.getSimilarity());
+        pattern.targetOffset(uiElement.getxCoordinate(), uiElement.getyCoordinate());
         return pattern;
     }
 }
