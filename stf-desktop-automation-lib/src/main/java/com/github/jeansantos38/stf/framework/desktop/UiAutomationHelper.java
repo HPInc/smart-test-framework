@@ -24,11 +24,12 @@ public class UiAutomationHelper {
     private final String DRAG_AND_DROP_LOG = "[#action: %1$s],[#Source: %2$s],[#Destination: %3$s]";
 
     protected void click(UiElement uiElement) throws Exception {
-        Match pattern = find(uiElement);
+        find(uiElement);
+
         if (!uiElement.isVncScreen()) {
-            uiElement.getScreen().click(pattern);
+            uiElement.getScreen().click(uiElement.getMatch());
         } else {
-            uiElement.getVncScreen().click(pattern);
+            uiElement.getVncScreen().click(uiElement.getMatch());
         }
         uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenClicks());
     }
@@ -42,25 +43,28 @@ public class UiAutomationHelper {
     }
 
     protected void moveCursorOver(UiElement uiElement) throws Exception {
-        Match pattern = find(uiElement);
+        find(uiElement);
+
+
         if (!uiElement.isVncScreen()) {
-            uiElement.getScreen().hover(pattern);
+            uiElement.getScreen().hover(uiElement.getMatch());
         } else {
-            uiElement.getVncScreen().hover(pattern);
+            uiElement.getVncScreen().hover(uiElement.getMatch());
         }
     }
 
     protected void doubleClickRegion(UiElement uiElement, Region region) throws FindFailed {
         region.doubleClick(createPattern(uiElement));
+
     }
 
     protected void doubleClick(UiElement uiElement) throws Exception {
-        Match pattern = find(uiElement);
+        find(uiElement);
 
         if (!uiElement.isVncScreen()) {
-            uiElement.getScreen().doubleClick(pattern);
+            uiElement.getScreen().doubleClick(uiElement.getMatch());
         } else {
-            uiElement.getVncScreen().doubleClick(pattern);
+            uiElement.getVncScreen().doubleClick(uiElement.getMatch());
         }
         uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenClicks());
     }
@@ -132,10 +136,10 @@ public class UiAutomationHelper {
             if (uiElement.getMatch() == null) {
                 uiElement.setMatch(!uiElement.isVncScreen() ? uiElement.getScreen().find(pattern) : uiElement.getVncScreen().find(pattern));
                 uiElement.getTestLog().logIt("======> Precisei ...");
-            }else{
+            } else {
                 uiElement.getTestLog().logIt("======> Nao precisei");
             }
-            highlighter(uiElement,uiElement.getMatch());
+            highlighter(uiElement, uiElement.getMatch());
             return uiElement.getMatch();
         } catch (Exception e) {
             if (uiElement.takeScreenshotWhenFail()) {
@@ -145,6 +149,7 @@ public class UiAutomationHelper {
             throw new Exception(e);
         }
     }
+
 
     private void highlighter(UiElement uiElement, Match match) {
         UiVisualFeedback visualFeedback = uiElement.getUiVisualFeedback();

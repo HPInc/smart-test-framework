@@ -203,6 +203,10 @@ public class UiElement extends UiAutomationHelper {
         return extractTextViaOCR(this);
     }
 
+    public void assertRegionContainsText(String text) throws Exception {
+        Assert.assertTrue(extractTextViaOCR(this).contains(text));
+    }
+
     public boolean containsString(String content) {
         return true;
     }
