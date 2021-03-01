@@ -52,7 +52,7 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
         uiVisualFeedback.setEnableHighlight(true);
 
         if (!_isVncScreen) {
-            uiAutomationDriver = new UiAutomationDriver(new Screen(), testLog, waitHelper, System.getProperty("user.home") + "/STF_Screenshots", true, 50, 50, uiVisualFeedback);
+            uiAutomationDriver = new UiAutomationDriver(new Screen(), testLog, waitHelper, System.getProperty("user.home") + "/STF_Screenshots", true, 500, 500, uiVisualFeedback);
             startWinDemoApp();
         } else {
             manageVm("Starting test VM!", startVmScript, _vmManagerBinPath, _vmName, _vmSnapshotName);
@@ -75,12 +75,19 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
     public void radioButtonTest() throws Exception {
         waitHelper.wait(ThreadWait.WAIT_1_SEC);
         testLog.logIt("abc123xx");
+        waitHelper.wait(ThreadWait.WAIT_1_SEC);
         uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "innerIco").assertVisible(3000);
-        uiAutomationDriver.type("UHUM SEI");
-        String something = uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "textBox1Region").getTextViaOCR();
+        uiAutomationDriver.type("Teste real pra valer");
+        UiElement textBoxRegion = uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "textBox1Region");
+        String something = textBoxRegion.getTextViaOCR();
         testLog.logIt("abc123");
         testLog.logIt(String.format("You've typed: \n %s", something));
-        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "cbx_2").click();
+        textBoxRegion.assertRegionContainsText("Teste real pra valer");
+        UiElement checkbox2 = uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "cbx_2");
+        checkbox2.click();
+        checkbox2.click();
+        checkbox2.click();
+        checkbox2.click();
         uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "rbt_2").click();
         uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "dropdownLst").click();
         waitHelper.wait(ThreadWait.WAIT_1_SEC);
@@ -90,32 +97,7 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
 
         uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "x_close_btn").click();
         testLog.logIt("fim");
-
     }
 
-//    @Test
-//    public void radioButtonTest2() throws Exception {
-//        waitHelper.wait(ThreadWait.WAIT_1_SEC);
-//        testLog.logIt("abc123xx");
-//        UiElement uiElement = uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "innerIco");
-//        uiElement.assertNotVisible(3000);
-//
-//
-//
-//        uiAutomationDriver.type("UHUM SEI");
-//        String something = uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "textBox1Region").getTextViaOCR();
-//        testLog.logIt("abc123");
-//        testLog.logIt(String.format("You've typed: \n %s", something));
-//        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "cbx_2").click();
-//        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "rbt_2").click();
-//        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "dropdownLst").click();
-//        waitHelper.wait(ThreadWait.WAIT_1_SEC);
-//        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "dropdownLst_item1").click();
-//        testLog.logIt("fimasassa");
-//        waitHelper.wait(ThreadWait.WAIT_1_SEC);
-//
-//        uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "x_close_btn").click();
-//        testLog.logIt("fim");
-//
-  //  }
+
 }
