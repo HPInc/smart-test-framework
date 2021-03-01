@@ -20,7 +20,7 @@ public class UiAutomationTestBase extends MainTestBase {
 
     protected void endWinDemoApp() throws Exception {
         Runtime.getRuntime().exec("taskkill /F /IM \"SmartTestFrameworkDemo.exe\" /T");
-        waitHelper.wait(ThreadWait.WAIT_3_SEC);
+        waitHelper.wait(ThreadWait.WAIT_5_SEC);
     }
 
     protected void manageVm(String msg, String script, String vmManagerBinPath, String vmName, String vmSnapshotName) throws IOException {
