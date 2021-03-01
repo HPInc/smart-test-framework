@@ -123,7 +123,7 @@ public class UiAutomationDriver {
 
     private UiElement retrievePatternFromNavigatorString(String navigatorFileFullPath, String areaId, String
             selector, boolean retrieveMasterLocOnly) throws Exception {
-       Elements elements = UiAutomationUtils.retrievePatternFromNavigatorString(navigatorFileFullPath,areaId,selector,retrieveMasterLocOnly);
+        Elements elements = UiAutomationUtils.retrievePatternFromNavigatorString(navigatorFileFullPath, areaId, selector, retrieveMasterLocOnly);
         File navigator = new File(navigatorFileFullPath);
         String masterAbsolutePath = navigator.getAbsolutePath().replace(navigator.getName(), (retrieveMasterLocOnly ? elements.element.masterLoc : elements.element.refMasterLoc));
         return factory(this.screen,
@@ -139,32 +139,6 @@ public class UiAutomationDriver {
 
 
 
-
-//private UiElement retrievePatternFromNavigatorString(String navigatorFileFullPath, String areaId, String
-//            selector, boolean retrieveMasterLocOnly) throws Exception {
-//        String navigatorContent = InputOutputHelper.readContentFromFile(navigatorFileFullPath);
-//        DataDrivenNavigator dataDrivenNavigator = DeserializeHelper.deserializeStringToObject(DataDrivenNavigator.class, SerializationType.JSON, navigatorContent);
-//        MasterImageDetails masterImageDetails = Arrays.stream(dataDrivenNavigator.MasterImageDetails).filter(x -> x.areaId.equals(areaId)).findAny().orElse(null);
-//        if (masterImageDetails == null)
-//            throw new Exception(String.format("The master image details for area '%1$s' was not retrieved from navigator, pls review the given parameters.", areaId));
-//
-//        Elements elements = Arrays.stream(masterImageDetails.elements).filter(x -> x.element.selector.equals(selector)).findFirst().orElse(null);
-//        if (elements == null || elements.element == null)
-//            throw new Exception(String.format("The element for selector '%1$s' was not retrieved from navigator, pls review the given parameters.", selector));
-//
-//        File navigator = new File(navigatorFileFullPath);
-//        String masterAbsolutePath = navigator.getAbsolutePath().replace(navigator.getName(), (retrieveMasterLocOnly ? elements.element.masterLoc : elements.element.refMasterLoc));
-//        this.testLog.logIt(String.format("Searching for the image '%1$s' related to the selector '%2$s'.", retrieveMasterLocOnly ? elements.element.masterLoc : elements.element.refMasterLoc, selector));
-//        return factory(this.screen,
-//                masterAbsolutePath,
-//                elements.element.xCoordinate,
-//                elements.element.yCoordinate,
-//                elements.element.rectangleTopLeftX,
-//                elements.element.rectangleTopLeftY,
-//                elements.element.rectangleBottomRightX,
-//                elements.element.rectangleBottomRightY,
-//                (double) elements.element.similarity);
-//    }
 
 
     private UiElement factory(Object screen,
