@@ -101,14 +101,6 @@ public class UiAutomationDriver {
         return factory(this.screen, imagePath, xCoordinate, yCoordinate, SURE_MATCH_MIN_SCORE);
     }
 
-    public UiElement buildRelativePatternFromNavigator(String navFilePath, String areaId, String selector,UiElement masterUiElement) throws Exception {
-        UiElement uiElement = retrievePatternFromNavigatorString(navFilePath, areaId, selector, true);
-        masterUiElement.initializeMatch();
-
-        uiElement.setMatch(masterUiElement.getMatch());
-        return uiElement;
-    }
-
     public UiElement buildPattern(String imagePath, int xCoordinate, int yCoordinate, Double similarity) {
         return factory(this.screen, imagePath, xCoordinate, yCoordinate, similarity);
     }
