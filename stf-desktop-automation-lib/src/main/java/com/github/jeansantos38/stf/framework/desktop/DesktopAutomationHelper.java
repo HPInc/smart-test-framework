@@ -1,23 +1,20 @@
 package com.github.jeansantos38.stf.framework.desktop;
 
-import com.github.jeansantos38.stf.dataclasses.web.datadriven.DataDrivenNavigator;
-import com.github.jeansantos38.stf.dataclasses.web.datadriven.Elements;
-import com.github.jeansantos38.stf.dataclasses.web.datadriven.MasterImageDetails;
+//import com.github.jeansantos38.stf.dataclasses.web.datadriven.Navigator;
+//import com.github.jeansantos38.stf.dataclasses.web.datadriven.Elements;
+//import com.github.jeansantos38.stf.dataclasses.web.datadriven.NavigatorArea;
+
 import com.github.jeansantos38.stf.enums.image.Action;
-import com.github.jeansantos38.stf.enums.serialization.SerializationType;
 import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
 import com.github.jeansantos38.stf.framework.logger.TestLog;
 import com.github.jeansantos38.stf.framework.misc.CalendarHelper;
 import com.github.jeansantos38.stf.framework.misc.RandomValuesHelper;
-import com.github.jeansantos38.stf.framework.serialization.DeserializeHelper;
 import com.github.jeansantos38.stf.framework.wait.WaitHelper;
 import com.google.common.base.Stopwatch;
 import org.sikuli.basics.Settings;
 import org.sikuli.script.*;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /************************************************************
@@ -473,21 +470,22 @@ public class DesktopAutomationHelper {
      */
     public Pattern retrievePatternFromNavigator(String navigatorFileFullPath, String areaId, String selector, boolean retrieveMasterLocOnly) throws Exception {
 
-        String navigatorContent = InputOutputHelper.readContentFromFile(navigatorFileFullPath);
-        DataDrivenNavigator dataDrivenNavigator = DeserializeHelper.deserializeStringToObject(DataDrivenNavigator.class, SerializationType.JSON, navigatorContent);
-        MasterImageDetails masterImageDetails = Arrays.stream(dataDrivenNavigator.MasterImageDetails).filter(x -> x.areaId.equals(areaId)).findAny().orElse(null);
-        if (masterImageDetails == null)
-            throw new Exception(String.format("The master image details for area '%1$s' was not retrieved from navigator, pls review the given parameters.", areaId));
-        String masterAbsolutePath = "";
-        Elements elements = Arrays.stream(masterImageDetails.elements).filter(x -> x.element.selector.equals(selector)).findFirst().orElse(null);
-        if (elements == null || elements.element == null)
-            throw new Exception(String.format("The element for selector '%1$s' was not retrieved from navigator, pls review the given parameters.", selector));
-
-        File navigator = new File(navigatorFileFullPath);
-        masterAbsolutePath = navigator.getAbsolutePath().replace(navigator.getName(), (retrieveMasterLocOnly ? elements.element.masterLoc : elements.element.refMasterLoc));
-        this.testLog.logIt(String.format("Searching for the image '%1$s' related to the selector '%2$s'.", retrieveMasterLocOnly ? elements.element.masterLoc : elements.element.refMasterLoc, selector));
-
-        return createPattern(masterAbsolutePath, elements.element.xCoordinate, elements.element.yCoordinate, elements.element.similarity);
+//        String navigatorContent = InputOutputHelper.readContentFromFile(navigatorFileFullPath);
+//        Navigator dataDrivenNavigator = DeserializeHelper.deserializeStringToObject(Navigator.class, SerializationType.JSON, navigatorContent);
+//        NavigatorArea masterImageDetails = Arrays.stream(dataDrivenNavigator.MasterImageDetails).filter(x -> x.areaId.equals(areaId)).findAny().orElse(null);
+//        if (masterImageDetails == null)
+//            throw new Exception(String.format("The master image details for area '%1$s' was not retrieved from navigator, pls review the given parameters.", areaId));
+//        String masterAbsolutePath = "";
+//        Elements elements = Arrays.stream(masterImageDetails.elements).filter(x -> x.element.selector.equals(selector)).findFirst().orElse(null);
+//        if (elements == null || elements.element == null)
+//            throw new Exception(String.format("The element for selector '%1$s' was not retrieved from navigator, pls review the given parameters.", selector));
+//
+//        File navigator = new File(navigatorFileFullPath);
+//        masterAbsolutePath = navigator.getAbsolutePath().replace(navigator.getName(), (retrieveMasterLocOnly ? elements.element.masterLoc : elements.element.refMasterLoc));
+//        this.testLog.logIt(String.format("Searching for the image '%1$s' related to the selector '%2$s'.", retrieveMasterLocOnly ? elements.element.masterLoc : elements.element.refMasterLoc, selector));
+//
+//        return createPattern(masterAbsolutePath, elements.element.xCoordinate, elements.element.yCoordinate, elements.element.similarity);
+        return null;
     }
 
     /***
@@ -625,11 +623,12 @@ public class DesktopAutomationHelper {
      * @return
      * @throws Exception
      */
-    public Elements retrieveTargetElement(String navigatorFileFullPath, String areaId, String selector) throws Exception {
-        String dataDrivenContent = InputOutputHelper.readContentFromFile(navigatorFileFullPath);
-        DataDrivenNavigator dataDrivenNavigator = DeserializeHelper.deserializeStringToObject(DataDrivenNavigator.class, SerializationType.JSON, dataDrivenContent);
-        MasterImageDetails masterImageDetails = Arrays.stream(dataDrivenNavigator.MasterImageDetails).filter(x -> x.areaId.equals(areaId)).findAny().orElse(null);
-        return Arrays.stream(masterImageDetails.elements).filter(x -> x.element.selector.equals(selector)).findFirst().orElse(null);
+    public Element retrieveTargetElement(String navigatorFileFullPath, String areaId, String selector) throws Exception {
+//        String dataDrivenContent = InputOutputHelper.readContentFromFile(navigatorFileFullPath);
+//        Navigator dataDrivenNavigator = DeserializeHelper.deserializeStringToObject(Navigator.class, SerializationType.JSON, dataDrivenContent);
+//        NavigatorArea masterImageDetails = Arrays.stream(dataDrivenNavigator.MasterImageDetails).filter(x -> x.areaId.equals(areaId)).findAny().orElse(null);
+//        return Arrays.stream(masterImageDetails.elements).filter(x -> x.element.selector.equals(selector)).findFirst().orElse(null);
+        return null;
     }
 
     /***
