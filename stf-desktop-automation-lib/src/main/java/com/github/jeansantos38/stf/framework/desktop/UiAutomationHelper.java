@@ -25,7 +25,6 @@ public class UiAutomationHelper {
 
     protected void click(UiElement uiElement) throws Exception {
         find(uiElement);
-
         if (!uiElement.isVncScreen()) {
             uiElement.getScreen().click(uiElement.getMatch());
         } else {
@@ -38,14 +37,27 @@ public class UiAutomationHelper {
         UiAutomationUtils.paste(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(), content);
     }
 
-    protected void type(UiElement uiElement, String content) {
+    protected void dragAndDrop(UiElement target, UiElement destination) throws FindFailed {
+        if (!target.isVncScreen()) {
+            target.getScreen().dragDrop(target.getMatch(), destination.getMatch());
+        } else {
+            target.getVncScreen().dragDrop(target.getMatch(), destination.getMatch());
+        }
+    }
+
+    protected void type(UiElement uiElement, String content) throws InterruptedException, FindFailed {
         UiAutomationUtils.type(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(), content);
+    }
+
+    protected String copyString(UiElement uiElement) throws Exception {
+        doubleClick(uiElement);
+//       return UiAutomationUtils.performKeyCombination(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(),
+//                "c", KeyModifier.CTRL);
+        return "";
     }
 
     protected void moveCursorOver(UiElement uiElement) throws Exception {
         find(uiElement);
-
-
         if (!uiElement.isVncScreen()) {
             uiElement.getScreen().hover(uiElement.getMatch());
         } else {
@@ -115,20 +127,24 @@ public class UiAutomationHelper {
 
     protected Region createRegionFromReferencePattern(UiElement uiElement) throws Exception {
         Match patternMatch = find(uiElement);
-        int recH = uiElement.getRecBottomRightY() - uiElement.getRecTopLeftY();
-        int recW = uiElement.getRecBottomRightX() - uiElement.getRecTopLeftX();
-        int finalX = patternMatch.x + ((patternMatch.w / 2) + uiElement.getRecTopLeftX());
-        int finalY = patternMatch.y + ((patternMatch.h / 2) + uiElement.getRecTopLeftY());
+        int recH = uiElement.getDetails().regionBottomRightY - uiElement.getDetails().regionTopLeftY;
+        int recW = uiElement.getDetails().regionBottomRightX - uiElement.getDetails().regionTopLeftX;
+        int finalX = patternMatch.x + ((patternMatch.w / 2) + uiElement.getDetails().regionTopLeftX);
+        int finalY = patternMatch.y + ((patternMatch.h / 2) + uiElement.getDetails().regionTopLeftY);
         return new Region(finalX, finalY, recW, recH);
     }
 
-    public String extractTextViaOCR(UiElement uiElement) throws Exception {
+    protected String extractTextFromRegionViaOCR(UiElement uiElement) throws Exception {
         Settings.OcrTextRead = true;
         Settings.OcrTextSearch = true;
         Region region = createRegionFromReferencePattern(uiElement);
         return region.text();
     }
 
+    protected boolean referenceAreaHasPattern(UiElement reference, UiElement expectedPattern) throws Exception {
+        Region region = createRegionFromReferencePattern(reference);
+        return superExists(true, region, expectedPattern, reference.takeScreenshotWhenFail(), 0);
+    }
 
     protected Match find(UiElement uiElement) throws Exception {
         Pattern pattern = createPattern(uiElement);
@@ -139,7 +155,7 @@ public class UiAutomationHelper {
             } else {
                 uiElement.getTestLog().logIt("======> Nao precisei");
             }
-            highlighter(uiElement, uiElement.getMatch());
+            highligh(uiElement, uiElement.getMatch());
             return uiElement.getMatch();
         } catch (Exception e) {
             if (uiElement.takeScreenshotWhenFail()) {
@@ -151,16 +167,17 @@ public class UiAutomationHelper {
     }
 
 
-    private void highlighter(UiElement uiElement, Match match) {
+    private void highligh(UiElement uiElement, Match match) {
         UiVisualFeedback visualFeedback = uiElement.getUiVisualFeedback();
-        if (visualFeedback != null && visualFeedback.enableHighlight) {
+        if (visualFeedback != null && visualFeedback.enableHighlight && !uiElement.isVncScreen()) {
             match.highlight(visualFeedback.masterHighlightTimeSec, visualFeedback.masterHighlightColor);
-            if (uiElement.getXcoordinate() != 0 || uiElement.getYcoordinate() != 0) {
-                new Region(match.getCenter().x + uiElement.getXcoordinate(),
-                        match.getCenter().y + uiElement.getYcoordinate(), visualFeedback.relHighlightW, visualFeedback.relHighlightH)
+            if (uiElement.getDetails().xCoordinate != 0 || uiElement.getDetails().yCoordinate != 0) {
+                new Region(match.getCenter().x + uiElement.getDetails().xCoordinate,
+                        match.getCenter().y + uiElement.getDetails().yCoordinate, visualFeedback.relHighlightW, visualFeedback.relHighlightH)
                         .highlight(visualFeedback.relAreaHighlightTimeSec, visualFeedback.relAreaHighlightColor);
             }
-
+        } else {
+            uiElement.getTestLog().logIt("Nothing to highlight here!");
         }
     }
 
@@ -227,15 +244,16 @@ public class UiAutomationHelper {
      * @return
      */
     private boolean evaluateScore(UiElement uiElement, double currentScore) {
-        uiElement.getTestLog().logIt(String.format("###Image Recognition match evaluation:[#Found pattern score:%1$s][#Minimum acceptance score:%2$s]", String.valueOf(currentScore), String.valueOf(uiElement.getSimilarity())));
-        return (currentScore >= uiElement.getSimilarity());
+        uiElement.getTestLog().logIt(String.format("###Image Recognition match evaluation:[#Found pattern score:%1$s][#Minimum acceptance score:%2$s]",
+                String.valueOf(currentScore), String.valueOf(uiElement.getDetails().similarity)));
+        return (currentScore >= uiElement.getDetails().similarity);
     }
 
     private Pattern createPattern(UiElement uiElement) {
-        Pattern pattern = new Pattern(uiElement.getImagePath());
-        if (uiElement.getSimilarity() != null)
-            pattern.similar(uiElement.getSimilarity());
-        pattern.targetOffset(uiElement.getXcoordinate(), uiElement.getYcoordinate());
+        Pattern pattern = new Pattern(uiElement.getDetails().imagePath);
+
+        pattern.similar(uiElement.getDetails().similarity);
+        pattern.targetOffset(uiElement.getDetails().xCoordinate, uiElement.getDetails().yCoordinate);
         return pattern;
     }
 

@@ -1,24 +1,16 @@
 package com.github.jeansantos38.stf.framework.desktop;
 
+import com.github.jeansantos38.stf.data.classes.ui.Details;
 import com.github.jeansantos38.stf.framework.logger.TestLog;
 import com.github.jeansantos38.stf.framework.wait.WaitHelper;
-import org.sikuli.script.FindFailed;
-import org.sikuli.script.Match;
-import org.sikuli.script.Screen;
+import org.sikuli.script.*;
 import org.sikuli.vnc.VNCScreen;
 import org.testng.Assert;
 
 import java.io.IOException;
 
 public class UiElement extends UiAutomationHelper {
-    private String imagePath;
-    private int xCoordinate;
-    private int yCoordinate;
-    private int recTopLeftX;
-    private int recTopLeftY;
-    private int recBottomRightX;
-    private int recBottomRightY;
-    private Double similarity;
+    private Details details;
     private Screen screen;
     private VNCScreen vncScreen;
     private boolean isVncScreen;
@@ -26,13 +18,20 @@ public class UiElement extends UiAutomationHelper {
     private boolean takeScreenshotWhenFail;
     private int msDelayBetweenClicks;
     private int msDelayBetweenActions;
-    private final String NOT_VISIBLE_ASSERT_MSG = "The Ui element was not found! See logs for more details!";
-    private final String STILL_VISIBLE_ASSERT_MSG = "The Ui element is still visible! See logs for more details!";
-
     private UiVisualFeedback uiVisualFeedback;
     private WaitHelper waitHelper;
     private TestLog testLog;
+    private Match match;
+    private final String NOT_VISIBLE_ASSERT_MSG = "The Ui element was not found! See logs for more details!";
+    private final String STILL_VISIBLE_ASSERT_MSG = "The Ui element is still visible! See logs for more details!";
 
+    public Details getDetails() {
+        return details;
+    }
+
+    public UiVisualFeedback getUiVisualFeedback() {
+        return uiVisualFeedback;
+    }
 
     public Match getMatch() {
         return match;
@@ -40,45 +39,6 @@ public class UiElement extends UiAutomationHelper {
 
     public void setMatch(Match match) {
         this.match = match;
-    }
-
-    private Match match;
-
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public UiVisualFeedback getUiVisualFeedback() {
-        return uiVisualFeedback;
-    }
-
-    public int getXcoordinate() {
-        return xCoordinate;
-    }
-
-    public int getYcoordinate() {
-        return yCoordinate;
-    }
-
-    public int getRecTopLeftX() {
-        return recTopLeftX;
-    }
-
-    public int getRecTopLeftY() {
-        return recTopLeftY;
-    }
-
-    public int getRecBottomRightX() {
-        return recBottomRightX;
-    }
-
-    public int getRecBottomRightY() {
-        return recBottomRightY;
-    }
-
-    public Double getSimilarity() {
-        return similarity;
     }
 
     public String getFolderPathToSaveScreenshots() {
@@ -129,29 +89,7 @@ public class UiElement extends UiAutomationHelper {
     }
 
     public UiElement(Object screen,
-                     String imagePath,
-                     int xCoordinate,
-                     int yCoordinate,
-                     Double similarity,
-                     int msDelayBetweenClicks,
-                     int msDelayBetweenActions,
-                     boolean takeScreenshotWhenFail,
-                     String folderPathToSaveScreenshots,
-                     UiVisualFeedback uiVisualFeedback,
-                     WaitHelper waitHelper,
-                     TestLog testLog) {
-        this(screen, imagePath, xCoordinate, yCoordinate, -0, -0, -0, -0, similarity, msDelayBetweenClicks, msDelayBetweenActions, takeScreenshotWhenFail, folderPathToSaveScreenshots, uiVisualFeedback, waitHelper, testLog);
-    }
-
-    public UiElement(Object screen,
-                     String imagePath,
-                     int xCoordinate,
-                     int yCoordinate,
-                     int recTopLeftX,
-                     int recTopLeftY,
-                     int recBottomRightX,
-                     int recBottomRightY,
-                     Double similarity,
+                     Details details,
                      int msDelayBetweenClicks,
                      int msDelayBetweenActions,
                      boolean takeScreenshotWhenFail,
@@ -161,14 +99,7 @@ public class UiElement extends UiAutomationHelper {
                      TestLog testLog) {
 
         checkScreenType(screen);
-        this.imagePath = imagePath;
-        this.xCoordinate = xCoordinate;
-        this.yCoordinate = yCoordinate;
-        this.recTopLeftX = recTopLeftX;
-        this.recTopLeftY = recTopLeftY;
-        this.recBottomRightX = recBottomRightX;
-        this.recBottomRightY = recBottomRightY;
-        this.similarity = similarity;
+        this.details = details;
         this.msDelayBetweenClicks = msDelayBetweenClicks;
         this.msDelayBetweenActions = msDelayBetweenActions;
         this.takeScreenshotWhenFail = takeScreenshotWhenFail;
@@ -191,24 +122,54 @@ public class UiElement extends UiAutomationHelper {
         doubleClick(this);
     }
 
-    public void paste(String content) {
+    public void tripleClick() throws Exception {
+        moveCursorOver();
+        actionClick(this, true, 3);
+    }
+
+
+    public void paste(String content) throws Exception {
+        click();
         paste(this, content);
     }
 
-    public void type(String keys) throws Exception {
-        throw new Exception("Not implemented!");
+    public void dragAndDrop(UiElement destination) throws Exception {
+        initializeMatch();
+        if (destination.getMatch() == null) {
+            destination.initializeMatch();
+        }
+        dragAndDrop(this, destination);
     }
 
-    public String getTextViaOCR() throws Exception {
-        return extractTextViaOCR(this);
+    public void type(String content) throws Exception {
+        click();
+        UiAutomationUtils.type(!this.isVncScreen() ? this.getScreen() : this.getVncScreen(), content);
     }
 
-    public void assertRegionContainsText(String text) throws Exception {
-        Assert.assertTrue(extractTextViaOCR(this).contains(text));
+    public void clearText() throws Exception {
+        click();
+        UiAutomationUtils.performKeyCombination(!this.isVncScreen() ? this.getScreen() : this.getVncScreen(), "a", KeyModifier.CTRL);
+        UiAutomationUtils.type(!this.isVncScreen() ? this.getScreen() : this.getVncScreen(), Key.DELETE);
     }
 
-    public boolean containsString(String content) {
-        return true;
+    public String extractTextViaOCR() throws Exception {
+        return extractTextFromRegionViaOCR(this);
+    }
+
+
+    public String extractTextViaClipboard() throws Exception {
+        click();
+        UiAutomationUtils.performKeyCombination(!this.isVncScreen() ? this.getScreen() : this.getVncScreen(), "a", KeyModifier.CTRL);
+        UiAutomationUtils.performKeyCombination(!this.isVncScreen() ? this.getScreen() : this.getVncScreen(), "c", KeyModifier.CTRL);
+        return UiAutomationUtils.getContentFromClipboard();
+    }
+
+    public void assertContainsTextViaOCR(String text) throws Exception {
+        Assert.assertTrue(extractTextFromRegionViaOCR(this).contains(text));
+    }
+
+    public void assertContainsTextViaClipboard(String text) throws Exception {
+        Assert.assertTrue(extractTextViaClipboard().contains(text));
     }
 
     public void assertVisible(int waitMs) throws IOException, FindFailed {
@@ -233,6 +194,14 @@ public class UiElement extends UiAutomationHelper {
 
     public void initializeMatch() throws Exception {
         find(this);
+    }
+
+    public boolean regionHasPattern(UiElement pattern) throws Exception {
+        return referenceAreaHasPattern(this, pattern);
+    }
+
+    public void assertRegionHasPattern(UiElement pattern) throws Exception {
+        Assert.assertTrue(regionHasPattern(pattern));
     }
 
     public void assertNotVisible() throws Exception {

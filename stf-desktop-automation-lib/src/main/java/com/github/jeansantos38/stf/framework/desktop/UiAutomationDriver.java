@@ -1,17 +1,13 @@
 package com.github.jeansantos38.stf.framework.desktop;
 
-import com.github.jeansantos38.stf.dataclasses.web.datadriven.DataDrivenNavigator;
-import com.github.jeansantos38.stf.dataclasses.web.datadriven.Elements;
-import com.github.jeansantos38.stf.dataclasses.web.datadriven.MasterImageDetails;
-import com.github.jeansantos38.stf.enums.serialization.SerializationType;
-import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
+import com.github.jeansantos38.stf.data.classes.ui.Details;
+import com.github.jeansantos38.stf.data.classes.ui.Element;
 import com.github.jeansantos38.stf.framework.logger.TestLog;
-import com.github.jeansantos38.stf.framework.serialization.DeserializeHelper;
 import com.github.jeansantos38.stf.framework.wait.WaitHelper;
+import org.sikuli.script.FindFailed;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 /************************************************************
  *  © Copyright 2019 HP Development Company, L.P.
@@ -86,23 +82,23 @@ public class UiAutomationDriver {
     }
 
     public UiElement buildPatternFromNavigator(String navFilePath, String areaId, String selector) throws Exception {
-        return retrievePatternFromNavigatorString(navFilePath, areaId, selector, true);
+        return retrievePatternFromNavigatorString(navFilePath, areaId, selector);
     }
 
     public UiElement buildPattern(String imagePath) {
-        return factory(this.screen, imagePath, 0, 0, SURE_MATCH_MIN_SCORE);
+        return factory(this.screen, new Details(imagePath, 0, 0, SURE_MATCH_MIN_SCORE));
     }
 
     public UiElement buildPattern(String imagePath, Double similarity) {
-        return factory(this.screen, imagePath, 0, 0, similarity);
+        return factory(this.screen, new Details(imagePath, 0, 0, similarity));
     }
 
     public UiElement buildPattern(String imagePath, int xCoordinate, int yCoordinate) {
-        return factory(this.screen, imagePath, xCoordinate, yCoordinate, SURE_MATCH_MIN_SCORE);
+        return factory(this.screen, new Details(imagePath, xCoordinate, yCoordinate, SURE_MATCH_MIN_SCORE));
     }
 
     public UiElement buildPattern(String imagePath, int xCoordinate, int yCoordinate, Double similarity) {
-        return factory(this.screen, imagePath, xCoordinate, yCoordinate, similarity);
+        return factory(this.screen, new Details(imagePath, xCoordinate, yCoordinate, similarity));
     }
 
     public String takeScreenshot() throws IOException {
@@ -113,72 +109,29 @@ public class UiAutomationDriver {
         return UiAutomationUtils.saveDesktopScreenshot(this.screen, this.folderPathToSaveScreenshots, filename);
     }
 
-    public void type(String content) {
-        UiAutomationUtils.type(this.screen, content);
+    public void type(String... content) throws InterruptedException, FindFailed {
+        StringBuilder finalContent = new StringBuilder();
+        for (String a : content) finalContent.append(a);
+        UiAutomationUtils.type(this.screen, finalContent.toString());
     }
 
     public void paste(String content) {
         UiAutomationUtils.paste(this.screen, content);
     }
 
-    private UiElement retrievePatternFromNavigatorString(String navigatorFileFullPath, String areaId, String
-            selector, boolean retrieveMasterLocOnly) throws Exception {
-        Elements elements = UiAutomationUtils.retrievePatternFromNavigatorString(navigatorFileFullPath, areaId, selector, retrieveMasterLocOnly);
-        File navigator = new File(navigatorFileFullPath);
-        String masterAbsolutePath = navigator.getAbsolutePath().replace(navigator.getName(), (retrieveMasterLocOnly ? elements.element.masterLoc : elements.element.refMasterLoc));
+    private UiElement retrievePatternFromNavigatorString(String navigatorFileFullPath, String areaId, String selector) throws Exception {
+        Element element = UiAutomationUtils.retrievePatternFromNavigatorString(navigatorFileFullPath, areaId, selector);
+      File navigator = new File(navigatorFileFullPath);
+//        String masterAbsolutePath =
+        element.details.imagePath = navigator.getAbsolutePath().replace(navigator.getName(), element.details.imagePath);
         return factory(this.screen,
-                masterAbsolutePath,
-                elements.element.xCoordinate,
-                elements.element.yCoordinate,
-                elements.element.rectangleTopLeftX,
-                elements.element.rectangleTopLeftY,
-                elements.element.rectangleBottomRightX,
-                elements.element.rectangleBottomRightY,
-                (double) elements.element.similarity);
+                element.details);
     }
 
-
-
-
-
     private UiElement factory(Object screen,
-                              String imagePath,
-                              int xCoordinate,
-                              int yCoordinate,
-                              Double similarity) {
+                              Details details) {
         return new UiElement(screen,
-                imagePath,
-                xCoordinate,
-                yCoordinate,
-                similarity,
-                this.msDelayBetweenClicks,
-                this.msDelayBetweenActions,
-                this.takeScreenshotWhenFail,
-                this.folderPathToSaveScreenshots,
-                this.uiVisualFeedback,
-                this.waitHelper,
-                this.testLog);
-    }
-
-
-    private UiElement factory(Object screen,
-                              String imagePath,
-                              int xCoordinate,
-                              int yCoordinate,
-                              int recTopLeftX,
-                              int recTopLeftY,
-                              int recBottomRightX,
-                              int recBottomRightY,
-                              Double similarity) {
-        return new UiElement(screen,
-                imagePath,
-                xCoordinate,
-                yCoordinate,
-                recTopLeftX,
-                recTopLeftY,
-                recBottomRightX,
-                recBottomRightY,
-                similarity,
+                details,
                 this.msDelayBetweenClicks,
                 this.msDelayBetweenActions,
                 this.takeScreenshotWhenFail,
