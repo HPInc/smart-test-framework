@@ -11,7 +11,7 @@
         <parameter name="_vmManagerBinPath" value="C:\Program Files\Oracle\VirtualBox\VBoxManage.exe"/>
         <parameter name="_vmName" value="Windows 10 base"/>
         <parameter name="_vmSnapshotName" value="Snapshot 2"/>
-        <parameter name="_vncServerIpAddress" value="192.168.0.46"/>
+        <parameter name="_vncServerIpAddress" value="192.168.0.48"/>
         <parameter name="_vncServerPort" value="5900"/>
         <parameter name="_vncServerPassword" value="Abc123*"/>
         <parameter name="_connectionTimeoutSec" value="15"/>
