@@ -4,13 +4,12 @@ import com.github.jeansantos38.stf.framework.desktop.UiAutomationDriver;
 import com.github.jeansantos38.stf.framework.desktop.UiAutomationUtils;
 import com.github.jeansantos38.stf.framework.desktop.UiElement;
 import com.github.jeansantos38.stf.framework.desktop.UiVisualFeedback;
-import com.github.jeansantos38.stf.framework.misc.RandomValuesHelper;
 import org.sikuli.script.Screen;
 import org.sikuli.vnc.VNCScreen;
 import org.testng.annotations.*;
 import system.base.UiAutomationTestBase;
 
-public class UiAutomationGeneric extends UiAutomationTestBase {
+public class UiAutomationControls extends UiAutomationTestBase {
 
     UiAutomationDriver uiAutomationDriver;
     String navigator;
@@ -40,6 +39,7 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
                             @Optional("") String _vncServerPassword,
                             @Optional("15") Integer _connectionTimeoutSec,
                             @Optional("3000") Integer _operationTimeoutMs) throws Exception {
+//        navigator = discoverAbsoluteFilePath("masters/winApp/_navigator_STF_Win_Demo-App.json");
         navigator = discoverAbsoluteFilePath("masters/winApp/_navigator_STF_Win_Demo-App.yml");
         startVmScript = discoverAbsoluteFilePath("scripts/vBoxStartVmSnapshot.bat");
         endVmScript = discoverAbsoluteFilePath("scripts/vBoxShutdownVmRestoreSnapshot.bat");
@@ -53,52 +53,40 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
 
         if (!_isVncScreen) {
             uiAutomationDriver = new UiAutomationDriver(new Screen(), testLog, waitHelper, System.getProperty("user.home") + "/STF_Screenshots", true, 500, 500, uiVisualFeedback);
+            endWinDemoApp();
             startWinDemoApp();
         } else {
             manageVm("Starting test VM!", startVmScript, _vmManagerBinPath, _vmName, _vmSnapshotName);
             VNCScreen screen = UiAutomationUtils.connectToVncScreen(_vncServerIpAddress, _vncServerPort, _vncServerPassword, _connectionTimeoutSec, _operationTimeoutMs, 3);
             uiAutomationDriver = new UiAutomationDriver(screen, testLog, waitHelper, System.getProperty("user.home") + "/STF_Screenshots", true, uiVisualFeedback);
-            uiAutomationDriver.buildPatternFromNavigator(navigator, "desktop", "stfIcon").doubleClick();
+            //uiAutomationDriver.buildPatternFromNavigator(navigator, "desktop", "stfIcon").doubleClick();
         }
     }
 
     @AfterClass
     public void cleanup() throws Exception {
         if (!isVncScreen) {
-            endWinDemoApp();
+
         } else {
-            manageVm("Ending test VM!", endVmScript, vmManagerBinPath, vmName, vmSnapshotName);
+//            manageVm("Ending test VM!", endVmScript, vmManagerBinPath, vmName, vmSnapshotName);
         }
     }
 
     @Test
     public void demoTest() throws Exception {
-        String testMsg = "This is a super demo test!";
-        uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "innerIco").assertVisible(3000);
+        UiElement stfIcon = uiAutomationDriver.buildPatternFromNavigator(navigator, "desktop", "innerIco");
+        UiElement checkboxTrue = uiAutomationDriver.buildPatternFromNavigator(navigator, "desktop", "checkbox_true");
+        UiElement checkboxFalse = uiAutomationDriver.buildPatternFromNavigator(navigator, "desktop", "checkbox_false");
 
-        UiElement textBox1 = uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "textBox1Region");
-        textBox1.clearText();
-        textBox1.type(testMsg);
+        UiElement checkbox1 = uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "cbx_1");
+        checkbox1.click();
+        stfIcon.moveCursorOver();
+        checkbox1.assertRegionHasPattern(checkboxTrue);
 
-        uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "cbx_1").click();
-        uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "cbx_2").click();
-
-        uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "dropdownLst").click();
-        uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "dropdownLst_item5").click();
-
-        uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "rbt_2").click();
-
-        UiElement textBox2 = uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "textBox2Region");
-        textBox2.clearText();
-        String randomMsg = "wow a random value ->  " + RandomValuesHelper.generateRandomAlphanumeric(20);
-        textBox2.type(randomMsg);
-
-        UiElement trackbarOpt1 = uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "tbr_value1");
-        UiElement trackbarOpt2 = uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "tbr_value3");
-
-        trackbarOpt1.dragAndDrop(trackbarOpt2);
-
-        uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "x_close_btn").click();
+        UiElement checkbox2 = uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "cbx_2");
+        checkbox2.click();
+        stfIcon.moveCursorOver();
+        checkbox2.assertRegionHasPattern(checkboxFalse);
 
     }
 }
