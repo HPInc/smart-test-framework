@@ -1,4 +1,4 @@
-package com.github.jeansantos38.stf.framework.desktop;
+package com.github.jeansantos38.stf.framework.ui;
 
 import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
 import com.github.jeansantos38.stf.framework.misc.CalendarHelper;
@@ -131,7 +131,9 @@ public class UiAutomationHelper {
         int recW = uiElement.getDetails().regionBottomRightX - uiElement.getDetails().regionTopLeftX;
         int finalX = patternMatch.x + ((patternMatch.w / 2) + uiElement.getDetails().regionTopLeftX);
         int finalY = patternMatch.y + ((patternMatch.h / 2) + uiElement.getDetails().regionTopLeftY);
-        return new Region(finalX, finalY, recW, recH);
+        Region region = new Region(finalX, finalY, recW, recH);
+        highlight(uiElement, region);
+        return region;
     }
 
     protected String extractTextFromRegionViaOCR(UiElement uiElement) throws Exception {
@@ -151,11 +153,8 @@ public class UiAutomationHelper {
         try {
             if (uiElement.getMatch() == null) {
                 uiElement.setMatch(!uiElement.isVncScreen() ? uiElement.getScreen().find(pattern) : uiElement.getVncScreen().find(pattern));
-                uiElement.getTestLog().logIt("======> Precisei ...");
-            } else {
-                uiElement.getTestLog().logIt("======> Nao precisei");
             }
-            highligh(uiElement, uiElement.getMatch());
+            highlight(uiElement, uiElement.getMatch());
             return uiElement.getMatch();
         } catch (Exception e) {
             if (uiElement.takeScreenshotWhenFail()) {
@@ -166,15 +165,23 @@ public class UiAutomationHelper {
         }
     }
 
-
-    private void highligh(UiElement uiElement, Match match) {
+    private void highlight(UiElement uiElement, Region region) {
         UiVisualFeedback visualFeedback = uiElement.getUiVisualFeedback();
         if (visualFeedback != null && visualFeedback.enableHighlight && !uiElement.isVncScreen()) {
-            match.highlight(visualFeedback.masterHighlightTimeSec, visualFeedback.masterHighlightColor);
+            region.highlight(visualFeedback.highlightTimeSec, visualFeedback.areaHighlightColor);
+        } else {
+            uiElement.getTestLog().logIt("Nothing to highlight here!");
+        }
+    }
+
+    private void highlight(UiElement uiElement, Match match) {
+        UiVisualFeedback visualFeedback = uiElement.getUiVisualFeedback();
+        if (visualFeedback != null && visualFeedback.enableHighlight && !uiElement.isVncScreen()) {
+            match.highlight(visualFeedback.highlightTimeSec, visualFeedback.masterHighlightColor);
             if (uiElement.getDetails().xCoordinate != 0 || uiElement.getDetails().yCoordinate != 0) {
                 new Region(match.getCenter().x + uiElement.getDetails().xCoordinate,
                         match.getCenter().y + uiElement.getDetails().yCoordinate, visualFeedback.relHighlightW, visualFeedback.relHighlightH)
-                        .highlight(visualFeedback.relAreaHighlightTimeSec, visualFeedback.relAreaHighlightColor);
+                        .highlight(visualFeedback.highlightTimeSec, visualFeedback.coordinateHighlightColor);
             }
         } else {
             uiElement.getTestLog().logIt("Nothing to highlight here!");

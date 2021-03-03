@@ -1,17 +1,16 @@
-package com.github.jeansantos38.stf.framework.desktop;
+package com.github.jeansantos38.stf.framework.ui;
 
 import com.github.jeansantos38.stf.data.classes.ui.Element;
 import com.github.jeansantos38.stf.data.classes.ui.Navigator;
 import com.github.jeansantos38.stf.data.classes.ui.NavigatorArea;
-import com.github.jeansantos38.stf.enums.serialization.SerializationType;
-import com.github.jeansantos38.stf.enums.wait.ThreadWait;
+import com.github.jeansantos38.stf.enums.ui.serialization.SerializationType;
+import com.github.jeansantos38.stf.enums.ui.wait.ThreadWait;
 import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
 import com.github.jeansantos38.stf.framework.logger.TestLog;
 import com.github.jeansantos38.stf.framework.misc.CalendarHelper;
 import com.github.jeansantos38.stf.framework.misc.RandomValuesHelper;
 import com.github.jeansantos38.stf.framework.serialization.DeserializeHelper;
 import com.github.jeansantos38.stf.framework.wait.WaitHelper;
-import org.sikuli.script.FindFailed;
 import org.sikuli.script.Screen;
 import org.sikuli.vnc.VNCScreen;
 

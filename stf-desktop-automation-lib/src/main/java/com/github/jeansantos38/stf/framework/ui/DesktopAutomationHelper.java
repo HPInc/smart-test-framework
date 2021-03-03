@@ -1,10 +1,10 @@
-package com.github.jeansantos38.stf.framework.desktop;
+package com.github.jeansantos38.stf.framework.ui;
 
 //import com.github.jeansantos38.stf.dataclasses.web.datadriven.Navigator;
 //import com.github.jeansantos38.stf.dataclasses.web.datadriven.Elements;
 //import com.github.jeansantos38.stf.dataclasses.web.datadriven.NavigatorArea;
 
-import com.github.jeansantos38.stf.enums.image.Action;
+import com.github.jeansantos38.stf.contants.ui.UiAction;
 import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
 import com.github.jeansantos38.stf.framework.logger.TestLog;
 import com.github.jeansantos38.stf.framework.misc.CalendarHelper;
@@ -113,7 +113,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void click(Pattern pattern) throws Exception {
-        superAction(Action.CLICK, true, pattern, null, 0);
+        superAction(UiAction.CLICK, true, pattern, null, 0);
     }
 
     /***
@@ -122,7 +122,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void click(Region region, Pattern pattern) throws Exception {
-        superAction(Action.CLICK, true, region, pattern, null, 0);
+        superAction(UiAction.CLICK, true, region, pattern, null, 0);
     }
 
     /***
@@ -131,7 +131,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void click(String imageFilenamePath) throws Exception {
-        superAction(Action.CLICK, true, createPattern(imageFilenamePath, 0, 0, 0), null, 0);
+        superAction(UiAction.CLICK, true, createPattern(imageFilenamePath, 0, 0, 0), null, 0);
     }
 
     /***
@@ -142,7 +142,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void click(String imageFilenamePath, int xCoordinate, int yCoordinate) throws Exception {
-        superAction(Action.CLICK, true, createPattern(imageFilenamePath, xCoordinate, yCoordinate, 0), null, 0);
+        superAction(UiAction.CLICK, true, createPattern(imageFilenamePath, xCoordinate, yCoordinate, 0), null, 0);
     }
 
     /***
@@ -154,7 +154,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void click(String imageFilenamePath, int xCoordinate, int yCoordinate, float similarity) throws Exception {
-        superAction(Action.CLICK, true, createPattern(imageFilenamePath, xCoordinate, yCoordinate, similarity), null, 0);
+        superAction(UiAction.CLICK, true, createPattern(imageFilenamePath, xCoordinate, yCoordinate, similarity), null, 0);
     }
 
     /***
@@ -166,7 +166,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void rightClick(String imageFilenamePath, int xCoordinate, int yCoordinate, float similarity) throws Exception {
-        superAction(Action.CLICK, false, createPattern(imageFilenamePath, xCoordinate, yCoordinate, similarity), null, 0);
+        superAction(UiAction.CLICK, false, createPattern(imageFilenamePath, xCoordinate, yCoordinate, similarity), null, 0);
     }
 
     /***
@@ -175,7 +175,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void rightClick(Pattern pattern) throws Exception {
-        superAction(Action.CLICK, false, pattern, null, 0);
+        superAction(UiAction.CLICK, false, pattern, null, 0);
     }
 
     /***
@@ -184,7 +184,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void rightClick(String imageFilenamePath) throws Exception {
-        superAction(Action.CLICK, false, createPattern(imageFilenamePath, 0, 0, 0), null, 0);
+        superAction(UiAction.CLICK, false, createPattern(imageFilenamePath, 0, 0, 0), null, 0);
     }
 
     /***
@@ -195,7 +195,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void rightClick(String imageFilenamePath, int xCoordinate, int yCoordinate) throws Exception {
-        superAction(Action.CLICK, false, createPattern(imageFilenamePath, xCoordinate, yCoordinate, 0), null, 0);
+        superAction(UiAction.CLICK, false, createPattern(imageFilenamePath, xCoordinate, yCoordinate, 0), null, 0);
     }
 
     /***
@@ -204,7 +204,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void doubleClick(Pattern pattern) throws Exception {
-        superAction(Action.DOUBLE_CLICK, true, pattern, null, 0);
+        superAction(UiAction.DOUBLE_CLICK, true, pattern, null, 0);
     }
 
     /***
@@ -213,7 +213,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void doubleClick(String imageFilenamePath) throws Exception {
-        superAction(Action.DOUBLE_CLICK, true, createPattern(imageFilenamePath, 0, 0, 0), null, 0);
+        superAction(UiAction.DOUBLE_CLICK, true, createPattern(imageFilenamePath, 0, 0, 0), null, 0);
     }
 
     /***
@@ -224,7 +224,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void doubleClick(String imageFilenamePath, int xCoordinate, int yCoordinate) throws Exception {
-        superAction(Action.DOUBLE_CLICK, true, createPattern(imageFilenamePath, xCoordinate, yCoordinate, 0), null, 0);
+        superAction(UiAction.DOUBLE_CLICK, true, createPattern(imageFilenamePath, xCoordinate, yCoordinate, 0), null, 0);
     }
 
     /***
@@ -236,7 +236,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void doubleClick(String imageFilenamePath, int xCoordinate, int yCoordinate, float similarity) throws Exception {
-        superAction(Action.DOUBLE_CLICK, true, createPattern(imageFilenamePath, xCoordinate, yCoordinate, similarity), null, 0);
+        superAction(UiAction.DOUBLE_CLICK, true, createPattern(imageFilenamePath, xCoordinate, yCoordinate, similarity), null, 0);
     }
 
     /***
@@ -343,7 +343,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public Match find(String imageFilenamePath) throws Exception {
-        return (Match) superAction(Action.FIND, false, createPattern(imageFilenamePath, 0, 0, 0), null, 0);
+        return (Match) superAction(UiAction.FIND, false, createPattern(imageFilenamePath, 0, 0, 0), null, 0);
     }
 
     /**
@@ -354,7 +354,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public Match find(Pattern pattern) throws Exception {
-        return (Match) superAction(Action.FIND, false, pattern, null, 0);
+        return (Match) superAction(UiAction.FIND, false, pattern, null, 0);
     }
 
     /***
@@ -365,7 +365,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public Match find(String imageFilenamePath, float similarity) throws Exception {
-        return (Match) superAction(Action.FIND, false, createPattern(imageFilenamePath, 0, 0, similarity), null, 0);
+        return (Match) superAction(UiAction.FIND, false, createPattern(imageFilenamePath, 0, 0, similarity), null, 0);
     }
 
     /***
@@ -375,7 +375,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void waitPatternExists(Pattern pattern, double timeoutSec) throws Exception {
-        superAction(Action.WAIT_FOR, false, pattern, null, timeoutSec);
+        superAction(UiAction.WAIT_FOR, false, pattern, null, timeoutSec);
     }
 
     /***
@@ -396,7 +396,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void waitPatternExists(String imageFilenamePath, float similarity, double timeoutSec) throws Exception {
-        superAction(Action.WAIT_FOR, false, createPattern(imageFilenamePath, 0, 0, similarity), null, timeoutSec);
+        superAction(UiAction.WAIT_FOR, false, createPattern(imageFilenamePath, 0, 0, similarity), null, timeoutSec);
     }
 
     /***
@@ -665,7 +665,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void dragAndDrop(String sourceImageFullFilename, String destinationImageFullFilename) throws Exception {
-        superAction(Action.DRAG_AND_DROP, false, createPattern(sourceImageFullFilename, 0, 0, 0), createPattern(destinationImageFullFilename, 0, 0, 0), 0);
+        superAction(UiAction.DRAG_AND_DROP, false, createPattern(sourceImageFullFilename, 0, 0, 0), createPattern(destinationImageFullFilename, 0, 0, 0), 0);
     }
 
     /**
@@ -676,7 +676,7 @@ public class DesktopAutomationHelper {
      * @throws Exception
      */
     public void dragAndDrop(Pattern source, Pattern destination) throws Exception {
-        superAction(Action.DRAG_AND_DROP, false, source, destination, 0);
+        superAction(UiAction.DRAG_AND_DROP, false, source, destination, 0);
     }
 
     /***
@@ -765,7 +765,7 @@ public class DesktopAutomationHelper {
 
     /***
      * This is the main action for the some of the most important features of SikuliX API. Use it for screen actions.
-     * @param action: It's what should be done.
+     * @param uiAction: It's what should be done.
      * @param isLeftClick: Use false for right click.
      * @param pattern1: The main pattern that will be receive an action.
      * @param pattern2: Only for drag and drop. The pattern where an item will be dropped into. Leave null for other actions.
@@ -773,13 +773,13 @@ public class DesktopAutomationHelper {
      * @return Usually null, but just for Find it might return a MATCH.
      * @throws Exception
      */
-    private Object superAction(Action action, boolean isLeftClick, Pattern pattern1, Pattern pattern2, double timeoutSec) throws Exception {
-        return superAction(action, isLeftClick, null, pattern1, pattern2, timeoutSec);
+    private Object superAction(UiAction uiAction, boolean isLeftClick, Pattern pattern1, Pattern pattern2, double timeoutSec) throws Exception {
+        return superAction(uiAction, isLeftClick, null, pattern1, pattern2, timeoutSec);
     }
 
     /***
      * This is the main action for the some of the most important features of SikuliX API. Use it for screen or region actions.
-     * @param action: It's what should be done.
+     * @param uiAction: It's what should be done.
      * @param isLeftClick: Use false for right click.
      * @param region: A screen region.
      * @param pattern1: The main pattern that will be receive an action.
@@ -788,14 +788,14 @@ public class DesktopAutomationHelper {
      * @return Usually null, but just for Find it might return a MATCH.
      * @throws Exception
      */
-    private Object superAction(Action action, boolean isLeftClick, Region region, Pattern pattern1, Pattern pattern2, double timeoutSec) throws Exception {
+    private Object superAction(UiAction uiAction, boolean isLeftClick, Region region, Pattern pattern1, Pattern pattern2, double timeoutSec) throws Exception {
         String mainImagePath = pattern1.getImage().getName();
         String mainImageOffset = pattern1.getTargetOffset().toString();
         String mainImageSimilarity = String.valueOf(pattern1.getSimilar());
 
-        switch (action) {
+        switch (uiAction) {
             case CLICK:
-                testLog.logIt(String.format(SINGLE_DOUBLE_CLICK_LOG, action.toString(), mainImagePath, mainImageOffset, mainImageSimilarity));
+                testLog.logIt(String.format(SINGLE_DOUBLE_CLICK_LOG, uiAction.toString(), mainImagePath, mainImageOffset, mainImageSimilarity));
                 if (isLeftClick) {
                     if (region == null) {
                         screen.click(pattern1);
@@ -814,7 +814,7 @@ public class DesktopAutomationHelper {
                 break;
 
             case DOUBLE_CLICK:
-                testLog.logIt(String.format(SINGLE_DOUBLE_CLICK_LOG, action.toString(), mainImagePath, mainImageOffset, mainImageSimilarity));
+                testLog.logIt(String.format(SINGLE_DOUBLE_CLICK_LOG, uiAction.toString(), mainImagePath, mainImageOffset, mainImageSimilarity));
                 if (region == null) {
                     screen.doubleClick(pattern1);
                 } else {
@@ -825,12 +825,12 @@ public class DesktopAutomationHelper {
                 break;
 
             case DRAG_AND_DROP:
-                testLog.logIt(String.format(DRAG_AND_DROP_LOG, action.toString(), pattern1.getFilename(), pattern2.getFilename()));
+                testLog.logIt(String.format(DRAG_AND_DROP_LOG, uiAction.toString(), pattern1.getFilename(), pattern2.getFilename()));
                 this.screen.dragDrop(pattern1, pattern2);
                 break;
 
             case FIND:
-                testLog.logIt(String.format(FIND_LOG, action.toString(), mainImagePath, mainImageSimilarity));
+                testLog.logIt(String.format(FIND_LOG, uiAction.toString(), mainImagePath, mainImageSimilarity));
                 if (region == null) {
                     try {
                         return screen.find(pattern1);
@@ -852,7 +852,7 @@ public class DesktopAutomationHelper {
                 }
 
             case WAIT_FOR:
-                testLog.logIt(String.format(WAIT_EXISTS_LOG, action.toString(), mainImagePath, mainImageSimilarity, String.valueOf(timeoutSec)));
+                testLog.logIt(String.format(WAIT_EXISTS_LOG, uiAction.toString(), mainImagePath, mainImageSimilarity, String.valueOf(timeoutSec)));
                 if (region == null) {
                     screen.wait(pattern1, timeoutSec);
                 } else {
@@ -861,7 +861,7 @@ public class DesktopAutomationHelper {
                 break;
 
             default:
-                throw new Exception(String.format("The action %1$s is not supported by SuperAction method yet!", action.toString()));
+                throw new Exception(String.format("The action %1$s is not supported by SuperAction method yet!", uiAction.toString()));
         }
         return null;
     }

@@ -1,4 +1,4 @@
-package com.github.jeansantos38.stf.framework.desktop;
+package com.github.jeansantos38.stf.framework.ui;
 
 import com.github.jeansantos38.stf.data.classes.ui.Details;
 import com.github.jeansantos38.stf.data.classes.ui.Element;
