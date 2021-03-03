@@ -13,7 +13,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import system.base.MainTestBase;
 import system.pojo.NoteDemoClass;
-import system.pojo.Book;
 
 import java.io.File;
 import java.lang.String;

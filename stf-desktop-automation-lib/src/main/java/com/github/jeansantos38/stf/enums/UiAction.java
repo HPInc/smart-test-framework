@@ -1,4 +1,4 @@
-package com.github.jeansantos38.stf.dataclasses.web.datadriven;
+package com.github.jeansantos38.stf.enums;
 
 /************************************************************
  *  © Copyright 2019 HP Development Company, L.P.
@@ -6,7 +6,6 @@ package com.github.jeansantos38.stf.dataclasses.web.datadriven;
  *
  *  Smart Test Framework
  ************************************************************/
-
-public class DataDrivenNavigator {
-    public MasterImageDetails[] MasterImageDetails;
+public enum UiAction {
+    CLICK, DOUBLE_CLICK, TRIPLE_CLICK, DRAG_AND_DROP, FIND, WAIT_FOR, EXISTS
 }

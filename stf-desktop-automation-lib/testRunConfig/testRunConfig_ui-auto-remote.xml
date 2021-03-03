@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="STF_DESKTOP-AUTOMATION_TEST_SUITE">
+
+    <!--*************************************[TEST CASES AREA]*************************************-->
+    <!--Global parameter-->
+    <parameter name="optionalGlobalParameterExample" value="valueGotFromGlobalParam"/>
+
+    <test name="Ui-Automation-Remote_Test-Set">
+        <parameter name="_isVncScreen" value="true"/>
+        <parameter name="_vmManagerBinPath" value="C:\Program Files\Oracle\VirtualBox\VBoxManage.exe"/>
+        <parameter name="_vmName" value="Windows 10 base"/>
+        <parameter name="_vmSnapshotName" value="Snapshot 2"/>
+        <parameter name="_vncServerIpAddress" value="192.168.0.48"/>
+        <parameter name="_vncServerPort" value="5900"/>
+        <parameter name="_vncServerPassword" value="Abc123*"/>
+        <parameter name="_connectionTimeoutSec" value="15"/>
+        <parameter name="_operationTimeoutMs" value="3000"/>
+        <classes>
+            <class name="system.test.UiAutomationGeneric"/>
+        </classes>
+    </test>
+</suite>

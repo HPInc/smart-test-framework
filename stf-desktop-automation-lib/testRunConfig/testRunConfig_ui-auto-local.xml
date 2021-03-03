@@ -6,9 +6,11 @@
     <!--Global parameter-->
     <parameter name="optionalGlobalParameterExample" value="valueGotFromGlobalParam"/>
 
-    <test name="Desktop-Automation-Helpers_Test-Set">
+    <parameter name="_popUpDuringTest" value="true"/>
+
+    <test name="Ui-Automation-Local_Test-Set">
         <classes>
-            <class name="system.test.DesktopAutomation"/>
+            <class name="system.test.UiAutomationGeneric"/>
         </classes>
     </test>
 </suite>

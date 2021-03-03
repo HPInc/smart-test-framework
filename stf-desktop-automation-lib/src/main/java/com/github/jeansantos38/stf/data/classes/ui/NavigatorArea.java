@@ -1,4 +1,4 @@
-package com.github.jeansantos38.stf.dataclasses.web.datadriven;
+package com.github.jeansantos38.stf.data.classes.ui;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -10,10 +10,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  ************************************************************/
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MasterImageDetails {
+public class NavigatorArea {
     public String areaId;
-    public Elements[] elements;
-
-    public MasterImageDetails() {
+    public Element[] elements;
+    public NavigatorArea() {
     }
 }

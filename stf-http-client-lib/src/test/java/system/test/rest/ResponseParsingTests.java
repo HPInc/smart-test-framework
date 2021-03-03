@@ -12,7 +12,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import system.test.base.HttpClientTestBase;
-import system.test.pojo.Book;
 import system.test.pojo.BooksStore;
 
 

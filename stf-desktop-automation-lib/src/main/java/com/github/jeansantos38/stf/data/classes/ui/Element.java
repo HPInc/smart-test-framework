@@ -1,4 +1,4 @@
-package com.github.jeansantos38.stf.dataclasses.web.datadriven;
+package com.github.jeansantos38.stf.data.classes.ui;
 
 /************************************************************
  *  © Copyright 2019 HP Development Company, L.P.
@@ -7,9 +7,8 @@ package com.github.jeansantos38.stf.dataclasses.web.datadriven;
  *  Smart Test Framework
  ************************************************************/
 
-public class Elements {
-    public Element element;
-
-    public Elements() {
+public class Element {
+    public Details details;
+    public Element() {
     }
 }
