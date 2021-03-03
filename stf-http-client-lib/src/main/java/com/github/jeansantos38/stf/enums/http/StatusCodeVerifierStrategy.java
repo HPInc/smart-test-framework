@@ -1,4 +1,4 @@
-package com.github.jeansantos38.stf.enums.http;
+package com.github.jeansantos38.stf.enums.ui.http;
 
 /************************************************************
  *  © Copyright 2019 HP Development Company, L.P.
@@ -6,6 +6,7 @@ package com.github.jeansantos38.stf.enums.http;
  *
  *  Smart Test Framework
  ************************************************************/
-public enum HttpRequestMethod {
-    GET, POST, PUT, OPTIONS, DELETE, PATCH, HEAD, TRACE
+
+public enum StatusCodeVerifierStrategy {
+    EXPECTED_STATUS_CODE, LIST_OF_POSSIBLE_STATUS_CODES, REGEX_FOR_POSSIBLE_STATUS_CODES
 }

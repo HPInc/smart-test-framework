@@ -1,4 +1,4 @@
-package com.github.jeansantos38.stf.enums.webdriver;
+package com.github.jeansantos38.stf.enums.ui.serialization;
 
 /************************************************************
  *  © Copyright 2019 HP Development Company, L.P.
@@ -6,6 +6,6 @@ package com.github.jeansantos38.stf.enums.webdriver;
  *
  *  Smart Test Framework
  ************************************************************/
-public enum SelectorType {
-    BY_ID, BY_XPATH, BY_CLASS_NAME, BY_CSS, BY_NAME, BY_TAG_NAME, BY_LINK, BY_PARTIAL_LINK
+public enum SerializationType {
+    JSON, XML, YAML
 }
