@@ -98,7 +98,6 @@ public class UiAutomationHelper {
         return superExists(false, null, uiElement, false, timeoutMs);
     }
 
-
     /***
      * Helper that takes a screenshot from a given region.
      * @param region: A screen region.
@@ -124,6 +123,29 @@ public class UiAutomationHelper {
         return String.format("%s/%s", path, filename);
     }
 
+    protected void waitVanishes(UiElement uiElement, double timeoutSec, boolean abortOnAssertionFailure) throws Exception {
+        Pattern pattern = createPattern(uiElement);
+        boolean vanished = !uiElement.isVncScreen() ? uiElement.getScreen().waitVanish(pattern, timeoutSec) : uiElement.getVncScreen().waitVanish(pattern, timeoutSec);
+        if (abortOnAssertionFailure && !vanished) {
+            highlight(uiElement, pattern);
+            throw new Exception("The pattern did not vanished!");
+        }
+    }
+
+    protected void waitExists(UiElement uiElement, double timeoutSec, boolean abortOnAssertionFailure) throws Exception {
+        Pattern pattern = createPattern(uiElement);
+        try {
+            if (!uiElement.isVncScreen()) {
+                uiElement.getScreen().wait(pattern, timeoutSec);
+            } else {
+                uiElement.getVncScreen().wait(pattern, timeoutSec);
+            }
+            highlight(uiElement, pattern);
+        } catch (Exception e) {
+            if (abortOnAssertionFailure)
+                throw e;
+        }
+    }
 
     protected Region createRegionFromReferencePattern(UiElement uiElement) throws Exception {
         Match patternMatch = find(uiElement);
@@ -149,20 +171,28 @@ public class UiAutomationHelper {
     }
 
     protected Match find(UiElement uiElement) throws Exception {
-        Pattern pattern = createPattern(uiElement);
+        return find(uiElement, null);
+    }
+
+    protected Match find(UiElement uiElement, Pattern pattern) throws Exception {
+        Pattern tempPattern = pattern == null ? createPattern(uiElement) : pattern;
         try {
             if (uiElement.getMatch() == null) {
-                uiElement.setMatch(!uiElement.isVncScreen() ? uiElement.getScreen().find(pattern) : uiElement.getVncScreen().find(pattern));
+                uiElement.setMatch(!uiElement.isVncScreen() ? uiElement.getScreen().find(tempPattern) : uiElement.getVncScreen().find(tempPattern));
             }
             highlight(uiElement, uiElement.getMatch());
             return uiElement.getMatch();
         } catch (Exception e) {
             if (uiElement.takeScreenshotWhenFail()) {
                 uiElement.getTestLog().logIt(String.format("The pattern was not found! ###The expected master is:[%1$s] ### It was not found at: [%2$s]",
-                        pattern.getFilename(), UiAutomationUtils.saveDesktopScreenshot(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(), uiElement.getFolderPathToSaveScreenshots())));
+                        tempPattern.getFilename(), UiAutomationUtils.saveDesktopScreenshot(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(), uiElement.getFolderPathToSaveScreenshots())));
             }
             throw new Exception(e);
         }
+    }
+
+    private void highlight(UiElement uiElement, Pattern pattern) throws Exception {
+        highlight(uiElement, find(uiElement, pattern));
     }
 
     private void highlight(UiElement uiElement, Region region) {
@@ -258,7 +288,6 @@ public class UiAutomationHelper {
 
     private Pattern createPattern(UiElement uiElement) {
         Pattern pattern = new Pattern(uiElement.getDetails().imagePath);
-
         pattern.similar(uiElement.getDetails().similarity);
         pattern.targetOffset(uiElement.getDetails().xCoordinate, uiElement.getDetails().yCoordinate);
         return pattern;

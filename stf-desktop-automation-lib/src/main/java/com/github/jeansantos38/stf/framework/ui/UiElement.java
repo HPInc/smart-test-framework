@@ -200,9 +200,26 @@ public class UiElement extends UiAutomationHelper {
         return referenceAreaHasPattern(this, pattern);
     }
 
+    public void waitVanishes(double timeoutSec) throws Exception {
+        waitVanishes(this, timeoutSec, true);
+    }
+
+    public void waitVanishes(double timeoutSec, boolean abortOnAssertionFailure) throws Exception {
+        waitVanishes(this, timeoutSec, abortOnAssertionFailure);
+    }
+
+    public void waitExists(double timeoutSec) throws Exception {
+        waitExists(this, timeoutSec, true);
+    }
+
+    public void waitExists(double timeoutSec, boolean abortOnAssertionFailure) throws Exception {
+        waitExists(this, timeoutSec, abortOnAssertionFailure);
+    }
+
     public void assertRegionContainsPattern(UiElement pattern) throws Exception {
         Assert.assertTrue(regionContainsPattern(pattern), LogMessages.ERROR_PATTERN_NOT_FOUND_IN_REGION);
     }
+
 
     public void assertRegionNotContainsPattern(UiElement pattern) throws Exception {
         Assert.assertFalse(regionContainsPattern(pattern), LogMessages.ERROR_PATTERN_FOUND_IN_REGION);

@@ -48,7 +48,6 @@ public class UiAutomationVnc extends UiAutomationTestBase {
 
     @Test
     public void radioButtonTest() throws Exception {
-
         uiAutomationDriver.type("UHUM SEI");
         uiAutomationDriver.takeScreenshot();
         uiAutomationDriver.buildPatternFromNavigator(stfNavigator, "mainScreen", "x_close_btn").click();

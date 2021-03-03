@@ -7,9 +7,6 @@
     <parameter name="optionalGlobalParameterExample" value="valueGotFromGlobalParam"/>
 
     <test name="Ui-Automation-Local_Test-Set">
-        <parameter name="_vmManagerBinPath" value="C:\Program Files\Oracle\VirtualBox\VBoxManage.exe"/>
-        <parameter name="_vmName" value="Windows 10 base"/>
-        <parameter name="_vmSnapshotName" value="Snapshot 1"/>
         <classes>
             <class name="system.test.UiAutomationGeneric"/>
         </classes>
