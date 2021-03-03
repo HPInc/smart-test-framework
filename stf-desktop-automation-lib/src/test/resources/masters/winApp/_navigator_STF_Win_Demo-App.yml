@@ -9,6 +9,12 @@ navigatorAreas:
           similarity: 0.9
           imagePath: stfShortcutIcon.png
       - details:
+          selector: nonExistentRedDice
+          ctrlType: picture
+          interactionType: direct
+          similarity: 0.9
+          imagePath: notExistentPattern.png
+      - details:
           selector: innerIco
           similarity: 0.8
           imagePath: stf_ico.png
@@ -41,7 +47,7 @@ navigatorAreas:
           ctrlType: picture
           interactionType: direct
           similarity: 0.9
-          imagePath: trackbarPointer.png.png
+          imagePath: trackbarPointer.png
   - areaId: mainScreen
     elements:
       - details:
@@ -115,6 +121,10 @@ navigatorAreas:
           interactionType: indirect
           xCoordinate: 299
           yCoordinate: 144
+          regionTopLeftX: 17
+          regionTopLeftY: 131
+          regionBottomRightX: 49
+          regionBottomRightY: 147
           similarity: 0.7
           imagePath: stf_ico.png
           shortcuts: []
@@ -251,7 +261,11 @@ navigatorAreas:
           interactionType: indirect
           xCoordinate: 177
           yCoordinate: 333
-          similarity: 0.7
+          regionTopLeftX: 164
+          regionTopLeftY: 318
+          regionBottomRightX: 190
+          regionBottomRightY: 350
+          similarity: 0.9
           imagePath: stf_ico.png
           shortcuts: []
       - details:
