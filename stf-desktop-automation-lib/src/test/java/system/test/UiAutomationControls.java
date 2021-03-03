@@ -156,7 +156,7 @@ public class UiAutomationControls extends UiAutomationTestBase {
         textBox1.assertContainsTextViaClipboard("");
         textBox1.paste(textToBePasted);
         textBox1.assertContainsTextViaClipboard(textToBePasted);
-        Assert.assertEquals(textToBePasted, textBox1.extractTextViaClipboard());
+        Assert.assertEquals(textBox1.extractTextViaClipboard(), textToBePasted);
         try {
             //Negative check 1
             textBox1.assertContainsTextViaClipboard(textToBePasted + "A");
@@ -211,6 +211,26 @@ public class UiAutomationControls extends UiAutomationTestBase {
         } catch (AssertionError error) {
             Assert.assertTrue(error.getMessage().contains(LogMessages.ERROR_TEXT_NOT_FOUND_VIA_OCR));
         }
+    }
+
+    @Test
+    public void clearTextBoxAndPasteTest() throws Exception {
+        String textToBePasted = "Value pasted from clipboard!";
+        UiElement textBox1 = uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "textBox1Region");
+        textBox1.paste(textToBePasted);
+        textBox1.assertContainsTextViaClipboard(textToBePasted + "textbox1");
+        textBox1.clearAndPaste(textToBePasted);
+        textBox1.assertContainsTextViaClipboard(textToBePasted);
+    }
+
+    @Test
+    public void clearTextBoxAndTypeTest() throws Exception {
+        String textToBePasted = "Value pasted from clipboard!";
+        UiElement textBox1 = uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "textBox1Region");
+        textBox1.type(textToBePasted);
+        textBox1.assertContainsTextViaClipboard(textToBePasted + "textbox1");
+        textBox1.clearAndType(textToBePasted);
+        textBox1.assertContainsTextViaClipboard(textToBePasted);
     }
 
     @Test
