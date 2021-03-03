@@ -1,6 +1,6 @@
 package com.github.jeansantos38.stf.framework.ui;
 
-import com.github.jeansantos38.stf.contants.ui.Logs;
+import com.github.jeansantos38.stf.contants.ui.LogMessages;
 import com.github.jeansantos38.stf.data.classes.ui.Details;
 import com.github.jeansantos38.stf.framework.logger.TestLog;
 import com.github.jeansantos38.stf.framework.wait.WaitHelper;
@@ -65,11 +65,11 @@ public class UiElement extends UiAutomationHelper {
     }
 
     public String get_NOT_VISIBLE_ASSERT_MSG() {
-        return Logs.NOT_VISIBLE_ASSERT_MSG;
+        return LogMessages.NOT_VISIBLE_ASSERT_MSG;
     }
 
     public String get_STILL_VISIBLE_ASSERT_MSG() {
-        return Logs.STILL_VISIBLE_ASSERT_MSG;
+        return LogMessages.STILL_VISIBLE_ASSERT_MSG;
     }
 
     public Screen getScreen() {
@@ -164,20 +164,20 @@ public class UiElement extends UiAutomationHelper {
 
     public void assertContainsTextViaOCR(String text) throws Exception {
         String current = extractTextFromRegionViaOCR(this);
-        Assert.assertTrue(current.contains(text), Logs.ERROR_TEXT_NOT_FOUND_VIA_OCR + String.format(Logs.ERROR_SUFFIX_EXPECTED_ACTUAL, text, current));
+        Assert.assertTrue(current.contains(text), LogMessages.ERROR_TEXT_NOT_FOUND_VIA_OCR + String.format(LogMessages.ERROR_SUFFIX_EXPECTED_ACTUAL, text, current));
     }
 
     public void assertContainsTextViaClipboard(String text) throws Exception {
         String current = extractTextViaClipboard();
-        Assert.assertTrue(current.contains(text), Logs.ERROR_TEXT_NOT_FOUND_VIA_CLIPBOARD + String.format(Logs.ERROR_SUFFIX_EXPECTED_ACTUAL, text, current));
+        Assert.assertTrue(current.contains(text), LogMessages.ERROR_TEXT_NOT_FOUND_VIA_CLIPBOARD + String.format(LogMessages.ERROR_SUFFIX_EXPECTED_ACTUAL, text, current));
     }
 
     public void assertVisible(int waitMs) throws IOException, FindFailed {
-        Assert.assertTrue(exists(this, waitMs), Logs.NOT_VISIBLE_ASSERT_MSG);
+        Assert.assertTrue(exists(this, waitMs), LogMessages.NOT_VISIBLE_ASSERT_MSG);
     }
 
     public void assertVisible() throws Exception {
-        Assert.assertTrue(exists(this), Logs.NOT_VISIBLE_ASSERT_MSG);
+        Assert.assertTrue(exists(this), LogMessages.NOT_VISIBLE_ASSERT_MSG);
     }
 
     public void multipleLeftClicks(int howMany) throws InterruptedException, FindFailed {
@@ -189,7 +189,7 @@ public class UiElement extends UiAutomationHelper {
     }
 
     public void assertNotVisible(int waitMs) throws Exception {
-        Assert.assertFalse(exists(this, waitMs, true), Logs.STILL_VISIBLE_ASSERT_MSG);
+        Assert.assertFalse(exists(this, waitMs, true), LogMessages.STILL_VISIBLE_ASSERT_MSG);
     }
 
     public void initializeMatch() throws Exception {
@@ -201,15 +201,15 @@ public class UiElement extends UiAutomationHelper {
     }
 
     public void assertRegionContainsPattern(UiElement pattern) throws Exception {
-        Assert.assertTrue(regionContainsPattern(pattern), Logs.ERROR_PATTERN_NOT_FOUND_IN_REGION);
+        Assert.assertTrue(regionContainsPattern(pattern), LogMessages.ERROR_PATTERN_NOT_FOUND_IN_REGION);
     }
 
     public void assertRegionNotContainsPattern(UiElement pattern) throws Exception {
-        Assert.assertFalse(regionContainsPattern(pattern), Logs.ERROR_PATTERN_FOUND_IN_REGION);
+        Assert.assertFalse(regionContainsPattern(pattern), LogMessages.ERROR_PATTERN_FOUND_IN_REGION);
     }
 
     public void assertNotVisible() throws Exception {
-        Assert.assertFalse(exists(this, 0, true), Logs.STILL_VISIBLE_ASSERT_MSG);
+        Assert.assertFalse(exists(this, 0, true), LogMessages.STILL_VISIBLE_ASSERT_MSG);
     }
 
     private void checkScreenType(Object screen) {

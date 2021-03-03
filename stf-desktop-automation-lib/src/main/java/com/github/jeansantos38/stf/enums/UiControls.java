@@ -1,4 +1,4 @@
-package com.github.jeansantos38.stf.contants.ui;
+package com.github.jeansantos38.stf.enums;
 
 public enum UiControls {
     REGION,

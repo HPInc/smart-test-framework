@@ -4,7 +4,7 @@ package com.github.jeansantos38.stf.framework.ui;
 //import com.github.jeansantos38.stf.dataclasses.web.datadriven.Elements;
 //import com.github.jeansantos38.stf.dataclasses.web.datadriven.NavigatorArea;
 
-import com.github.jeansantos38.stf.contants.ui.UiAction;
+import com.github.jeansantos38.stf.enums.UiAction;
 import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
 import com.github.jeansantos38.stf.framework.logger.TestLog;
 import com.github.jeansantos38.stf.framework.misc.CalendarHelper;

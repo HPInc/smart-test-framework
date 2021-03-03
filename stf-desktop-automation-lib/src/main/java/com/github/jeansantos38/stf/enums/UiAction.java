@@ -1,4 +1,4 @@
-package com.github.jeansantos38.stf.contants.ui;
+package com.github.jeansantos38.stf.enums;
 
 /************************************************************
  *  © Copyright 2019 HP Development Company, L.P.

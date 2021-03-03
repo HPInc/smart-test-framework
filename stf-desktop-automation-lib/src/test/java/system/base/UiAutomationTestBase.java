@@ -1,7 +1,6 @@
 package system.base;
 
 import com.github.jeansantos38.stf.enums.wait.ThreadWait;
-import org.testng.annotations.Optional;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package system.test;
 
-import com.github.jeansantos38.stf.framework.desktop.UiAutomationDriver;
-import com.github.jeansantos38.stf.framework.desktop.UiElement;
+import com.github.jeansantos38.stf.framework.ui.UiAutomationDriver;
+import com.github.jeansantos38.stf.framework.ui.UiElement;
 import org.sikuli.hotkey.Keys;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Screen;

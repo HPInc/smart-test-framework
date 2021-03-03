@@ -1,6 +1,6 @@
 package com.github.jeansantos38.stf.contants.ui;
 
-public class Logs {
+public class LogMessages {
 
     public static final String ERROR_PATTERN_NOT_FOUND_IN_REGION = "The expected pattern ***was not found*** inside the requested region\\area";
     public static final String ERROR_PATTERN_FOUND_IN_REGION = "The expected pattern ***was found*** inside the requested region\\area.";
