@@ -1,11 +1,11 @@
-package com.github.jeansantos38.stf.framework.desktop;
+package com.github.jeansantos38.stf.framework.ui;
 
 
 public class UiVisualFeedback {
 
     boolean enableHighlight;
 
-    public boolean isEnableHighlight() {
+    public boolean highlightEnabled() {
         return enableHighlight;
     }
 
@@ -14,47 +14,48 @@ public class UiVisualFeedback {
     }
 
     String masterHighlightColor;
-    String relAreaHighlightColor;
-    double masterHighlightTimeSec;
-    double relAreaHighlightTimeSec;
+    String coordinateHighlightColor;
+    String areaHighlightColor;
+    double highlightTimeSec;
     int relHighlightH;
     int relHighlightW;
-    final int HIGHLIGHT_H_W_DEFAULT = 5;
 
     public UiVisualFeedback() {
-        this(true, "yellow", "red", 0.5, 0.5, 0, 0);
+        this(true, "green", "red", "blue", 0.2, 0, 0);
     }
 
     public UiVisualFeedback(
             String masterHighlightColor,
-            String relAreaHighlightColor) {
-        this(true, masterHighlightColor, relAreaHighlightColor, 0.5, 0.5, 0, 0);
+            String coordinateHighlightColor,
+            String areaHighlightColor) {
+        this(true, masterHighlightColor, coordinateHighlightColor, areaHighlightColor, 0.2, 0, 0);
 
     }
 
     public UiVisualFeedback(
             String masterHighlightColor,
-            String relAreaHighlightColor,
-            double masterHighlightTimeSec,
-            double relAreaHighlightTimeSec) {
-        this(true, masterHighlightColor, relAreaHighlightColor, masterHighlightTimeSec, relAreaHighlightTimeSec, 0, 0);
+            String coordinateHighlightColor,
+            String areaHighlightColor,
+            double highlightTimeSec) {
+        this(true, masterHighlightColor, coordinateHighlightColor, areaHighlightColor, highlightTimeSec, 0, 0);
 
     }
 
     public UiVisualFeedback(
             boolean enableHighlight,
             String masterHighlightColor,
-            String relAreaHighlightColor,
-            double masterHighlightTimeSec,
-            double relAreaHighlightTimeSec,
+            String coordinateHighlightColor,
+            String areaHighlightColor,
+            double highlightTimeSec,
             int relHighlightH,
             int relHighlightW) {
         this.enableHighlight = enableHighlight;
         this.masterHighlightColor = masterHighlightColor;
-        this.relAreaHighlightColor = relAreaHighlightColor;
-        this.masterHighlightTimeSec = masterHighlightTimeSec;
-        this.relAreaHighlightTimeSec = relAreaHighlightTimeSec;
-        this.relHighlightH = relHighlightH == 0 ? HIGHLIGHT_H_W_DEFAULT : relHighlightH;
-        this.relHighlightW = relHighlightW == 0 ? HIGHLIGHT_H_W_DEFAULT : relHighlightW;
+        this.coordinateHighlightColor = coordinateHighlightColor;
+        this.areaHighlightColor = areaHighlightColor;
+        this.highlightTimeSec = highlightTimeSec;
+        int HIGHLIGHT_DEFAULT_SIZE = 1;
+        this.relHighlightH = relHighlightH == 0 ? HIGHLIGHT_DEFAULT_SIZE : relHighlightH;
+        this.relHighlightW = relHighlightW == 0 ? HIGHLIGHT_DEFAULT_SIZE : relHighlightW;
     }
 }
