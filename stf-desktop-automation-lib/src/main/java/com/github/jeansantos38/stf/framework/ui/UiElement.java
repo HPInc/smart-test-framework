@@ -139,6 +139,18 @@ public class UiElement extends UiAutomationHelper {
         dragAndDrop(this, destination);
     }
 
+    public void clearAndType(String content) throws Exception {
+        click();
+        clearText();
+        type(this, content);
+    }
+
+    public void clearAndPaste(String content) throws Exception {
+        click();
+        clearText();
+        paste(this, content);
+    }
+
     public void type(String content) throws Exception {
         click();
         UiAutomationUtils.type(!this.isVncScreen() ? this.getScreen() : this.getVncScreen(), content);
@@ -146,14 +158,13 @@ public class UiElement extends UiAutomationHelper {
 
     public void clearText() throws Exception {
         click();
-        UiAutomationUtils.performKeyCombination(!this.isVncScreen() ? this.getScreen() : this.getVncScreen(), "a", KeyModifier.CTRL);
-        UiAutomationUtils.type(!this.isVncScreen() ? this.getScreen() : this.getVncScreen(), Key.DELETE);
+        performKeyCombination(this, "a", KeyModifier.CTRL);
+        type(this, Key.BACKSPACE);
     }
 
     public String extractTextViaOCR() throws Exception {
         return extractTextFromRegionViaOCR(this);
     }
-
 
     public String extractTextViaClipboard() throws Exception {
         click();

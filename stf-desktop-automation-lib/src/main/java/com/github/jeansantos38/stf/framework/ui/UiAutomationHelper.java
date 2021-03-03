@@ -49,11 +49,8 @@ public class UiAutomationHelper {
         UiAutomationUtils.type(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(), content);
     }
 
-    protected String copyString(UiElement uiElement) throws Exception {
-        doubleClick(uiElement);
-//       return UiAutomationUtils.performKeyCombination(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(),
-//                "c", KeyModifier.CTRL);
-        return "";
+    protected void performKeyCombination(UiElement uiElement, String key, int... modifiers) throws InterruptedException {
+        UiAutomationUtils.performKeyCombination(!uiElement.isVncScreen() ? uiElement.getScreen() : uiElement.getVncScreen(), key, modifiers);
     }
 
     protected void moveCursorOver(UiElement uiElement) throws Exception {
@@ -67,7 +64,6 @@ public class UiAutomationHelper {
 
     protected void doubleClickRegion(UiElement uiElement, Region region) throws FindFailed {
         region.doubleClick(createPattern(uiElement));
-
     }
 
     protected void doubleClick(UiElement uiElement) throws Exception {
