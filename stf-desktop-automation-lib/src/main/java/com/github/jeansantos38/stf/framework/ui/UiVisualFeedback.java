@@ -21,7 +21,7 @@ public class UiVisualFeedback {
     int relHighlightW;
 
     public UiVisualFeedback() {
-        this(true, "green", "red", "blue", 0.2, 0, 0);
+        this(true, "green", "red", "orange", 0.2, 0, 0);
     }
 
     public UiVisualFeedback(
