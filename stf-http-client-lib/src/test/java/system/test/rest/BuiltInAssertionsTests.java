@@ -2,7 +2,6 @@ package system.test.rest;
 
 import com.github.jeansantos38.stf.dataclasses.web.http.HttpDetailedHeader;
 import com.github.jeansantos38.stf.dataclasses.web.http.HttpDetailedResponse;
-import com.github.jeansantos38.stf.enums.http.HttpRequestLogLevel;
 import com.github.jeansantos38.stf.enums.http.HttpRequestMethod;
 import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
 import com.github.tomakehurst.wiremock.WireMockServer;

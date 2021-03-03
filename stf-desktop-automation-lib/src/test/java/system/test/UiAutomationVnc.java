@@ -1,8 +1,8 @@
 package system.test;
 
 import com.github.jeansantos38.stf.enums.wait.ThreadWait;
-import com.github.jeansantos38.stf.framework.desktop.UiAutomationDriver;
-import com.github.jeansantos38.stf.framework.desktop.UiAutomationUtils;
+import com.github.jeansantos38.stf.framework.ui.UiAutomationDriver;
+import com.github.jeansantos38.stf.framework.ui.UiAutomationUtils;
 import org.sikuli.vnc.VNCScreen;
 import org.testng.annotations.*;
 import system.base.UiAutomationTestBase;

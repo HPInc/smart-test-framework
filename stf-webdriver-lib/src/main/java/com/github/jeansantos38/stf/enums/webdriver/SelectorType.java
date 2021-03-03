@@ -1,4 +1,4 @@
-package com.github.jeansantos38.stf.enums.ui.webdriver;
+package com.github.jeansantos38.stf.enums.webdriver;
 
 /************************************************************
  *  © Copyright 2019 HP Development Company, L.P.

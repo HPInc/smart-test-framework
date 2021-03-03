@@ -1,9 +1,9 @@
 package system.test;
 
-import com.github.jeansantos38.stf.framework.desktop.UiAutomationDriver;
-import com.github.jeansantos38.stf.framework.desktop.UiAutomationUtils;
-import com.github.jeansantos38.stf.framework.desktop.UiElement;
-import com.github.jeansantos38.stf.framework.desktop.UiVisualFeedback;
+import com.github.jeansantos38.stf.framework.ui.UiAutomationDriver;
+import com.github.jeansantos38.stf.framework.ui.UiAutomationUtils;
+import com.github.jeansantos38.stf.framework.ui.UiElement;
+import com.github.jeansantos38.stf.framework.ui.UiVisualFeedback;
 import com.github.jeansantos38.stf.framework.misc.RandomValuesHelper;
 import org.sikuli.script.Screen;
 import org.sikuli.vnc.VNCScreen;
@@ -48,7 +48,7 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
         vmName = _vmName;
         vmSnapshotName = _vmSnapshotName;
 
-        UiVisualFeedback uiVisualFeedback = new UiVisualFeedback("green", "red", 0.2, 0.2);
+        UiVisualFeedback uiVisualFeedback = new UiVisualFeedback("green", "red", "blue", 0.2);
         uiVisualFeedback.setEnableHighlight(true);
 
         if (!_isVncScreen) {

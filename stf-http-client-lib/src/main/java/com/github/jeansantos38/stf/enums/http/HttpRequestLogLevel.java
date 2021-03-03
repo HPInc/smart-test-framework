@@ -1,4 +1,4 @@
-package com.github.jeansantos38.stf.enums.ui.http;
+package com.github.jeansantos38.stf.enums.http;
 
 /************************************************************
  *  © Copyright 2019 HP Development Company, L.P.

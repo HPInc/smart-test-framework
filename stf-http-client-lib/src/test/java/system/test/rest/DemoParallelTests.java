@@ -1,12 +1,10 @@
 package system.test.rest;
 
 import com.github.jeansantos38.stf.dataclasses.web.http.HttpDetailedHeader;
-import com.github.jeansantos38.stf.dataclasses.web.http.HttpDetailedResponse;
 import com.github.jeansantos38.stf.enums.http.HttpRequestMethod;
 import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import io.qameta.allure.Description;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import system.test.base.HttpClientTestBase;
