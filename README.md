@@ -305,7 +305,7 @@ public void initialize() throws Exception {
 
 ### DesktopAutomationHelper
 #### First steps:
-This helper `DesktopAutomationHelper.java` can be found in this namespace: `com.github.jeansantos38.stf.framework.desktop`
+This helper `DesktopAutomationHelper.java` can be found in this namespace: `com.github.jeansantos38.stf.framework.ui`
 
 This is how to instantiate **DesktopAutomationHelper**:
 ```java

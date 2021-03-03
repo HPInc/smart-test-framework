@@ -1,4 +1,4 @@
-package com.github.jeansantos38.stf.enums.image;
+package com.github.jeansantos38.stf.enums.ui;
 
 /************************************************************
  *  © Copyright 2019 HP Development Company, L.P.
@@ -7,5 +7,5 @@ package com.github.jeansantos38.stf.enums.image;
  *  Smart Test Framework
  ************************************************************/
 public enum Action {
-    CLICK, DOUBLE_CLICK, DRAG_AND_DROP, FIND, WAIT_FOR
+    CLICK, DOUBLE_CLICK, TRIPLE_CLICK, DRAG_AND_DROP, FIND, WAIT_FOR, EXISTS
 }
