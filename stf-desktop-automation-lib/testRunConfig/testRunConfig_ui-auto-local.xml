@@ -6,6 +6,8 @@
     <!--Global parameter-->
     <parameter name="optionalGlobalParameterExample" value="valueGotFromGlobalParam"/>
 
+    <parameter name="_popUpDuringTest" value="true"/>
+
     <test name="Ui-Automation-Local_Test-Set">
         <classes>
             <class name="system.test.UiAutomationGeneric"/>

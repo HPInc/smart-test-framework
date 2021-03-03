@@ -1,5 +1,6 @@
 package system.test;
 
+import com.github.jeansantos38.stf.framework.misc.VisualWarningsHelper;
 import com.github.jeansantos38.stf.framework.ui.UiAutomationDriver;
 import com.github.jeansantos38.stf.framework.ui.UiAutomationUtils;
 import com.github.jeansantos38.stf.framework.ui.UiElement;
@@ -20,6 +21,8 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
     String vmName;
     String vmSnapshotName;
     boolean isVncScreen;
+    boolean popUpDuringTest;
+
 
     @Parameters({"_isVncScreen",
             "_vmManagerBinPath",
@@ -29,7 +32,8 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
             "_vncServerPort",
             "_vncServerPassword",
             "_connectionTimeoutSec",
-            "_operationTimeoutMs"})
+            "_operationTimeoutMs",
+            "_popUpDuringTest"})
     @BeforeClass
     public void beforeClass(@Optional("false") Boolean _isVncScreen,
                             @Optional("") String _vmManagerBinPath,
@@ -39,7 +43,8 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
                             @Optional("5900") Integer _vncServerPort,
                             @Optional("") String _vncServerPassword,
                             @Optional("15") Integer _connectionTimeoutSec,
-                            @Optional("3000") Integer _operationTimeoutMs) throws Exception {
+                            @Optional("3000") Integer _operationTimeoutMs,
+                            @Optional("false") Boolean _popUpDuringTest) throws Exception {
         navigator = discoverAbsoluteFilePath("masters/winApp/_navigator_STF_Win_Demo-App.yml");
         startVmScript = discoverAbsoluteFilePath("scripts/vBoxStartVmSnapshot.bat");
         endVmScript = discoverAbsoluteFilePath("scripts/vBoxShutdownVmRestoreSnapshot.bat");
@@ -47,6 +52,7 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
         vmManagerBinPath = _vmManagerBinPath;
         vmName = _vmName;
         vmSnapshotName = _vmSnapshotName;
+        popUpDuringTest = _popUpDuringTest;
 
         UiVisualFeedback uiVisualFeedback = new UiVisualFeedback("green", "red", "blue", 0.2);
         uiVisualFeedback.setEnableHighlight(true);
@@ -81,17 +87,24 @@ public class UiAutomationGeneric extends UiAutomationTestBase {
         textBox1.type(testMsg);
 
         uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "cbx_1").click();
+
+        if (popUpDuringTest)
+            VisualWarningsHelper.showDialogInfo("Pause!", "Move the form around!", 1);
+
         uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "cbx_2").click();
 
         uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "dropdownLst").click();
         uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "dropdownLst_item5").click();
 
         uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "rbt_2").click();
+        if (popUpDuringTest)
+            VisualWarningsHelper.showDialogInfo("Pause!", "Move the form around!", 1);
 
         UiElement textBox2 = uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "textBox2Region");
         textBox2.clearText();
         String randomMsg = "wow a random value ->  " + RandomValuesHelper.generateRandomAlphanumeric(20);
         textBox2.type(randomMsg);
+
 
         UiElement trackbarOpt1 = uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "tbr_value1");
         UiElement trackbarOpt2 = uiAutomationDriver.buildPatternFromNavigator(navigator, "mainScreen", "tbr_value3");
