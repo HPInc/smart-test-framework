@@ -2,6 +2,7 @@ package com.github.jeansantos38.stf.framework.ui;
 
 import com.github.jeansantos38.stf.contants.ui.LogMessages;
 import com.github.jeansantos38.stf.data.classes.ui.Details;
+import com.github.jeansantos38.stf.enums.UiMouseButton;
 import com.github.jeansantos38.stf.framework.logger.TestLog;
 import com.github.jeansantos38.stf.framework.wait.WaitHelper;
 import org.sikuli.script.*;
@@ -123,7 +124,7 @@ public class UiElement extends UiAutomationHelper {
 
     public void tripleClick() throws Exception {
         moveCursorOver();
-        actionClick(this, true, 3);
+        actionClick(this, UiMouseButton.LEFT, 3);
     }
 
     public void paste(String content) throws Exception {
@@ -191,12 +192,12 @@ public class UiElement extends UiAutomationHelper {
         Assert.assertTrue(exists(this), LogMessages.NOT_VISIBLE_ASSERT_MSG);
     }
 
-    public void multipleLeftClicks(int howMany) throws InterruptedException, FindFailed {
-        actionClick(this, true, howMany);
+    public void multipleLeftClicks(int howMany) throws Exception {
+        actionClick(this, UiMouseButton.LEFT, howMany);
     }
 
-    public void multipleRightClicks(int howMany) throws InterruptedException, FindFailed {
-        actionClick(this, false, howMany);
+    public void multipleRightClicks(int howMany) throws Exception {
+        actionClick(this, UiMouseButton.RIGHT, howMany);
     }
 
     public void assertNotVisible(int waitMs) throws Exception {
@@ -231,6 +232,13 @@ public class UiElement extends UiAutomationHelper {
         Assert.assertTrue(regionContainsPattern(pattern), LogMessages.ERROR_PATTERN_NOT_FOUND_IN_REGION);
     }
 
+    public boolean exists() throws Exception {
+        return exists(this);
+    }
+
+    public boolean exists(int timeoutSec) throws Exception {
+        return exists(this, timeoutSec);
+    }
 
     public void assertRegionNotContainsPattern(UiElement pattern) throws Exception {
         Assert.assertFalse(regionContainsPattern(pattern), LogMessages.ERROR_PATTERN_FOUND_IN_REGION);

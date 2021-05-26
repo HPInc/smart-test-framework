@@ -40,7 +40,7 @@ public class WebUiTests extends WebUiTestBase {
     }
 
     @Test()
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.MINOR)
     @Story("A QA should be capable of using STF webdriver helpers to locate and interact with selenium web-elements")
     @Description("Setup an entire web FORM, then assert all configured values just using STF helpers")
     @Link(name = "This could be a Link to your project Issue Tracker", url = "https://github.com/HPInc/smart-test-framework")
