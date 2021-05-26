@@ -121,8 +121,7 @@ public class UiAutomationDriver {
 
     private UiElement retrievePatternFromNavigatorString(String navigatorFileFullPath, String areaId, String selector) throws Exception {
         Element element = UiAutomationUtils.retrievePatternFromNavigatorString(navigatorFileFullPath, areaId, selector);
-      File navigator = new File(navigatorFileFullPath);
-//        String masterAbsolutePath =
+        File navigator = new File(navigatorFileFullPath);
         element.details.imagePath = navigator.getAbsolutePath().replace(navigator.getName(), element.details.imagePath);
         return factory(this.screen,
                 element.details);

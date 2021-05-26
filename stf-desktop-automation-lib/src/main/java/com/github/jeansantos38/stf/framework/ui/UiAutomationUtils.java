@@ -29,7 +29,7 @@ public class UiAutomationUtils {
     }
 
     public static void type(Object screen, String content) {
-        if (UiAutomationUtils.isVncScreen(screen)) {
+        if (isVncScreen(screen)) {
             ((VNCScreen) screen).type(content);
         } else {
             ((Screen) screen).type(content);

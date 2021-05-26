@@ -1,5 +1,6 @@
 package com.github.jeansantos38.stf.framework.ui;
 
+import com.github.jeansantos38.stf.enums.UiMouseButton;
 import com.github.jeansantos38.stf.framework.io.InputOutputHelper;
 import com.github.jeansantos38.stf.framework.misc.CalendarHelper;
 import com.github.jeansantos38.stf.framework.misc.RandomValuesHelper;
@@ -24,13 +25,15 @@ public class UiAutomationHelper {
     private final String DRAG_AND_DROP_LOG = "[#action: %1$s],[#Source: %2$s],[#Destination: %3$s]";
 
     protected void click(UiElement uiElement) throws Exception {
-        find(uiElement);
-        if (!uiElement.isVncScreen()) {
-            uiElement.getScreen().click(uiElement.getMatch());
-        } else {
-            uiElement.getVncScreen().click(uiElement.getMatch());
-        }
-        uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenClicks());
+        click(uiElement, UiMouseButton.LEFT);
+    }
+
+    protected void rightClick(UiElement uiElement) throws Exception {
+        click(uiElement, UiMouseButton.RIGHT);
+    }
+
+    protected void middleClick(UiElement uiElement) throws Exception {
+        actionClick(uiElement, UiMouseButton.MIDDLE, 1);
     }
 
     protected void paste(UiElement uiElement, String content) {
@@ -77,7 +80,7 @@ public class UiAutomationHelper {
         uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenClicks());
     }
 
-    public boolean exists(UiElement uiElement) throws Exception {
+    protected boolean exists(UiElement uiElement) throws Exception {
         return exists(uiElement, 0);
     }
 
@@ -187,6 +190,90 @@ public class UiAutomationHelper {
         }
     }
 
+    protected void scrollUp(UiElement uiElement, int steps) throws FindFailed {
+        scroll(uiElement, true, steps, 0);
+    }
+
+    protected void scrollUp(UiElement uiElement, int steps, int msDelay) throws FindFailed {
+        scroll(uiElement, true, steps, msDelay);
+    }
+
+    protected void scrollDown(UiElement uiElement, int steps) throws FindFailed {
+        scroll(uiElement, false, steps, 0);
+    }
+
+    protected void scrollDown(UiElement uiElement, int steps, int msDelay) throws FindFailed {
+        scroll(uiElement, false, steps, msDelay);
+    }
+
+    protected void actionClick(UiElement uiElement, UiMouseButton uiMouseButton, int howManyClicks) throws Exception {
+        int tempBtn;
+        switch (uiMouseButton) {
+            case RIGHT:
+                tempBtn = Button.RIGHT;
+                break;
+            case LEFT:
+                tempBtn = Button.LEFT;
+                break;
+            case MIDDLE:
+                tempBtn = Button.MIDDLE;
+                break;
+            default:
+                throw new Exception("This method only support clickable mouse buttons!");
+        }
+
+        for (int i = 0; i < howManyClicks; i++) {
+            if (!uiElement.isVncScreen()) {
+                uiElement.getScreen().mouseDown(tempBtn);
+                uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenActions());
+                uiElement.getScreen().mouseUp(tempBtn);
+            } else {
+                uiElement.getVncScreen().mouseDown(tempBtn);
+                uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenActions());
+                uiElement.getVncScreen().mouseUp(tempBtn);
+            }
+            uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenClicks());
+        }
+    }
+
+    private void scroll(UiElement uiElement, boolean upDirection, int steps, int msDelay) throws FindFailed {
+        if (!uiElement.isVncScreen()) {
+            uiElement.getScreen().wheel(upDirection ? Button.WHEEL_UP : Button.WHEEL_DOWN, steps, msDelay);
+        } else {
+            uiElement.getVncScreen().wheel(upDirection ? Button.WHEEL_UP : Button.WHEEL_DOWN, steps, msDelay);
+        }
+    }
+
+    private void click(UiElement uiElement, UiMouseButton uiMouseButton) throws Exception {
+        find(uiElement);
+        if (!uiElement.isVncScreen()) {
+            switch (uiMouseButton) {
+                case LEFT:
+                    uiElement.getScreen().click(uiElement.getMatch());
+                    break;
+                case RIGHT:
+                    uiElement.getScreen().rightClick(uiElement.getMatch());
+                    break;
+                default:
+                    throw new Exception("This method only supports Left and Right buttons");
+            }
+
+        } else {
+            switch (uiMouseButton) {
+                case LEFT:
+                    uiElement.getVncScreen().click(uiElement.getMatch());
+                    break;
+                case RIGHT:
+                    uiElement.getVncScreen().rightClick(uiElement.getMatch());
+                    break;
+                default:
+                    throw new Exception("This method only supports Left and Right buttons");
+            }
+
+        }
+        uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenClicks());
+    }
+
     private void highlight(UiElement uiElement, Pattern pattern) throws Exception {
         highlight(uiElement, find(uiElement, pattern));
     }
@@ -289,18 +376,4 @@ public class UiAutomationHelper {
         return pattern;
     }
 
-    protected void actionClick(UiElement uiElement, boolean isLeftClick, int howManyClicks) throws FindFailed, InterruptedException {
-        for (int i = 0; i < howManyClicks; i++) {
-            if (!uiElement.isVncScreen()) {
-                uiElement.getScreen().mouseDown(isLeftClick ? Button.LEFT : Button.RIGHT);
-                uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenActions());
-                uiElement.getScreen().mouseUp(isLeftClick ? Button.LEFT : Button.RIGHT);
-            } else {
-                uiElement.getVncScreen().mouseDown(isLeftClick ? Button.LEFT : Button.RIGHT);
-                uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenActions());
-                uiElement.getVncScreen().mouseUp(isLeftClick ? Button.LEFT : Button.RIGHT);
-            }
-            uiElement.getWaitHelper().waitMilliseconds(uiElement.getMsDelayBetweenClicks());
-        }
-    }
 }
