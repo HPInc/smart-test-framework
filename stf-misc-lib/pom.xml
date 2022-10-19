@@ -17,7 +17,7 @@
     <url>https://github.com/HPInc/smart-test-framework</url>
 
     <properties>
-        <jackson.version>2.11.0</jackson.version>
+        <jackson.version>2.13.4.1</jackson.version>
     </properties>
 
     <dependencies>
