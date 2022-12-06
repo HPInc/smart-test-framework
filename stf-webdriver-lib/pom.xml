@@ -95,8 +95,6 @@
                 <version>${maven.surefire.plugin.version}</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testRunConfig/testRunConfig_webcontent_ui_demo-tests.xml
-                        </suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
