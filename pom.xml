@@ -16,6 +16,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.surefire.plugin.version>2.18.1</maven.surefire.plugin.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>jcenter</id>
+            <name>bintray</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
 
     <modules>
         <module>stf-misc-lib</module>
@@ -29,7 +36,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.6.1</version>
+            <version>7.7.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
